@@ -26,6 +26,7 @@ pages:
   - Linux ftrace Delivers dtrace-like Functionality: linux/linux-ftrace-delivers-dtrace-like-functionality.md
 - Python:
   - Building REST APIs with Python Flask: python/building-rest-apis-with-python-flask.md
+  - Install the Latest Python Versions on Mac OSX: python/install-the-latest-python-versions-on-macosx.md
   - Stop Using "print" for Debugging: python/stop-using-print-for-debugging.md
 - Scala:
   - Starting Scala REPLs with Gradle and SBT: scala/starting-scala-repls-with-gradle-and-sbt.md
