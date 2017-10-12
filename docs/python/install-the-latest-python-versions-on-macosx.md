@@ -138,6 +138,9 @@ versions.  Your `python` version will automatically switch when you change into 
 
 ## Useful Python Packages
 
+This is a small collecton of useful packages that will help get you started doing useful things
+with Python.
+
 Install [flake8](http://flake8.pycqa.org/en/latest/), which is a static analyzer that enforces
 good Python coding style and alerts you to coding mistakes.  Now that you have Python installed,
 you can use the `pip` command to install any additional modules that you want to use.  You will
@@ -157,6 +160,55 @@ website has more information on these tools.
 pip install ipython jupyter
 ipython
 jupyter notebook
+```
+
+Install [Requests: HTTP for Humans](http://docs.python-requests.org/en/master/), which makes it easy
+to consume HTTP services. See GitHub's [REST API v3](https://developer.github.com/v3/) documentation
+for more details on endpoints that are avaialble.
+
+```
+pip install requests
+```
+
+```
+python
+>>> import requests
+>>> r = requests.get('https://api.github.com/users/copperlight')
+>>> r.ok
+True
+>>> r.status_code
+200
+>>> r.headers['content-type']
+'application/json; charset=utf8'
+>>> r.encoding
+'utf-8'
+>>> r.text
+u'{"login":"copperlight", ...}'
+>>> r.json()
+{u'public_repos': 27, ...}
+>>> r.json()['login']
+u'copperlight'
+```
+
+Install [Flask: A Python Microframework](http://flask.pocoo.org/), which can be used to quickly build
+small websites that automate everyday tasks.
+
+```
+pip install Flask
+```
+
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+```
+
+```
+FLASK_APP=hello.py flask run
+curl http://127.0.0.1:5000
 ```
 
 If you need Python package isolation on a per-project basis, because you have conflicting sets
