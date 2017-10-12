@@ -21,7 +21,7 @@ pages:
   - Build a Fake Instance Metadata Server for Ubuntu on Vagrant: aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant.md
   - Configuring Multiple Interfaces on the Same Network in EC2: aws/configuring-multiple-interfaces-on-the-same-network-in-ec2.md
 - GitHub:
-  - How I Built My Blog: github/how-i-built-my-blog.md
+  - How I Built My Site: github/how-i-built-my-site.md
 - Linux:
   - Linux ftrace Delivers dtrace-like Functionality: linux/linux-ftrace-delivers-dtrace-like-functionality.md
 - Python:
