@@ -1,4 +1,4 @@
-# Install the Latest Python on Mac OSX
+# Install the Latest Python Versions on Mac OSX
 
 Once you have decided that Python is an [awesome language to learn](https://automatetheboringstuff.com/)
 and you have heard all about the the [cool features](https://www.youtube.com/watch?v=9zinZmE3Ogk)
