@@ -1,5 +1,7 @@
 # Install the Latest Python Versions on Mac OSX
 
+<small>2017-10-12</small>
+
 Once you have decided that Python is an [awesome language to learn](https://automatetheboringstuff.com/)
 and you have heard all about the the [cool features](https://www.youtube.com/watch?v=9zinZmE3Ogk)
 awaiting you, you are determined to install the latest versions on your laptop so that you can start
