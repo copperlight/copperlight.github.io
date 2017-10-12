@@ -1,0 +1,26 @@
+site_name: Copperlight Writes
+
+site_url: 'http://copperlight.github.io/'
+
+repo_url: 'https://github.com/copperlight/copperlight.github.io'
+
+strict: True
+
+pages:
+- Home: index.md
+
+theme: material
+
+extra:
+  font:
+    code: 'Menlo'
+
+extra_css:
+- css/custom.css
+
+markdown_extensions:
+- admonition
+- codehilite
+- pymdownx.tilde
+- toc:
+    permalink: True
