@@ -1,13 +1,40 @@
 site_name: Copperlight Writes
-
 site_url: 'http://copperlight.github.io/'
-
 repo_url: 'https://github.com/copperlight/copperlight.github.io'
+edit_uri: ''
+site_description: A site for knowledge sharing and neat things.
+site_author: Matthew Johnson
+copyright: <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+google_analytics: ['UA-52382416-1', 'copperlight.github.io']
+remote_branch: master
 
 strict: True
 
 pages:
 - Home: index.md
+- Ansible:
+  - Ansible Vault and SSH Key Distribution: ansible/ansible-vault-and-ssh-key-distribution.md
+  - Running Ansible Playbooks on Windows: ansible/running-ansible-playbooks-on-windows.md
+  - Testing Ansible Galaxy Roles with Docker: ansible/testing-ansible-galaxy-roles-with-docker.md
+- AWS:
+  - AWS Credential Files for Java and Python: aws/aws-credential-files-for-java-and-python.md
+  - Build a Fake Instance Metadata Server for Ubuntu on Vagrant: aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant.md
+  - Configuring Multiple Interfaces on the Same Network in EC2: aws/configuring-multiple-interfaces-on-the-same-network-in-ec2.md
+- GitHub:
+  - How I Built My Blog: github/how-i-built-my-blog.md
+- Linux:
+  - Linux ftrace Delivers dtrace-like Functionality: linux/linux-ftrace-delivers-dtrace-like-functionality.md
+- Python:
+  - Building REST APIs with Python Flask: python/building-rest-apis-with-python-flask.md
+  - Stop Using "print" for Debugging: python/stop-using-print-for-debugging.md
+- Scala:
+  - Starting Scala REPLs with Gradle and SBT: scala/starting-scala-repls-with-gradle-and-sbt.md
+  - Using the Scala REPL to Configure Amazon SES Notifications: scala/using-the-scala-repl-to-configure-amazon-ses-notifications.md
+- Shell:
+  - Measuring Transfer Speed Over Time with cURL: shell/measuring-transfer-speed-over-time-with-curl.md
+  - Parsing JSON on the Command Line: shell/parsing-json-on-the-command-line.md
+- Talks:
+  - Netflix Atlas Telemetry - A Platform Begets an Ecosystem: talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md
 
 theme: material
 
