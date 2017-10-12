@@ -204,3 +204,24 @@ allow you to run tests with multiple different versions of Python, if needed.
 After completing a Python program or two, you will be interested in learning how to distribute them
 effectively.  The [Python Packaging User Guide](https://packaging.python.org/) has some good advice
 on this topic.
+
+## Quickstart Commands
+
+```bash
+# if you need homebrew
+xcode-select --install
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# install pyenv and latest major python versions
+brew install pyenv
+
+cat >>$HOME/.bash_profile <<"EOF"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+EOF
+
+source $HOME/.bash_profile
+
+pyenv install 2.7.14
+pyenv install 3.6.3
+pyenv versions
+```
