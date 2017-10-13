@@ -48,6 +48,7 @@ pages:
 - Shell:
   - Measuring Transfer Speed Over Time with cURL: shell/measuring-transfer-speed-over-time-with-curl.md
   - Parsing JSON on the Command Line: shell/parsing-json-on-the-command-line.md
+  - pet - CLI Snippet Manager: shell/pet-cli-snippet-manager.md
   - Schedule Ad-Hoc Jobs for Later on an Instance with atd: shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd.md
 - Talks:
   - Netflix Atlas Telemetry - A Platform Begets an Ecosystem: talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md
