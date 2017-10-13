@@ -28,6 +28,18 @@ pip install mkdocs mkdocs-material
 
 [Install the Latest Python Versions on Mac OSX]: ../python/install-the-latest-python-versions-on-macosx.md
 
+## Sign Up for Google Analytics
+
+!!! note
+    You must disable ad-blocking software in order to be able to see the Google Analytics page.
+
+1. Navigate to [Google Analytics](https://analytics.google.com/analytics/web/) > Admin
+1. Property > Create New Property
+    1. **Website Name:** username.github.io
+    1. **Website URL:** https://username.github.io
+    1. Get Tracking ID
+1. Note the Tracking ID (looks like: `UA-00000000-0`) assigned to this property.
+
 ## Build the Site
 
 1. [Create a new repository](https://github.com/new) named `username.github.io`, where `username` is
@@ -45,7 +57,9 @@ your username (or organization name) on GitHub.  It must match exactly, or it wi
 1. Create a `./mkdocs.yml` site configuration file. Setting the `remote_branch` to `master` is
 important for the GitHub deployment hooks in MkDocs. Choose a
 [Creative Commons license](https://creativecommons.org/choose/) for your site - I chose
-[CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) for my site.
+[CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) for my site.  Add your Google
+Analytics property Tracking ID to `google_analytics`.  If you do not have a Tracking ID, then delete this
+line in the configuration file.
 
         site_name: My Site
         site_url: 'http://username.github.io/'
@@ -54,7 +68,7 @@ important for the GitHub deployment hooks in MkDocs. Choose a
         site_description: My Site
         site_author: My Name
         copyright: <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
-        google_analytics: ['UA-........-.', 'username.github.io']
+        google_analytics: ['UA-00000000-0', 'username.github.io']
         remote_branch: master
 
         strict: True
