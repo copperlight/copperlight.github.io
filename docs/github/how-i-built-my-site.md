@@ -26,7 +26,7 @@ dependencies for a fully functioning site.
 pip install mkdocs mkdocs-material
 ```
 
-[Install the Latest Python Versions on Mac OSX]: ../python/install-the-latest-python-versions-on-macosx.md)
+[Install the Latest Python Versions on Mac OSX]: ../python/install-the-latest-python-versions-on-macosx.md
 
 ## Build the Site
 
