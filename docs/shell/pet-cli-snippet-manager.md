@@ -17,7 +17,7 @@ Install with Homebrew:
 brew install pet
 ```
 
-[Create a new access token](https://github.com/settings/tokens/new) on GitHub that allows only the
+[Create a new access token](https://github.com/settings/tokens) on GitHub that allows only the
 `gist` scope.  Create a pet configuration file and set the `access_token`.
 
 ```
