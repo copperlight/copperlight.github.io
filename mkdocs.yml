@@ -17,23 +17,38 @@ pages:
   - Running Ansible Playbooks on Windows: ansible/running-ansible-playbooks-on-windows.md
   - Testing Ansible Galaxy Roles with Docker: ansible/testing-ansible-galaxy-roles-with-docker.md
 - AWS:
+  - Assume Role with AWSCLI: aws/assume-role-with-awscli.md
   - AWS Credential Files for Java and Python: aws/aws-credential-files-for-java-and-python.md
   - Build a Fake Instance Metadata Server for Ubuntu on Vagrant: aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant.md
+  - Checking and Changing Content-Type of S3 Object with AWSCLI: aws/checking-and-changing-content-type-of-s3-object-with-awscli.md
   - Configuring Multiple Interfaces on the Same Network in EC2: aws/configuring-multiple-interfaces-on-the-same-network-in-ec2.md
 - GitHub:
   - How I Built My Site: github/how-i-built-my-site.md
 - Linux:
   - Linux ftrace Delivers dtrace-like Functionality: linux/linux-ftrace-delivers-dtrace-like-functionality.md
+- Misc:
+  - Clone Stash Pull Requests: misc/clone-stash-pull-requests.md
+  - Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina: misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina.md
+  - Reset Jenkins Build Number: misc/reset-jenkins-build-number.md
+  - Switching JDKs in OSX: misc/switching-jdks-in-osx.md
 - Python:
+  - Accessing Google APIs with Python: python/accessing-google-apis-with-python.md
   - Building REST APIs with Python Flask: python/building-rest-apis-with-python-flask.md
   - Install the Latest Python Versions on Mac OSX: python/install-the-latest-python-versions-on-macosx.md
+  - Memory Profiling with Pyrasite and Heapy: python/memory-profiling-with-pyrasite-and-heapy.md
   - Stop Using "print" for Debugging: python/stop-using-print-for-debugging.md
 - Scala:
+  - IntelliJ Configuration Tips: scala/intellij-configuration-tips.md
+  - Overview of Debugging Tools: scala/overview-of-debugging-tools.md
+  - Scalafmt Configuration Tips: scala/scalafmt-configuration-tips.md
   - Starting Scala REPLs with Gradle and SBT: scala/starting-scala-repls-with-gradle-and-sbt.md
+  - Testing AWS Clients with IAM AssumeRole Credentials in Scala: scala/testing-aws-clients-with-iam-assumerole-credentials-in-scala.md
+  - Using Gradle to Run Scala Projects Locally: scala/using-gradle-to-run-scala-projects-locally.md
   - Using the Scala REPL to Configure Amazon SES Notifications: scala/using-the-scala-repl-to-configure-amazon-ses-notifications.md
 - Shell:
   - Measuring Transfer Speed Over Time with cURL: shell/measuring-transfer-speed-over-time-with-curl.md
   - Parsing JSON on the Command Line: shell/parsing-json-on-the-command-line.md
+  - Schedule Ad-Hoc Jobs for Later on an Instance with atd: shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd.md
 - Talks:
   - Netflix Atlas Telemetry - A Platform Begets an Ecosystem: talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md
 

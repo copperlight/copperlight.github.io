@@ -66,7 +66,8 @@ c.setEndpoint("sns.us-east-1.amazonaws.com")
 
 c.createTopic("ses-email-bounce")
 
-res0: com.amazonaws.services.sns.model.CreateTopicResult = {TopicArn: arn:aws:sns:us-east-1:000000000000:ses-email-bounce}
+res0: com.amazonaws.services.sns.model.CreateTopicResult =
+{TopicArn: arn:aws:sns:us-east-1:000000000000:ses-email-bounce}
 
 val c = new AmazonSimpleEmailServiceClient(
     new AWSCredentialsProviderChain(
@@ -81,29 +82,32 @@ c.setEndpoint("email.us-east-1.amazonaws.com")
 
 c.getSendQuota()
 
-res1: com.amazonaws.services.simpleemail.model.GetSendQuotaResult = {Max24HourSend: 100.0,MaxSendRate: 10.0,SentLast24Hours: 1.0}
+res1: com.amazonaws.services.simpleemail.model.GetSendQuotaResult =
+{Max24HourSend: 100.0,MaxSendRate: 10.0,SentLast24Hours: 1.0}
 
 c.getSendStatistics()
 
-res2: com.amazonaws.services.simpleemail.model.GetSendStatisticsResult = {SendDataPoints: [{Timestamp: ...,DeliveryAttempts: 0,Bounces: 0,Complaints: 0,Rejects: 0}, ...
+res2: com.amazonaws.services.simpleemail.model.GetSendStatisticsResult =
+{SendDataPoints: [{Timestamp: ...,DeliveryAttempts: 0,Bounces: 0,Complaints: 0,Rejects: 0}, ...
 
 c.getIdentityVerificationAttributes(
     new GetIdentityVerificationAttributesRequest()
-        .withIdentities("some.email@mydomain.com")
+        .withIdentities("some.email@example.com")
 )
 
-res3: com.amazonaws.services.simpleemail.model.GetIdentityVerificationAttributesResult = {VerificationAttributes: {some.email@mydomain.com={VerificationStatus: Success,}}}
+res3: com.amazonaws.services.simpleemail.model.GetIdentityVerificationAttributesResult =
+{VerificationAttributes: {some.email@mydomain.com={VerificationStatus: Success,}}}
 
 c.setIdentityNotificationTopic(
     new SetIdentityNotificationTopicRequest()
-        .withIdentity("some.email@mydomain.com")
+        .withIdentity("some.email@example.com")
         .withNotificationType("Bounce")
-        .withSnsTopic("arn:aws:sns:us-east-1:000000000000:ses-email-bounce")
+        .withSnsTopic(s"arn:aws:sns:us-east-1:$accountId:ses-email-bounce")
 )
 
 c.getIdentityNotificationAttributes(
     new GetIdentityNotificationAttributesRequest()
-        .withIdentities("some.email@mydomain.com")
+        .withIdentities("some.email@example.com")
 )
 ```
 
@@ -141,7 +145,16 @@ for additional details.  In brief, create a `scalas` script and make it availabl
 ```bash
 #!/bin/sh
 test -f ~/.sbtconfig && . ~/.sbtconfig
-exec java -Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M ${SBT_OPTS} -jar /usr/local/Cellar/sbt/0.13.2/libexec/sbt-launch.jar -Dsbt.main.class=sbt.ScriptMain "$@"
+exec java \
+    -Xms512M \
+    -Xmx1536M \
+    -Xss1M \
+    -XX:+CMSClassUnloadingEnabled \
+    -XX:MaxPermSize=256M \
+    ${SBT_OPTS} \
+    -jar /usr/local/Cellar/sbt/0.13.2/libexec/sbt-launch.jar \
+    -Dsbt.main.class=sbt.ScriptMain \
+    "$@"
 ```
 
 You can then write Scala scripts like so:
