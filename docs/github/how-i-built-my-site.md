@@ -33,9 +33,9 @@ pip install mkdocs mkdocs-material
 1. [Create a new repository](https://github.com/new) named `username.github.io`, where `username` is
 your username (or organization name) on GitHub.  It must match exactly, or it will not work.
 
-1. Clone the repository locally.
+1. Clone the repository locally.  Requires [SSH keys](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
-        git clone https://github.com/username/username.github.io
+        git clone git@github.com:username/username.github.io.git
         cd username.github.com
 
 1. Create a new branch to store the source files for the site.
