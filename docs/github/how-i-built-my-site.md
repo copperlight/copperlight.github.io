@@ -12,7 +12,7 @@ on mobile browsers with the [Material] theme. Since I use MkDocs for site genera
 already pretty familiar with it.
 
 Writing documents in [Markdown] and turning them into web pages with a static site generator is the
-fastest and easiest way to post articles on your own GitHub Pages site.  This format allows you to
+fastest and easiest way to post articles on your GitHub Pages site.  This format allows you to
 drop down into HTML, when necessary, to enhance your page formatting, but you shouldn't need to do
 this for most pages.
 
