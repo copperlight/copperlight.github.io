@@ -1,6 +1,9 @@
 # Measuring Transfer Speed Over Time with cURL
 
-<small>2014-07-02</small>
+<div class="meta">
+  <span class="date"><small>2014-07-02</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Ordinarily when you run the [cURL](http://curl.haxx.se/) command to download a file, you see a
 progress meter that updates every second.

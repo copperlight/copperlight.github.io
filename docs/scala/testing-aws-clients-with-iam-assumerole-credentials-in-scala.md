@@ -1,5 +1,10 @@
 # Testing AWS Clients with IAM AssumeRole Credentials in Scala
 
+<div class="meta">
+  <span class="date"><small>2017-09-28</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
+
 This technique is meant to be used with IntelliJ Scala worksheets or similar scratch code, so you
 can test clients and validate their behavior. Don't check-in secrets – use on-instance credentials
 with the `DefaultAWSCredentialsProviderChain` in production code.

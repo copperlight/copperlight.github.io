@@ -1,6 +1,9 @@
 # Using Gradle to Run Scala Projects Locally
 
-<small>2017-10-12</small>
+<div class="meta">
+  <span class="date"><small>2017-10-12</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Running projects locally in a minimal fashion is often useful for understanding the code, using a
 debugger and performing interactive integration testing.

@@ -1,6 +1,9 @@
 # AWS Credential Files for Java and Python
 
-<small>2014-07-14</small>
+<div class="meta">
+  <span class="date"><small>2014-07-14</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Each of the AWS tools has slightly different expectations about the location and naming of the
 credentials file and the various properties within it.  It seems like the Python tools are moving

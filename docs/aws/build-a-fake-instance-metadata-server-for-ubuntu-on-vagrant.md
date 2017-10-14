@@ -1,6 +1,9 @@
 # Build a Fake Instance Metadata Server for Ubuntu on Vagrant
 
-<small>2014-07-22</small>
+<div class="meta">
+  <span class="date"><small>2014-07-22</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Let's say that you have a proper build/bake/deploy pipeline in place for running appications in AWS.
 This is a reliable way to deploy applications at scale and move traffic between different versions

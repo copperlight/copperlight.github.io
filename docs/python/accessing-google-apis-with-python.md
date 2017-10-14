@@ -1,6 +1,9 @@
 # Accessing Google APIs with Python
 
-<small>2016-06-03</small>
+<div class="meta">
+  <span class="date"><small>2016-06-03</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 ## Links
 

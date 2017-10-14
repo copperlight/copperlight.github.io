@@ -1,5 +1,11 @@
 # Overview of Debugging Tools
 
+<div class="meta">
+  <span class="date"><small>2016-10-13</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
+
+<center>
 <table>
     <tr> <th>Tool <th>Use Cases
     <tr>
@@ -30,3 +36,4 @@
             <ul>
             <li>first choice for writing tiny benchmarks to evaluate code samples
 </table>
+</center>

@@ -1,6 +1,9 @@
 # Parsing JSON on the Command Line
 
-<small>2014-07-16</small>
+<div class="meta">
+  <span class="date"><small>2014-07-16</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 With more APIs moving to JSON, being able to parse it at the command line allows you to write more
 sophisticated shell scripts that can interact with your favorite services.  Most first attempts at

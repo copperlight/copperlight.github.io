@@ -3,9 +3,12 @@
  * https://github.com/mkdocs/mkdocs/issues/318#issuecomment-98520139
  */
 li.toctree-l3:first-child {
-  display: none;
+    display: none;
 }
 
 code {
-  font-family: Menlo, monospace;
+    font-family: Menlo, monospace;
 }
+
+.meta .date { float: left }
+.meta .discuss { float: right }

@@ -1,6 +1,9 @@
 # Testing Ansible Galaxy Roles with Docker
 
-<small>2014-10-14</small>
+<div class="meta">
+  <span class="date"><small>2014-10-14</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 I learned a neat trick for testing [Ansible Galaxy](https://galaxy.ansible.com/)
 [roles](http://docs.ansible.com/playbooks_roles.html) at

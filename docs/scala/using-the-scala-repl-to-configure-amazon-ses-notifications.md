@@ -1,6 +1,9 @@
 # Using the Scala REPL to Configure Amazon SES Notifications
 
-<small>2014-06-30</small>
+<div class="meta">
+  <span class="date"><small>2014-06-30</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Let's say you want to configure bounce notifications for SES emails using the Scala REPL.  How do
 you go about accessing the AWS API to make it happen?  Make sure to have the

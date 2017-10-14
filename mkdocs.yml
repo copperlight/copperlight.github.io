@@ -62,6 +62,9 @@ extra:
 extra_css:
 - css/custom.css
 
+extra_javascript:
+- https://buttons.github.io/buttons.js
+
 markdown_extensions:
 - admonition
 - codehilite

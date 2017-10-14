@@ -1,6 +1,9 @@
 # Install the Latest Python Versions on Mac OSX
 
-<small>2017-10-12</small>
+<div class="meta">
+  <span class="date"><small>2017-10-12</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 Once you have decided that Python is an [awesome language to learn](https://automatetheboringstuff.com/)
 and you have heard all about the the [cool features](https://www.youtube.com/watch?v=9zinZmE3Ogk)

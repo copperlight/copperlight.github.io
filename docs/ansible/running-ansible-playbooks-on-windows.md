@@ -1,6 +1,9 @@
 # Running Ansible Playbooks on Windows
 
-<small>2014-06-29</small>
+<div class="meta">
+  <span class="date"><small>2014-06-29</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 ## But First, Some History
 

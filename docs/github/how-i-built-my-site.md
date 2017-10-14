@@ -1,6 +1,9 @@
 # How I Built My Site
 
-<small>2017-10-12</small>
+<div class="meta">
+  <span class="date"><small>2017-10-12</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 I recently rebuilt my [GitHub Pages] site, switching my tech stack to [Python], [MkDocs] and
 [Material for MkDocs]. The previous workflow had too many moving parts and the theme was hard to

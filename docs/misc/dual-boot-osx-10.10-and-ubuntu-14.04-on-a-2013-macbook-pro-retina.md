@@ -1,6 +1,9 @@
 # Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
 
-<small>2015-06-24</small>
+<div class="meta">
+  <span class="date"><small>2015-06-24</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 ## Introduction
 

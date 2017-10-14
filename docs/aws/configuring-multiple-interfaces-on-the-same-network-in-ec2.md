@@ -1,6 +1,9 @@
 # Configuring Multiple Interfaces on the Same Network in EC2
 
-<small>2014-07-09</small>
+<div class="meta">
+  <span class="date"><small>2014-07-09</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 I've been reading a bit lately on Linux policy and source-based routing for the purpose of
 configuring multiple NICs on the same network in EC2.  I found the following links helpful:

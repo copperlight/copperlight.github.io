@@ -1,6 +1,9 @@
 # Ansible Vault and SSH Key Distribution
 
-<small>2014-06-30</small>
+<div class="meta">
+  <span class="date"><small>2014-06-30</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 There are two types of SSH key distribution discussed in this post: private keys on local hosts and
 public keys on remote hosts.  SSH private key distribution is best used for setting up your own

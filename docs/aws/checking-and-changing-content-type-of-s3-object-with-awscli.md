@@ -1,6 +1,9 @@
 # Checking and Changing Content-Type of S3 Object with AWSCLI
 
-<small>2017-03-04</small>
+<div class="meta">
+  <span class="date"><small>2017-03-04</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 ```
 aws s3api get-object \

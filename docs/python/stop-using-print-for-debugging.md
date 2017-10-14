@@ -1,6 +1,9 @@
 # Stop Using "print" for Debugging
 
-<small>2017-10-12</small>
+<div class="meta">
+  <span class="date"><small>2017-10-12</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 My favorite quickstart guide to the Python logging module, by [Al Sweigart](https://inventwithpython.com/blog/author/al-sweigart.html):
 

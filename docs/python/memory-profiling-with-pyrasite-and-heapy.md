@@ -1,6 +1,9 @@
 # Memory Profiling with Pyrasite and Heapy
 
-<small>2017-09-17</small>
+<div class="meta">
+  <span class="date"><small>2017-09-17</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 1. Build or install Pyrasite from the develop branch in the GitHub repo.  The PyPi package does not
 have the latest code, which allows you to control the IPC timeout.

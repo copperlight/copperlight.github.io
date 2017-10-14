@@ -1,6 +1,9 @@
 # Starting Scala REPLs with Gradle and SBT
 
-<small>2015-07-04</small>
+<div class="meta">
+  <span class="date"><small>2015-07-04</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
 
 These examples are tailored for usage with the Atomic Scala exercises, but they demonstrate the
 principles.
