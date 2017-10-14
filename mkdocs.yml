@@ -52,6 +52,17 @@ pages:
   - Schedule Ad-Hoc Jobs for Later on an Instance with atd: shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd.md
 - Talks:
   - Netflix Atlas Telemetry - A Platform Begets an Ecosystem: talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md
+  - Developing ClojureScript with Figwheel: talks/developing-clojurescript-with-figwheel.md
+  - Python Concurrency from the Ground Up: talks/python-concurrency-from-the-ground-up.md
+  - Fear and Awaiting in Async: talks/fear-and-awaiting-in-async.md
+  - Interactive Programming Flappy Bird in ClojureScript: talks/interactive-programming-flappy-bird-in-clojurescript.md
+  - The ReactJS Landscape: talks/the-reactjs-landscape.md
+  - Python vs Ruby a Battle to the Death: talks/python-vs-ruby-a-battle-to-the-death.md
+  - REPL Based Development Demo: talks/repl-based-development-demo.md
+  - A Better Scala REPL: talks/a-better-scala-repl.md
+  - Simple Made Easy: talks/simple-made-easy.md
+  - The Unix Chainsaw: talks/the-unix-chainsaw.md
+  - Wat - A Lightning Talk: talks/wat-a-lightning-talk.md
 
 theme: material
 
