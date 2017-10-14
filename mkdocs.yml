@@ -52,17 +52,56 @@ pages:
   - Schedule Ad-Hoc Jobs for Later on an Instance with atd: shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd.md
 - Talks:
   - A Better Scala REPL: talks/a-better-scala-repl.md
+  - Amazon S3 and Elastic MapReduce to Monitor at Gigascale: talks/amazon-s3-elastic-mapreduce-to-monitor-at-gigascale.md
+  - Are We There Yet?: talks/are-we-there-yet.md
+  - Automating Your Browser and Desktop Apps: talks/automating-your-browser-and-desktop-apps.md
+  - Beyond PEP 8 Best Practices for Beautiful Intelligible Code: talks/beyond-pep-8-best-practices-for-beautiful-intelligible-code.md
+  - Boot Can Build It: talks/boot-can-build-it.md
+  - Bottom Up vs Top Down Design in Clojure: talks/bottom-up-vs-top-down-design-in-clojure.md
+  - Built-In Super Heroes: talks/built-in-super-heroes.md
+  - Clojure Concurrency: talks/clojure-concurrency.md
+  - Clojure core.async: talks/clojure-core-async.md
+  - Clojure Made Simple: talks/clojure-made-simple.md
+  - Clojure Parallelism Beyond Futures: talks/clojure-parallelism-beyond-futures.md
+  - ClojureScript for Skeptics: talks/clojurescript-for-skeptics.md
+  - Composing Interactive Apps with Zelkova: talks/composing-interactive-apps-with-zelkova.md
+  - Dagobah - A Data-Centric Meta-Scheduler: talks/dagobah-a-data-centric-meta-scheduler.md
+  - Debugging Clojure Code with Cursive: talks/debugging-clojure-code-with-cursive.md
+  - Design and Prototype a Language in Clojure: talks/design-and-prototype-a-language-in-clojure.md
   - Developing ClojureScript with Figwheel: talks/developing-clojurescript-with-figwheel.md
   - Fear and Awaiting in Async: talks/fear-and-awaiting-in-async.md
+  - From 0 to Prototype Using ClojureScript Re-Frame and Friends: talks/from-0-to-prototype-using-clojurescript-re-frame-and-friends.md
+  - Hammock Driven Development: talks/hammock-driven-development.md
+  - Handmade Hero Day 001 - Setting Up the Windows Build: talks/handmade-hero-day-001-setting-up-the-windows-build.md
   - Interactive Programming Flappy Bird in ClojureScript: talks/interactive-programming-flappy-bird-in-clojurescript.md
+  - Logging and Testing and Debugging Oh My: talks/logging-and-testing-and-debugging-oh-my.md
+  - Machete-Mode Debugging Hacking Your Way Out of a Tight Spot: talks/machete-mode-debugging-hacking-your-way-out-of-a-tight-spot.md
+  - Monitoring Monitoring Systems at Netflix: talks/monitoring-monitoring-systems-at-netflix.md
   - Netflix Atlas Telemetry - A Platform Begets an Ecosystem: talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md
+  - Parallel Programming Fork Join and Reducers: talks/parallel-programming-fork-join-and-reducers.md
+  - Parsing Text with a Virtual Machine: talks/parsing-text-with-a-virtual-machine.md
+  - Python as a Configuration Language: talks/python-as-a-configuration-language.md
   - Python Concurrency from the Ground Up: talks/python-concurrency-from-the-ground-up.md
-  - Python vs Ruby a Battle to the Death: talks/python-vs-ruby-a-battle-to-the-death.md
+  - Python Language - PyCon 2016: talks/python-language-pycon-2016.md
+  - Python vs Ruby - A Battle to the Death: talks/python-vs-ruby-a-battle-to-the-death.md
   - REPL Based Development Demo: talks/repl-based-development-demo.md
+  - Refactoring Python Why and How to Restructure Your Code: talks/refactoring-python-why-and-how-to-restructure-your-code.md
+  - Removing Pythons GIL - The Gilectomy: talks/removing-pythons-gil-the-gilectomy.md
+  - Rethinking the Developer Career Path: talks/rethinking-the-developer-career-path.md
+  - Rich Hickey on clojure.spec: talks/rich-hickey-on-clojure-spec.md
   - Simple Made Easy: talks/simple-made-easy.md
+  - Spec-ulation Keynote: talks/spec-ulation-keynote.md
+  - Stop Writing Classes: talks/stop-writing-classes.md
+  - The Joys and Perils of Interactive Development: talks/the-joys-and-perils-of-interactive-development.md
+  - The Packaging Gradient: talks/the-packaging-gradient.md
   - The ReactJS Landscape: talks/the-reactjs-landscape.md
   - The Unix Chainsaw: talks/the-unix-chainsaw.md
+  - Think Like a Pythonista: talks/think-like-a-pythonista.md
+  - Thinking in Coroutines: talks/thinking-in-coroutines.md
+  - To Mock or Not To Mock That is the Question: talks/to-mock-or-not-to-mock-that-is-the-question.md
+  - Types are Like the Weather Type Systems are Like Weathermen: talks/types-are-like-the-weather-type-systems-are-like-weathermen.md
   - Wat - A Lightning Talk: talks/wat-a-lightning-talk.md
+  - Writing Awesome Command Line Programs in Python: talks/writing-awesome-command-line-programs-in-python.md
 
 theme: material
 
