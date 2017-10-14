@@ -14,5 +14,7 @@ If you have questions or comments on this site, file a GitHub issue and discussi
 * [Install the Latest Python Versions on Mac OSX](python/install-the-latest-python-versions-on-macosx.md)
 * [How I Built My Site](github/how-i-built-my-site.md)
 * [Netflix Atlas Telemetry - A Platform Begets an Ecosystem](talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem.md)
+* [AWS Credential Files for Java and Python](aws/aws-credential-files-for-java-and-python.md)
+* [Using the Scala REPL to Configure Amazon SES Notifications](scala/using-the-scala-repl-to-configure-amazon-ses-notifications.md)
 * [Ansible Vault and SSH Key Distribution](ansible/ansible-vault-and-ssh-key-distribution.md)
 * [Running Ansible Playbooks on Windows](ansible/running-ansible-playbooks-on-windows.md)
