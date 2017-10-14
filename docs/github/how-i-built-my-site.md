@@ -38,8 +38,10 @@ pip install mkdocs mkdocs-material
 
 1. Navigate to [Google Analytics](https://analytics.google.com/analytics/web/) > Admin
 1. Property > Create New Property
+    1. **Account Name:** $YOUR_ACCOUNT_NAME
     1. **Website Name:** username.github.io
     1. **Website URL:** https://username.github.io
+    1. Go with the default configuration options - you can change these later.
     1. Get Tracking ID
 1. Note the Tracking ID (looks like: `UA-00000000-0`) assigned to this property.
 
