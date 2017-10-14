@@ -67,7 +67,7 @@ in the `source` branch.
 
         git checkout -b source
 
-1. You will be creating a directory structure that looks like the following:
+1. You will create a directory structure that looks like the following:
 
         username.github.io/
         ├── .gitignore
