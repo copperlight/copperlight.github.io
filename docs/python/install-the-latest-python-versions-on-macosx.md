@@ -72,7 +72,7 @@ Terminal. The `PYENV_ROOT`, which is where Python versions and packages will be 
 defaults to `$HOME/.pyenv`.
 
         cat >>$HOME/.bash_profile <<"EOF"
-        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+        if which pyenv > /dev/null 2&>1; then eval "$(pyenv init -)"; fi
         EOF
 
 1. Load your `.bash_profile` configuration changes.
