@@ -87,6 +87,12 @@ interpreter is written in C.
 
         pyenv install --list
 
+1. If you are running OSX 10.13, you will need to set the following environment variables, when you
+install new Python versions. See [#988](https://github.com/pyenv/pyenv/issues/988) for more details.
+
+        export CFLAGS="-I$(brew --prefix openssl)/include"
+        export LDFLAGS="-L$(brew --prefix openssl)/lib"
+
 1. Install Python versions.
 
         pyenv install 2.7.14
