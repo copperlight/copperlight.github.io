@@ -9,8 +9,11 @@ My favorite quickstart guide to the Python logging module, by [Al Sweigart](http
 
 [Stop Using "print" for Debugging: A 5 Minute Quickstart Guide to Python’s logging Module](https://inventwithpython.com/blog/2012/04/06/stop-using-print-for-debugging-a-5-minute-quickstart-guide-to-pythons-logging-module/)
 
+This is a slight tweak to that pattern, which adds the name of the logging source and an example of disabling selected log sources.
+
 ```
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.getLogger('urllib3').setLevel(logging.CRITICAL)
 logging.debug('This is a log message.')
 ```
