@@ -37,6 +37,8 @@ pages:
   - Install the Latest Python Versions on Mac OSX: python/install-the-latest-python-versions-on-macosx.md
   - Memory Profiling with Pyrasite and Heapy: python/memory-profiling-with-pyrasite-and-heapy.md
   - Stop Using "print" for Debugging: python/stop-using-print-for-debugging.md
+- Recipes:
+  - Galaxy's Best Margarita: recipes/galaxys-best-margarita.md
 - Scala:
   - IntelliJ Configuration Tips: scala/intellij-configuration-tips.md
   - Overview of Debugging Tools: scala/overview-of-debugging-tools.md
