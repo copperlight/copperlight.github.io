@@ -124,7 +124,7 @@ Run the tests:
 ./project/sbt jmh:run
 ```
 
-## Example Test Classes
+## Example Test Class
 
 ```
 package io.github.brharrington
