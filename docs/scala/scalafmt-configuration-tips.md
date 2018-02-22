@@ -9,9 +9,13 @@
 an [IntelliJ plugin](https://plugins.jetbrains.com/plugin/8236-scalafmt) and a CLI version can
 be installed using [Homebrew](http://scalameta.org/scalafmt/#Homebrew).
 
+```
+brew install --HEAD olafurpg/scalafmt/scalafmt
+```
+
 ## Configuration
 
-The following `.scalafmt.conf` configuration is recommended for use with Insight projects. It
+The following `.scalafmt.conf` configuration is recommended for use with Scala projects. It
 should be created in the project's root directory.
 
 ```
