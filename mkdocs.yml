@@ -41,6 +41,7 @@ pages:
   - Galaxy's Best Margarita: recipes/galaxys-best-margarita.md
 - Scala:
   - IntelliJ Configuration Tips: scala/intellij-configuration-tips.md
+  - JMH Testing with Scala: scala/jmh-testing-with-scala.md
   - Overview of Debugging Tools: scala/overview-of-debugging-tools.md
   - Scalafmt Configuration Tips: scala/scalafmt-configuration-tips.md
   - Starting Scala REPLs with Gradle and SBT: scala/starting-scala-repls-with-gradle-and-sbt.md
