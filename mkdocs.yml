@@ -39,6 +39,8 @@ pages:
   - Stop Using "print" for Debugging: python/stop-using-print-for-debugging.md
 - Recipes:
   - Galaxy's Best Margarita: recipes/galaxys-best-margarita.md
+- Running:
+  - Garmin 935 Navigation: running/garmin-935-navigation.md
 - Scala:
   - IntelliJ Configuration Tips: scala/intellij-configuration-tips.md
   - JMH Testing with Scala: scala/jmh-testing-with-scala.md
