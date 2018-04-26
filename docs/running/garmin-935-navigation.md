@@ -15,6 +15,12 @@ ones that you get end up being either obvious or they do not occur when you need
 This page is a guide to a track processing process which allows you to add custom turn-by-turn
 waypoints to tracks and post-processes them so that they appear correctly on your Garmin watch.
 
+The following sites and tools are used:
+
+* [Trailstompers]
+* [GPSies]
+* CourseTCX2Fit conversion tool from [@CTCX2Fit]
+
 [Trailstompers]: http://www.trailstompers.com
 [GPSies]: https://www.gpsies.com
 [@CTCX2Fit]: https://twitter.com/ctcx2fit?lang=en
@@ -23,11 +29,18 @@ waypoints to tracks and post-processes them so that they appear correctly on you
 
 * Find a trail you like on [Trailstompers] and download the GPX track.
 * Upload the GPX track to [GPSies].
-* Edit the track and then modify the track.
+* Edit the track and then modify the track. The course title will display as-is on the Garmin.
 * You can add a cue sheet, which will populate turn-by-turn hints on the track.
+    * The cue sheet feature is capable of adding waypoints to the course points.
 * Add or delete waypoints, as desired. It is best to keep waypoints for forks in the trail.
-* Export the track as a TCX file.
-* Download CourseTCX2Fit conversion tool from [@CTCX2Fit].
-* Convert the file
-* Connect your Garmin via USB.
-* Access the Garmin storage device and copy the fit file to the X directory.
+    * Waypoints cannot be manually added to course points - they must be placed alongside course points.
+* Download the track and waypoints as a Garmin Course TCX file.
+* Run CourseTCX2FIT and convert the TCX file to a FIT file.
+* Connect to your Garmin via USB.
+* Access the Garmin storage device and copy the FIT file to the GARMIN/COURSES directory. Eject the Garmin device.
+* On your Garmin, load the course.
+    * Start > Select: Trail Run > Start
+    * Hold Up > Select: Navigation
+    * Select: Courses > Select: Named Course > Start
+    * Do Course > Start
+* The Garmin has 15 characters to display course titles, so choose wisely.
