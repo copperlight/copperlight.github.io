@@ -5,9 +5,8 @@
   <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
 </div><br/>
 
-My name is [Matthew Johnson](http://www.linkedin.com/in/mjjohnson33) and I am currently a Sr. DevOps Engineer at [Netflix](https://www.netflix.com/); I have been working in the DevOps space since I joined [Blackboard](http://www.blackboard.com/) in 2004.  The purpose of this site is to share notes and neat ways of solving problems.
-
-If you have questions or comments on this site, file a GitHub issue and discussion will take place there.
+The purpose of this site is to share notes and neat ways of solving problems. If you have questions
+or comments on this site, file a GitHub issue and discussion will take place there.
 
 ## Top-10 Popular Pages (May 2018)
 
