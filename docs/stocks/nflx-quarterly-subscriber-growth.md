@@ -10,6 +10,12 @@ can see that it is a straight copy from the source.
 [Netflix Investors]: https://ir.netflix.com/ir-overview/profile/default.aspx
 [spreadsheet]: https://docs.google.com/spreadsheets/d/14kGRCkKrZktf34WmGrcAJb8TqbeCGPrK6o48oTfzezM/edit?usp=sharing
 
-<img alt="Margarita Mixins" src="../../images/nflx-memberships.png" title="Netflix Quarterly" />
+<img
+    alt="Netflix Quarterly Paid Memberships"
+    src="../../images/nflx-memberships.png"
+    title="Netflix Quarterly Paid Memberships" />
 
-<img alt="Margarita Mixins" src="../../images/nflx-incremental-memberships.png" title="Margarita Mixins" />
+<img
+    alt="Netflix Quarterly Incremental Paid Memberships"
+    src="../../images/nflx-incremental-memberships.png"
+    title="Netflix Quarterly Incremental Paid Memberships" />
