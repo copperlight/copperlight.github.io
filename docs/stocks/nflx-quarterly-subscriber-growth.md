@@ -3,7 +3,7 @@
 All of the information presented here is taken from quarterly earnings reports publicly posted on
 the [Netflix Investors] website. The subscriber numbers can be found on the Segment Information
 tab of the Quarterly Earnings Financial Statements spreadsheets. The Domestic and International
-streaming paid memberships were first broken out separatly in 2011-Q3.
+streaming paid memberships were first broken out separately in 2011-Q3.
 
 The [spreadsheet] with the source data that generated these charts is available for review, so you
 can see that it is a straight copy from the source.
