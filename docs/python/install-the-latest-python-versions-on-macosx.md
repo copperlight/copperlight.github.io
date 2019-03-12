@@ -54,30 +54,40 @@ them.  This tool was inspired by and forked from [`rbenv`](https://github.com/rb
 
 1. Install [Homebrew](https://brew.sh/) and Xcode Command Line Tools.
 
-        xcode-select --install
+    ```
+    xcode-select --install
 
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ```
 
 1. Install `pyenv`.
 
-        brew install pyenv
+    ```
+    brew install pyenv
+    ```
 
 1. If you already have `pyenv` installed, you can upgrade it to gain access to the latest Python
 versions.  The `pyenv` tool is updated periodically with new formulas for the latest releases.
 
-        brew upgrade pyenv
+    ```
+    brew upgrade pyenv
+    ```
 
 1. Add configuration to your `.bash_profile` to initialize `pyenv` every time you start a new
 Terminal. The `PYENV_ROOT`, which is where Python versions and packages will be installed,
 defaults to `$HOME/.pyenv`.
 
-        cat >>$HOME/.bash_profile <<"EOF"
-        if which pyenv > /dev/null 2&>1; then eval "$(pyenv init -)"; fi
-        EOF
+    ```
+    cat >>$HOME/.bash_profile <<"EOF"
+    if which pyenv > /dev/null 2&>1; then eval "$(pyenv init -)"; fi
+    EOF
+    ```
 
 1. Load your `.bash_profile` configuration changes.
 
-        source $HOME/.bash_profile
+    ```
+    source $HOME/.bash_profile
+    ```
 
 1. List the available Python versions.  Notice that you have access to several different
 distributions: python.org (plain version numbers), anaconda, ironpython, jython, miniconda,
@@ -85,65 +95,81 @@ pypy and stackless.  We will install the standard Python versions released by
 [python.org](https://www.python.org/downloads/), otherwise known as CPython, because the
 interpreter is written in C.
 
-        pyenv install --list
+    ```
+    pyenv install --list
+    ```
 
 1. If you are running OSX 10.13, you will need to set the following environment variables, when you
 install new Python versions. See [#988](https://github.com/pyenv/pyenv/issues/988) for more details.
 
-        export CFLAGS="-I$(brew --prefix openssl)/include"
-        export LDFLAGS="-L$(brew --prefix openssl)/lib"
+    ```
+    export CFLAGS="-I$(brew --prefix openssl)/include"
+    export LDFLAGS="-L$(brew --prefix openssl)/lib"
+    ```
 
 1. Install Python versions.
 
-        pyenv install 2.7.14
-        pyenv install 3.6.3
+    ```
+    pyenv install 2.7.14
+    pyenv install 3.6.3
+    ```
 
 1. List the available Python versions.
 
-        pyenv versions
+    ```
+    pyenv versions
+    ```
 
 1. Activate a Python version and verify that it is available.
 
-        pyenv global 2.7.14
-        pyenv versions
-        python -V
+    ```
+    pyenv global 2.7.14
+    pyenv versions
+    python -V
+    ```
 
 1. Activate another Python version and verify that it is available.
 
-        pyenv global 3.6.3
-        pyenv versions
-        python -V
+    ```
+    pyenv global 3.6.3
+    pyenv versions
+    python -V
+    ```
 
 1. If desired, activate multiple Python versions and verify that they are available.
 [PEP 394 -- The "python" Command on Unix-Like Systems](https://www.python.org/dev/peps/pep-0394/)
 explains conventions for naming `python` binaries.
 
-        pyenv global 2.7.14 3.6.3
-        pyenv versions
-        python -V
-        python2 -V
-        python2.7 -V
-        python3 -V
-        python3.6 -V
+    ```
+    pyenv global 2.7.14 3.6.3
+    pyenv versions
+    python -V
+    python2 -V
+    python2.7 -V
+    python3 -V
+    python3.6 -V
+    ```
 
 1. Create new directories for Python projects, add `pyenv local` version files and verify the Python
 versions.  Your `python` version will automatically switch when you change into these directories.
 
-        mkdir python2-project
-        cd python2-project
-        pyenv local 2.7.13
-        cat .python-version
-        pyenv local
-        python -V
-        cd ..
+    ```
+    mkdir python2-project
+    cd python2-project
+    pyenv local 2.7.13
+    cat .python-version
+    pyenv local
+    python -V
+    cd ..
 
-        mkdir python3-project
-        cd python3-project
-        pyenv local 3.6.3
-        cat .python-version
-        pyenv local
-        python -V
-        cd ..
+    mkdir python3-project
+    cd python3-project
+    pyenv local 3.6.3
+    cat .python-version
+    pyenv local
+    python -V
+    cd ..
+    ```
 
 ## Useful Python Packages
 
@@ -179,7 +205,7 @@ for more details on endpoints that are avaialble.
 pip install requests
 ```
 
-```
+```python
 python
 >>> import requests
 >>> r = requests.get('https://api.github.com/users/copperlight')
@@ -202,11 +228,11 @@ u'copperlight'
 Install [Flask: A Python Microframework](http://flask.pocoo.org/), which can be used to quickly build
 small websites that automate everyday tasks.
 
-```
+```bash
 pip install Flask
 ```
 
-```
+```python
 from flask import Flask
 app = Flask(__name__)
 
@@ -268,7 +294,7 @@ on this topic.
 
 ## Quickstart Commands
 
-```bash
+```
 # if you need homebrew
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
