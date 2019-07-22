@@ -21,7 +21,7 @@ before_deploy:
   - git fetch origin master:master
 deploy:
   provider: script
-  script: mkdocs gh-deploy --remote-branch master
+  script: mkdocs gh-deploy
   skip_cleanup: true
   on:
     branch: source

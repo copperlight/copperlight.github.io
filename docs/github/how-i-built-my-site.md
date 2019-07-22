@@ -200,6 +200,7 @@ your Markdown files.
         git commit -m "my new post"
         git push origin
 
-1. Build and deploy the site.
+1. Build and deploy the site, which uses the `remote_branch` key from the `mkdocs.yml` file to
+choose the branch that will receive the push. 
 
         mkdocs gh-deploy
