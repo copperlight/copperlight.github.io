@@ -1,3 +1,6 @@
+travis-deploy-key
+travis-deploy-key.pub
+.idea/
 .vscode/
 site/
 venv/
