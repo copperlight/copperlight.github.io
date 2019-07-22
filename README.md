@@ -16,7 +16,7 @@
 1. Activate the virtual environment and serve the site.
 
     ```
-    sourve venv/bin/activate
+    source venv/bin/activate
     mkdocs serve
     open http://localhost:8000
     ``` 
@@ -47,7 +47,8 @@ one-liner for decrypting the key, which should be added to `.travis.yml`.
     travis encrypt-file travis-deploy-key
     ``` 
 
-1. Configure the [Travis build](./.travis.yml).
+1. Configure the [Travis build](./.travis.yml). The remote branch for the `gh-deploy` command is
+specified in the [MkDocs configuration](https://github.com/copperlight/copperlight.github.io/blob/source/mkdocs.yml#L9).
 
 ## Deployment
 
