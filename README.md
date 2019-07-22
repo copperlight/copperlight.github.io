@@ -18,6 +18,7 @@
     ```
     sourve venv/bin/activate
     mkdocs serve
+    open http://localhost:8000
     ``` 
 
 ## Deploy Configuration
@@ -51,3 +52,9 @@ one-liner for decrypting the key, which should be added to `.travis.yml`.
 ## Deployment
 
 Pushing changes to the `source` branch will trigger the build and deploy steps on Travis.
+
+## Known Issues
+
+The [mkdocs-markdownextradata-plugin](https://github.com/rosscdh/mkdocs-markdownextradata-plugin/)
+does not handle the Ansible pages well, because they embed Jinja expressions and there does not
+appear to be a way to escape those characters in that context. 

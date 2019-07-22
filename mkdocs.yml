@@ -78,5 +78,4 @@ markdown_extensions:
       permalink: True
 
 plugins:
-  - markdownextradata: {}
   - search
