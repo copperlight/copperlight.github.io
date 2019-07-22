@@ -41,10 +41,13 @@ named `travis-deploy-key` and allow write access.
     ```
 
 1. Encrypt the private key, using Travis CLI. This will upload the key to Travis and provide a
-one-liner for decrypting the key, which should be added to `.travis.yml`.
+one-liner for decrypting the key, which should be added to `.travis.yml`. Add the encrypted key
+to the repo and delete the original files.
 
     ```shell
     travis encrypt-file travis-deploy-key
+    git add travis-deploy-key.enc
+    rm travis-deploy-key travis-deploy-key.pub
     ``` 
 
 1. Configure the [Travis build](./.travis.yml). The remote branch for the `gh-deploy` command is
