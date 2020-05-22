@@ -93,11 +93,11 @@ def convertUnits(lines):
         if len(line) == 12 and not "--" in line[9]:
             # curl reports speed in bytes per second
             if 'k' in line[11]:
-                line[11] = str(int(line[11].replace('k','')) * 8 * 1024)
+                line[11] = str(float(line[11].replace('k','')) * 8 * 1024)
             elif 'M' in line[11]:
-                line[11] = str(int(line[11].replace('M','')) * 8 * 1048576)
+                line[11] = str(float(line[11].replace('M','')) * 8 * 1048576)
             elif 'G' in line[11]:
-                line[11] = str(int(line[11].replace('G','')) * 8 * 1073741824)
+                line[11] = str(float(line[11].replace('G','')) * 8 * 1073741824)
             converted.append([line[9], line[11]])
     return converted
 
