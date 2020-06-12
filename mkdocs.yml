@@ -25,6 +25,7 @@ nav:
   - GitHub:
     - How I Built My Site: github/how-i-built-my-site.md
   - Linux:
+    - Apache Deflate and CORS Headers: linux/apache-deflate-and-cors-headers.md
     - Linux ftrace Delivers dtrace-like Functionality: linux/linux-ftrace-delivers-dtrace-like-functionality.md
   - Misc:
     - Clone Stash Pull Requests: misc/clone-stash-pull-requests.md
