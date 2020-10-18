@@ -56,6 +56,7 @@ nav:
     - Parsing JSON on the Command Line: shell/parsing-json-on-the-command-line.md
     - pet - CLI Snippet Manager: shell/pet-cli-snippet-manager.md
     - Schedule Ad-Hoc Jobs for Later on an Instance with atd: shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd.md
+    - Z Shell Keyboard Shortcuts: shell/zsh-keyboard-shortcuts.md
   - Stocks:
     - Netflix Quarterly Growth: stocks/nflx-quarterly-subscriber-growth.md
   - Talks:
