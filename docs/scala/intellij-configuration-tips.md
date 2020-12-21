@@ -7,6 +7,18 @@
 
 This page provides a few tips on configuring IntelliJ for working with Scala code.
 
+## sbt Projects
+
+Sometimes, IntelliJ [struggles to import sbt projects] - the build phase will last forever (20 min
+is not uncommon), when it should complete in 3-4 minutes. The solution is to switch the sbt build
+process to use sbt shell.
+
+* IntelliJ IDEA > Preferences
+* Build, Execution, Deployment > Build Tools > sbt
+* sbt projects > sbt shell > use for: project reload, builds
+
+[struggles to import sbt projects]: https://stackoverflow.com/questions/47697141/intellij-cannot-import-sbt-project
+
 ## Optimize Imports
 
 The preference for organizing imports is to keep them on a single line per import, rather than
