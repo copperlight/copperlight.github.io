@@ -12,49 +12,58 @@ with the `DefaultAWSCredentialsProviderChain` in production code.
 ```scala
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicSessionCredentials
+import com.amazonaws.regions.Regions
+import com.amazonaws.services.autoscaling.AmazonAutoScalingClientBuilder
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest
-import com.amazonaws.ClientConfiguration
-import com.amazonaws.regions.Regions
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder
-import scala.collection.JavaConverters._
 
-// curl http://169.254.169.254/latest/meta-data/iam/security-credentials/MyProfile
-val instanceCreds = new BasicSessionCredentials(
-  "AccessKeyId",
-  "SecretAccessKey",
-  "Token"
-)
+// config values
 
-val stsClient = AWSSecurityTokenServiceClientBuilder
-  .standard()
-  .withCredentials(new AWSStaticCredentialsProvider(instanceCreds))
-  .withRegion(Regions.US_EAST_1)
-  .build()
+val accessKeyId = ""
+val secretAccessKey = ""
+val token = ""
 
+val role: Option[String] = None
 val accountId = ""
-val role = ""
+val region = Regions.US_WEST_1
 
-val assumeRoleResult = stsClient.assumeRole(
-  new AssumeRoleRequest()
-    .withRoleSessionName("TestAssumeRole")
-    .withRoleArn(s"arn:aws:iam::$accountId:role/$role")
-)
+// client configuration
 
-val stsCredentials = assumeRoleResult.getCredentials
+val staticProvider = {
+  role.fold {
+    val basic = new BasicSessionCredentials(accessKeyId, secretAccessKey, token)
+    new AWSStaticCredentialsProvider(basic)
+  } { role =>
+    val instanceProvider = {
+      val basic = new BasicSessionCredentials(accessKeyId, secretAccessKey, token)
+      new AWSStaticCredentialsProvider(basic)
+    }
 
-val assumeCreds = new BasicSessionCredentials(
-  stsCredentials.getAccessKeyId,
-  stsCredentials.getSecretAccessKey,
-  stsCredentials.getSessionToken
-)
+    val stsClient = AWSSecurityTokenServiceClientBuilder
+      .standard()
+      .withCredentials(instanceProvider)
+      .withRegion(region)
+      .build()
 
-val sqsClient = AmazonSQSClientBuilder
+    val req = new AssumeRoleRequest()
+      .withRoleSessionName(s"$role-testing")
+      .withRoleArn(s"arn:aws:iam::$accountId:role/$role")
+
+    val assumedCreds = stsClient.assumeRole(req).getCredentials
+
+    val basic = new BasicSessionCredentials(
+      assumedCreds.getAccessKeyId,
+      assumedCreds.getSecretAccessKey,
+      assumedCreds.getSessionToken
+    )
+
+    new AWSStaticCredentialsProvider(basic)
+  }
+}
+
+val client = AmazonAutoScalingClientBuilder
   .standard()
-  .withCredentials(new AWSStaticCredentialsProvider(assumeCreds))
-  .withClientConfiguration(new ClientConfiguration())
-  .withRegion(Regions.US_EAST_1)
+  .withCredentials(staticProvider)
+  .withRegion(region)
   .build()
-
-sqsClient.listQueues().getQueueUrls.asScala.foreach(println(_))
 ```
