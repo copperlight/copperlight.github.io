@@ -11,6 +11,24 @@ page.
 [Z shell]: http://zsh.sourceforge.net/
 [Kitty]: https://sw.kovidgoyal.net/kitty/#
 
+## Kitty Windows & Tabs
+
+| Description | Shortcut |
+|-------------|----------|
+| Switch between enabled window layouts | `ctrl-shift-l` |
+| New window | `cmd-enter` |
+| Close window | `cmd-shift-d` |
+| Next window | `ctrl-shift-]` |
+| Previous window | `ctrl-shift-[` |
+| Move window forward | `ctrl-shift-f` |
+| Move window backward | `ctrl-shift-b` |
+| New tab | `cmd-t` |
+| Close tab | `cmd-w` |
+| Next tab | `cmd-shift-]` |
+| Previous tab | `cmd-shift-[` |
+| Move tab forward | `ctrl-shift-.` |
+| Move tab backward | `ctrl-shift-,` |
+
 ## Moving within a Line
 
 | Description | Mapping | Shortcut |
