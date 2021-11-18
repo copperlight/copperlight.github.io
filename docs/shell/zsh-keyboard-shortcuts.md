@@ -56,7 +56,7 @@ page.
 | Make a word uppercase | `up-case-word` | `ctrl-[u` |
 | Quote line | `quote-line` | `ctrl-['` |
 | Push line onto buffer | `push-line` | `ctrl-[q` |
-| Get line from buffer | `get-line` | `ctrl-[q` |
+| Get line from buffer | `get-line` | `ctrl-[g` |
 | Delete buffer | `kill-buffer` | `ctrl-x,ctrl-k` | 
 | Undo the last change | `undo` | `ctrl-xu` <br> `ctrl-x,ctrl-u` |
 | Execute line | `accept-line` | `enter` <br> `ctrl-j` <br> `ctrl-m` |
