@@ -1,0 +1,1557 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A site for knowledge sharing and neat things.">
+      
+      
+        <meta name="author" content="Matthew Johnson">
+      
+      
+        <link rel="canonical" href="http://copperlight.github.io/aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+    
+    
+      
+        <title>Build a Fake Instance Metadata Server for Ubuntu on Vagrant - Copperlight Writes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-52382416-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Copperlight Writes" class="md-header__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Copperlight Writes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Build a Fake Instance Metadata Server for Ubuntu on Vagrant
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Copperlight Writes" class="md-nav__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Copperlight Writes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Ansible
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ansible" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ansible
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/ansible-vault-and-ssh-key-distribution/" class="md-nav__link">
+        Ansible Vault and SSH Key Distribution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/running-ansible-playbooks-on-windows/" class="md-nav__link">
+        Running Ansible Playbooks on Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/testing-ansible-galaxy-roles-with-docker/" class="md-nav__link">
+        Testing Ansible Galaxy Roles with Docker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          AWS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assume-role-with-awscli/" class="md-nav__link">
+        Assume Role with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-credential-files-for-java-and-python/" class="md-nav__link">
+        AWS Credential Files for Java and Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Build a Fake Instance Metadata Server for Ubuntu on Vagrant
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../checking-and-changing-content-type-of-s3-object-with-awscli/" class="md-nav__link">
+        Checking and Changing Content-Type of S3 Object with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuring-multiple-interfaces-on-the-same-network-in-ec2/" class="md-nav__link">
+        Configuring Multiple Interfaces on the Same Network in EC2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          GitHub
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GitHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          GitHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github/how-i-built-my-site/" class="md-nav__link">
+        How I Built My Site
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/apache-deflate-and-cors-headers/" class="md-nav__link">
+        Apache Deflate and CORS Headers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/linux-ftrace-delivers-dtrace-like-functionality/" class="md-nav__link">
+        Linux ftrace Delivers dtrace-like Functionality
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/clone-stash-pull-requests/" class="md-nav__link">
+        Clone Stash Pull Requests
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/" class="md-nav__link">
+        Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/reset-jenkins-build-number/" class="md-nav__link">
+        Reset Jenkins Build Number
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/switching-jdks-in-osx/" class="md-nav__link">
+        Switching JDKs in OSX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/accessing-google-apis-with-python/" class="md-nav__link">
+        Accessing Google APIs with Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/building-rest-apis-with-python-flask/" class="md-nav__link">
+        Building REST APIs with Python Flask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/install-the-latest-python-versions-on-macosx/" class="md-nav__link">
+        Install the Latest Python Versions on Mac OSX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/memory-profiling-with-pyrasite-and-heapy/" class="md-nav__link">
+        Memory Profiling with Pyrasite and Heapy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/stop-using-print-for-debugging/" class="md-nav__link">
+        Stop Using "print" for Debugging
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Recipes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recipes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Recipes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/galaxys-best-margarita/" class="md-nav__link">
+        Galaxy's Best Margarita
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Running
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Running" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Running
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/garmin-935-navigation/" class="md-nav__link">
+        Garmin 935 Navigation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Scala
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scala" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Scala
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/intellij-configuration-tips/" class="md-nav__link">
+        IntelliJ Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/jmh-testing-with-scala/" class="md-nav__link">
+        JMH Testing with Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/overview-of-debugging-tools/" class="md-nav__link">
+        Overview of Debugging Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/scalafmt-configuration-tips/" class="md-nav__link">
+        Scalafmt Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/starting-scala-repls-with-gradle-and-sbt/" class="md-nav__link">
+        Starting Scala REPLs with Gradle and SBT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/testing-aws-clients-with-iam-assumerole-credentials-in-scala/" class="md-nav__link">
+        Testing AWS Clients with IAM AssumeRole Credentials in Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-gradle-to-run-scala-projects-locally/" class="md-nav__link">
+        Using Gradle to Run Scala Projects Locally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-the-scala-repl-to-configure-amazon-ses-notifications/" class="md-nav__link">
+        Using the Scala REPL to Configure Amazon SES Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Shell
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Shell" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Shell
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/measuring-transfer-speed-over-time-with-curl/" class="md-nav__link">
+        Measuring Transfer Speed Over Time with cURL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/parsing-json-on-the-command-line/" class="md-nav__link">
+        Parsing JSON on the Command Line
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/pet-cli-snippet-manager/" class="md-nav__link">
+        pet - CLI Snippet Manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd/" class="md-nav__link">
+        Schedule Ad-Hoc Jobs for Later on an Instance with atd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/zsh-keyboard-shortcuts/" class="md-nav__link">
+        Z Shell Keyboard Shortcuts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Stocks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stocks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Stocks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stocks/nflx-quarterly-subscriber-growth/" class="md-nav__link">
+        Netflix Quarterly Growth
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          Talks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Talks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/favorite/" class="md-nav__link">
+        Favorite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-nav__link">
+        Netflix Atlas Telemetry - A Platform Begets an Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant">Build a Fake Instance Metadata Server for Ubuntu on Vagrant<a class="headerlink" href="#build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant" title="Permanent link">&para;</a></h1>
+<div class="meta">
+  <span class="date"><small>2014-07-22</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div>
+<p>Let's say that you have a proper build/bake/deploy pipeline in place for running appications in AWS.
+This is a reliable way to deploy applications at scale and move traffic between different versions
+of applications as a part of the deployment pipeline.  However, the whole process may take 20-40
+minutes or so to complete for any particular build.  If you want to iterate more rapidly on your
+development efforts, you could skip the full process with a quickpatch ssh/rsync deployment to a
+single server or you could stand up a local Vagrant base image and iterate on that.  Now let's say
+that the application you are working on is intended to work with instance metadata, particularly for
+the purpose of obtaining a rotating set of access and secret keys.  It might be nice to have a fake
+metadata service running on your local Vagrant image so that you can test your application in a
+manner similar to how it will be running in the cloud.  In this post, I describe how to build and
+configure a fake metadata service for an Ubuntu image running on Vagrant.</p>
+<h1 id="package-layout">Package Layout<a class="headerlink" href="#package-layout" title="Permanent link">&para;</a></h1>
+<p>This layout assumes that you will be installing custom packages to the <code>/apps</code> directory, and there
+is a <a href="http://cr.yp.to/daemontools.html">daemontools</a> service hierarchy located at <code>/service</code>.  The
+<code>fake-metadata/service/run</code> file is a script suitable for use with daemontools.</p>
+<div class="highlight"><pre><span></span><code>root/
+├── apps
+│   └── fake-metadata
+│       ├── app.py
+│       └── service
+│           └── run
+└── etc
+    ├── init.d
+    │   └── fake-metadata
+    ├── logrotate.d
+    │   └── fake-metadata
+    └── network
+        └── iptables.rules
+</code></pre></div>
+<h1 id="building-and-packaging">Building and Packaging<a class="headerlink" href="#building-and-packaging" title="Permanent link">&para;</a></h1>
+<p>For cross-platform build packaging, it will be easiest to use the
+<a href="https://github.com/nebula-plugins/gradle-ospackage-plugin">nebula ospackage</a> plugin with Gradle.
+With this plugin available, your build script will look something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;nebula-ospackage&#39;</span>
+
+<span class="n">ospackage</span> <span class="o">{</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span>
+    <span class="n">packageName</span><span class="o">=</span><span class="s1">&#39;fake-metadata&#39;</span>
+
+    <span class="n">requires</span><span class="o">(</span><span class="s1">&#39;python-flask&#39;</span><span class="o">)</span>
+
+    <span class="n">link</span><span class="o">(</span><span class="s1">&#39;/apps/fake-metadata/logs&#39;</span><span class="o">,</span> <span class="s1">&#39;/mnt/logs/fake-metadata&#39;</span><span class="o">)</span>
+    <span class="n">link</span><span class="o">(</span><span class="s1">&#39;/service/fake-metadata&#39;</span><span class="o">,</span> <span class="s1">&#39;/apps/fake-metadata/service&#39;</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="n">buildDeb</span> <span class="o">{</span>
+    <span class="n">postInstall</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;scripts/postInstall.sh&#39;</span><span class="o">)</span>
+    <span class="n">preUninstall</span> <span class="s1">&#39;svc -d /service/fake-metadata&#39;</span>
+    <span class="n">postUninstall</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;scripts/postUninstall.sh&#39;</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="n">task</span> <span class="nf">build</span><span class="o">(</span><span class="nl">dependsOn:</span> <span class="o">[</span><span class="s1">&#39;buildDeb&#39;</span><span class="o">])</span>
+</code></pre></div>
+<h1 id="fake-metadata-application">Fake Metadata Application<a class="headerlink" href="#fake-metadata-application" title="Permanent link">&para;</a></h1>
+<p>The simplest approach to building the service is to create a <a href="http://flask.pocoo.org/">Flask</a>
+service and have it run bare on the Vagrant instance.  Given how small it will be and limited amount
+of traffic it will need to serve, there is no need to run this behind a dedicated static webserver
+like nginx or Apache.  The nice thing about using Flask and having a basic structure in place is
+that it is then easy to extend the application to add other endpoints when needed.</p>
+<div class="highlight"><pre><span></span><code>#!/usr/bin/env python
+
+from flask import Flask, jsonify, abort, make_response, request
+import os
+import sys
+
+
+app = Flask(__name__)
+
+
+BaseIAMRole = {
+  &#39;Code&#39;: &#39;Success&#39;,
+  &#39;LastUpdated&#39; : &#39;&#39;,
+  &#39;Type&#39;: &#39;AWS-HMAC&#39;,
+  &#39;AccessKeyId&#39;: &#39;&#39;,
+  &#39;SecretAccessKey&#39;: &#39;&#39;,
+  &#39;Token&#39;: &#39;&#39;,
+  &#39;Expiration&#39;: &#39;&#39;
+}
+
+
+@app.route(&#39;/&#39;, methods = [&#39;GET&#39;])
+def index():
+    return &#39;latest&#39;
+
+
+@app.route(&#39;/latest/&#39;, methods = [&#39;GET&#39;])
+def latest():
+    return &#39;meta-data&#39;
+
+
+@app.route(&#39;/latest/meta-data/&#39;, methods = [&#39;GET&#39;])
+def meta_data():
+    endpoints = [
+        &#39;iam&#39;,
+        &#39;public-hostname&#39;,
+        &#39;public-ipv4&#39;
+    ]
+    return (&#39;\n&#39;).join(endpoints)
+
+
+@app.route(&#39;/latest/meta-data/iam/&#39;, methods = [&#39;GET&#39;])
+def iam():
+    return &#39;security-credentials&#39;
+
+
+@app.route(&#39;/latest/meta-data/iam/security-credentials/&#39;, methods = [&#39;GET&#39;])
+def security_credentials():
+    return &#39;BaseIAMRole&#39;
+
+
+@app.route(&#39;/latest/meta-data/iam/security-credentials/BaseIAMRole&#39;, methods = [&#39;GET&#39;])
+def base_iam_role():
+    # update the payload to contain a current set of accesss and secrey keys
+    return jsonify(BaseIAMRole)
+
+
+@app.route(&#39;/latest/meta-data/public-hostname&#39;, methods = [&#39;GET&#39;])
+def public_hostname():
+    return os.environ[&#39;EC2_LOCAL_HOSTNAME&#39;]
+
+
+@app.route(&#39;/latest/meta-data/public-ipv4&#39;, methods = [&#39;GET&#39;])
+def public_ipv4():
+    return os.environ[&#39;EC2_LOCAL_IPV4&#39;]
+
+
+@app.errorhandler(400)
+def not_found(error):
+    return make_response(jsonify( { &#39;error&#39;: &#39;bad request&#39; } ), 400)
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify( { &#39;error&#39;: &#39;not found&#39; } ), 404)
+
+
+@app.errorhandler(500)
+def not_found(error):
+    return make_response(jsonify( { &#39;error&#39;: &#39;internal server error&#39; } ), 500)
+
+
+if __name__ == &#39;__main__&#39;:
+    if len(sys.argv) &gt; 1:
+        if &#39;:&#39; in sys.argv[1]:
+            host=sys.argv[1].split(&#39;:&#39;)[0]
+            port=int(sys.argv[1].split(&#39;:&#39;)[1])
+            app.run(host=host, port=port)
+        else:
+            app.run(host=sys.argv[1])
+    else:
+        app.run(debug=True)
+</code></pre></div>
+<h1 id="daemontools-run-script">Daemontools Run Script<a class="headerlink" href="#daemontools-run-script" title="Permanent link">&para;</a></h1>
+<p>This script is watched by the supervise process, which then starts (or restarts) the application if
+it is not running.  Switching to a non-root user and redirecting output to the log file occurs here.</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+
+ulimit -n 32768
+
+source /etc/profile.d/environment.sh
+
+export PATH=/command:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/scripts
+
+if [ ! -d &quot;/mnt/logs/fake-metadata&quot; ]; then
+  mkdir -p /mnt/logs/fake-metadata
+  chmod 0777 /mnt/logs/fake-metadata
+fi
+
+USER=someuser
+PYTHON=/usr/bin/python
+APP=/apps/fake-metadata/app.py
+OPTS=127.0.0.1:8000
+LOG=/mnt/logs/fake-metadata/server.log
+
+echo &quot;starting fake-metadata&quot;
+exec setuidgid $USER $PYTHON $APP $OPTS &gt;&gt; $LOG 2&gt;&amp;1
+</code></pre></div>
+<h1 id="postinstall-script">PostInstall Script<a class="headerlink" href="#postinstall-script" title="Permanent link">&para;</a></h1>
+<p>This is where most of the trickiness occurs.</p>
+<p>The post install script is responsible for modifying the <code>/etc/network/interfaces</code> file, adding the
+metadata server IP address and configuring iptables in an idempotent manner.  When the post install
+script is packaged by the nebula ospackage plugin into a Debian package, it gets a <code>#!/bin/sh -e</code>
+shebang invocation, which means that the script will halt execution at any point where it evaluates
+a non-zero return code.  This means that the script needs to be written such a way that the
+environment state testing being done always returns a true value so that the script does not fail,
+hence the <code>||true</code> constructs.</p>
+<p>We are attaching an extra IP address to the loopback interface, so we need to redirect traffic from
+169.254.169.254:80 to the location where the fake metadata server is running.  We are dealing with
+the loopback interface, which means that the PREROUTING nat table is never hit and we must use the
+OUTPUT table instead.  You cannot DNAT packets destined for the loopback interface, because the
+kernel will treat them as martians and drop them, so you must REDIRECT the packets to the desired
+port.  When performing the redirection from port 80 to 8000 on the loopback interface, it sends the
+packets to 127.0.0.1:8000, not 169.254.169.254:8000, so the fake metadata server must be listening
+on localhost port 8000.</p>
+<p>If for some reason, you need to troubleshoot the post install script, it can be found at
+<code>/var/lib/dpkg/info/fake-metadata.postinst</code> following an attempted package installation.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> grep <span class="m">169</span>.254.169.254/32 /etc/network/interfaces <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> ! <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *169.254.169.254/32*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    sed -i <span class="s1">&#39;/iface lo inet loopback/a up ip addr add 169.254.169.254/32 dev lo scope host&#39;</span> /etc/network/interfaces
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> /sbin/ip addr <span class="p">|</span>grep <span class="m">169</span>.254.169.254/32 <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> ! <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *169.254.169.254/32*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    /sbin/ip addr add <span class="m">169</span>.254.169.254/32 dev lo scope host
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> grep iptables-restore /etc/network/interfaces <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> ! <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *iptables-restore*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    sed -i <span class="s1">&#39;/up ip addr add/a pre-up iptables-restore &lt; /etc/network/iptables.rules&#39;</span> /etc/network/interfaces
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> iptables -t nat -L <span class="p">|</span>grep <span class="m">8000</span> <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> ! <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *8000*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    iptables -t nat -A OUTPUT -p tcp -d <span class="m">169</span>.254.169.254/32 --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
+<span class="k">fi</span>
+
+/usr/sbin/update-rc.d fake-metadata defaults
+</code></pre></div>
+<h1 id="postuninstall-script">PostUninstall Script<a class="headerlink" href="#postuninstall-script" title="Permanent link">&para;</a></h1>
+<p>This script is the inverse of the post install script; it returns the system to its previous state.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> grep <span class="m">169</span>.254.169.254/32 /etc/network/interfaces <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *169.254.169.254/32*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    sed -i <span class="s1">&#39;/up ip addr add 169.254.169.254\/32 dev lo scope host/d&#39;</span> /etc/network/interfaces
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> /sbin/ip addr <span class="p">|</span>grep <span class="m">169</span>.254.169.254/32 <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *169.254.169.254/32*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    /sbin/ip addr delete <span class="m">169</span>.254.169.254/32 dev lo scope host
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> grep iptables-restore /etc/network/interfaces <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *iptables-restore*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    sed -i <span class="s1">&#39;/pre-up iptables-restore &lt; \/etc\/network\/iptables.rules/d&#39;</span> /etc/network/interfaces
+<span class="k">fi</span>
+
+<span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span> iptables -t nat -L <span class="p">|</span>grep <span class="m">8000</span> <span class="o">||</span> <span class="nb">true</span> <span class="k">)</span>
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&quot;</span><span class="nv">$LINE</span><span class="s2">&quot;</span> <span class="o">==</span> *8000*  <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    iptables -t nat -D OUTPUT -p tcp -d <span class="m">169</span>.254.169.254/32 --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
+<span class="k">fi</span>
+
+/usr/sbin/update-rc.d -f fake-metadata remove
+rm -rf /apps/fake-metadata
+pkill -f <span class="s1">&#39;supervise fake-metadata&#39;</span>
+</code></pre></div>
+<h1 id="log-rotation">Log Rotation<a class="headerlink" href="#log-rotation" title="Permanent link">&para;</a></h1>
+<p>To keep the local Vagrant instance clean, it is useful to configure log rotation.  Sending a HUP
+signal to the service allows it to continue writing to the new logfile.</p>
+<div class="highlight"><pre><span></span><code>/mnt/logs/fake-metadata/server.log <span class="o">{</span>
+    daily
+    rotate <span class="m">7</span>
+    compress
+    missingok
+    notifempty
+    create <span class="m">644</span> root root
+    postrotate
+        svc -h /service/fake-metadata
+    endscript
+<span class="o">}</span>
+</code></pre></div>
+<p><br/></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../aws-credential-files-for-java-and-python/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AWS Credential Files for Java and Python" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              AWS Credential Files for Java and Python
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../checking-and-changing-content-type-of-s3-object-with-awscli/" class="md-footer__link md-footer__link--next" aria-label="Next: Checking and Changing Content-Type of S3 Object with AWSCLI" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Checking and Changing Content-Type of S3 Object with AWSCLI
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      
+        <script src="https://buttons.github.io/buttons.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1706 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A site for knowledge sharing and neat things.">
+      
+      
+        <meta name="author" content="Matthew Johnson">
+      
+      
+        <link rel="canonical" href="http://copperlight.github.io/misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+    
+    
+      
+        <title>Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina - Copperlight Writes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-52382416-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dual-boot-osx-1010-and-ubuntu-1404-on-a-2013-macbook-pro-retina" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Copperlight Writes" class="md-header__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Copperlight Writes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Copperlight Writes" class="md-nav__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Copperlight Writes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Ansible
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ansible" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ansible
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/ansible-vault-and-ssh-key-distribution/" class="md-nav__link">
+        Ansible Vault and SSH Key Distribution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/running-ansible-playbooks-on-windows/" class="md-nav__link">
+        Running Ansible Playbooks on Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/testing-ansible-galaxy-roles-with-docker/" class="md-nav__link">
+        Testing Ansible Galaxy Roles with Docker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          AWS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/assume-role-with-awscli/" class="md-nav__link">
+        Assume Role with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/aws-credential-files-for-java-and-python/" class="md-nav__link">
+        AWS Credential Files for Java and Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant/" class="md-nav__link">
+        Build a Fake Instance Metadata Server for Ubuntu on Vagrant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/checking-and-changing-content-type-of-s3-object-with-awscli/" class="md-nav__link">
+        Checking and Changing Content-Type of S3 Object with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/configuring-multiple-interfaces-on-the-same-network-in-ec2/" class="md-nav__link">
+        Configuring Multiple Interfaces on the Same Network in EC2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          GitHub
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GitHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          GitHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github/how-i-built-my-site/" class="md-nav__link">
+        How I Built My Site
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/apache-deflate-and-cors-headers/" class="md-nav__link">
+        Apache Deflate and CORS Headers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/linux-ftrace-delivers-dtrace-like-functionality/" class="md-nav__link">
+        Linux ftrace Delivers dtrace-like Functionality
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clone-stash-pull-requests/" class="md-nav__link">
+        Clone Stash Pull Requests
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    Issues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling" class="md-nav__link">
+    Uninstalling
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-jenkins-build-number/" class="md-nav__link">
+        Reset Jenkins Build Number
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switching-jdks-in-osx/" class="md-nav__link">
+        Switching JDKs in OSX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/accessing-google-apis-with-python/" class="md-nav__link">
+        Accessing Google APIs with Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/building-rest-apis-with-python-flask/" class="md-nav__link">
+        Building REST APIs with Python Flask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/install-the-latest-python-versions-on-macosx/" class="md-nav__link">
+        Install the Latest Python Versions on Mac OSX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/memory-profiling-with-pyrasite-and-heapy/" class="md-nav__link">
+        Memory Profiling with Pyrasite and Heapy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/stop-using-print-for-debugging/" class="md-nav__link">
+        Stop Using "print" for Debugging
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Recipes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recipes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Recipes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/galaxys-best-margarita/" class="md-nav__link">
+        Galaxy's Best Margarita
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Running
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Running" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Running
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/garmin-935-navigation/" class="md-nav__link">
+        Garmin 935 Navigation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Scala
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scala" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Scala
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/intellij-configuration-tips/" class="md-nav__link">
+        IntelliJ Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/jmh-testing-with-scala/" class="md-nav__link">
+        JMH Testing with Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/overview-of-debugging-tools/" class="md-nav__link">
+        Overview of Debugging Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/scalafmt-configuration-tips/" class="md-nav__link">
+        Scalafmt Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/starting-scala-repls-with-gradle-and-sbt/" class="md-nav__link">
+        Starting Scala REPLs with Gradle and SBT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/testing-aws-clients-with-iam-assumerole-credentials-in-scala/" class="md-nav__link">
+        Testing AWS Clients with IAM AssumeRole Credentials in Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-gradle-to-run-scala-projects-locally/" class="md-nav__link">
+        Using Gradle to Run Scala Projects Locally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-the-scala-repl-to-configure-amazon-ses-notifications/" class="md-nav__link">
+        Using the Scala REPL to Configure Amazon SES Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Shell
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Shell" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Shell
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/measuring-transfer-speed-over-time-with-curl/" class="md-nav__link">
+        Measuring Transfer Speed Over Time with cURL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/parsing-json-on-the-command-line/" class="md-nav__link">
+        Parsing JSON on the Command Line
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/pet-cli-snippet-manager/" class="md-nav__link">
+        pet - CLI Snippet Manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd/" class="md-nav__link">
+        Schedule Ad-Hoc Jobs for Later on an Instance with atd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/zsh-keyboard-shortcuts/" class="md-nav__link">
+        Z Shell Keyboard Shortcuts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Stocks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stocks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Stocks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stocks/nflx-quarterly-subscriber-growth/" class="md-nav__link">
+        Netflix Quarterly Growth
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          Talks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Talks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/favorite/" class="md-nav__link">
+        Favorite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-nav__link">
+        Netflix Atlas Telemetry - A Platform Begets an Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    Issues
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing" class="md-nav__link">
+    Installing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstalling" class="md-nav__link">
+    Uninstalling
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="dual-boot-osx-1010-and-ubuntu-1404-on-a-2013-macbook-pro-retina">Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina<a class="headerlink" href="#dual-boot-osx-1010-and-ubuntu-1404-on-a-2013-macbook-pro-retina" title="Permanent link">&para;</a></h1>
+<div class="meta">
+  <span class="date"><small>2015-06-24</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Why?  Some recent benchmarks have shown that Ubuntu can out-perform OSX on Macbook hardware.</p>
+<ul>
+<li><a href="http://www.phoronix.com/scan.php?page=article&amp;item=osx10_ubuntu1410&amp;num=1">http://www.phoronix.com/scan.php?page=article&amp;item=osx10_ubuntu1410&amp;num=1</a></li>
+<li><a href="http://www.phoronix.com/scan.php?page=article&amp;item=ubuntu_1404_mba2013gl&amp;num=1">http://www.phoronix.com/scan.php?page=article&amp;item=ubuntu_1404_mba2013gl&amp;num=1</a></li>
+</ul>
+<p>This process was tested on a late 2013 Macbook11,2 A1398 model:</p>
+<ul>
+<li>2GHz Intel Core i7</li>
+<li>16GB 1600 MHz DDR3</li>
+<li>Intel Iris Pro 1536MB</li>
+</ul>
+<p>You can check your Macbook model from Ubuntu like so:</p>
+<div class="highlight"><pre><span></span><code>sudo dmidecode --type 1
+</code></pre></div>
+<h2 id="issues">Issues<a class="headerlink" href="#issues" title="Permanent link">&para;</a></h2>
+<p>Thunderbolt Monitor support is not great.  It will work if the monitor is connected to the system at
+boot-up, but it does not support hot-plug.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a href="https://blog.jessfraz.com/post/linux-on-mac/">https://blog.jessfraz.com/post/linux-on-mac/</a> for some new information on this.</p>
+<p>Apparently, kernel 3.17 has support for hotplugging Thunderbolt connections.</p>
+<p>See <a href="http://ubuntuhandbook.org/index.php/2014/11/how-to-upgrade-to-linux-kernel-3-17-4-in-ubuntu-14-10/">http://ubuntuhandbook.org/index.php/2014/11/how-to-upgrade-to-linux-kernel-3-17-4-in-ubuntu-14-10/</a> for adding 3.17 to Ubuntu 14.</p>
+</div>
+<h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Prepare Macbook for Ubuntu installation.</p>
+<ol>
+<li>
+<p>Partition hard disk.</p>
+<ol>
+<li>Finder &gt; Applications &gt; Utilities &gt; Disk Utility</li>
+<li>Macintosh HD &gt; Partition</li>
+<li>Add a "Free Space" partition equal to half the drive.</li>
+<li>Apply and wait for the file system to shrink (30-60 minutes).</li>
+</ol>
+</li>
+<li>
+<p><a href="http://sourceforge.net/projects/refind/files/0.8.4/refind-bin-0.8.4.zip/download">Download</a>
+a binary zip and install <a href="http://www.rodsbooks.com/refind/">rEFInd Boot Manager</a>.  This will
+allow you to switch between booting OSX 10.10 and Ubuntu 14.04.</p>
+<div class="codehilite"><pre><span></span><code>unzip refind-bin-0.8.4.zip
+cd refind-bin-0.8.4
+./install.sh --alldrivers
+</code></pre></div>
+
+</li>
+<li>
+<p><a href="http://www.ubuntu.com/download/desktop">Download Ubuntu</a> and create a
+<a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">bootable USB stick</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">hdiutil</span> <span class="nb">convert</span> <span class="o">-</span><span class="n">format</span> <span class="n">UDRW</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">target</span><span class="o">.</span><span class="n">img</span> <span class="o">~/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">iso</span>
+<span class="n">diskutil</span> <span class="n">list</span>
+<span class="c1"># find usb disk</span>
+<span class="n">diskutil</span> <span class="n">unmountDisk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">diskN</span>
+<span class="n">sudo</span> <span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">downloaded</span><span class="o">.</span><span class="n">img</span> <span class="n">of</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">rdiskN</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">m</span>
+<span class="n">diskutil</span> <span class="n">eject</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">diskN</span>
+</code></pre></div>
+
+</li>
+</ol>
+</li>
+<li>
+<p>Install Ubuntu.</p>
+<ol>
+<li>Reboot, hold down the Option key and choose Ubuntu USB stick.</li>
+<li>Grub Boot Menu: Install Ubuntu</li>
+<li>Continue with the installation, without networking.</li>
+<li>Installation Type &gt; Something Else</li>
+<li>This will allow you to create a custom partition configuration and preserve your Mac OSX install.</li>
+<li>
+<p>You should see a partition list like the following:</p>
+<table>
+<thead>
+<tr>
+<th>Partition</th>
+<th>Type</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/dev/sda1</td>
+<td>efi</td>
+<td>209 MB</td>
+</tr>
+<tr>
+<td>/dev/sda2</td>
+<td>hfs+</td>
+<td>125441 MB</td>
+</tr>
+<tr>
+<td>/dev/sda3</td>
+<td>hfs+</td>
+<td>650 MB</td>
+</tr>
+<tr>
+<td>free space</td>
+<td></td>
+<td>124699 MB</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Within the free space, create two new partitions:</p>
+<ol>
+<li>Swap space, equal to the same size as system RAM.</li>
+<li>An Ext4 partition for the root mount point, consuming the remaining space.</li>
+</ol>
+</li>
+<li>Select the new root partition and continue the installation.</li>
+<li>Time Zone: Los Angeles</li>
+<li>Keyboard Layout: English (US) - English (Macintosh)</li>
+<li>Who Are You?  Re-use your existing username and computer name.</li>
+<li>Reboot and choose Ubuntu installation from rEFInd menu.</li>
+</ol>
+</li>
+<li>
+<p>Configure Ubuntu Environment.</p>
+<ol>
+<li>
+<p>Start a Terminal</p>
+<ol>
+<li>Ubuntu Search &gt; Terminal</li>
+<li>Right-click Launcher Icon &gt; Lock to Launcher</li>
+</ol>
+</li>
+<li>
+<p>Configure <a href="http://askubuntu.com/questions/513425/how-to-get-wifi-working-on-ubuntu-14-04-macbook-pro-retina-15-inch-2014">wireless networking</a>.</p>
+<ol>
+<li>Insert USB stick with Ubuntu installation media.</li>
+<li>
+<p>Install dkms and bcmwl-kernel-source packages.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">cd</span> <span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="n n-Quoted">`whoami`</span><span class="o">/</span><span class="n">Ubuntu</span><span class="err">\</span> <span class="mf">14.04.1</span><span class="err">\</span> <span class="n">LTS</span><span class="err">\</span> <span class="n">amd64</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">dpgk</span> <span class="o">-</span><span class="n">i</span> <span class="n">pool</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">d</span><span class="o">/</span><span class="n">dkms</span><span class="o">/</span><span class="n">dkms_2</span><span class="mf">.2.0.3</span><span class="o">-</span><span class="mf">1.1</span><span class="n">ubuntu5_all</span><span class="p">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">dpgk</span> <span class="o">-</span><span class="n">i</span> <span class="n">pool</span><span class="o">/</span><span class="n">restricted</span><span class="o">/</span><span class="n">b</span><span class="o">/</span><span class="n">bcmwl</span><span class="o">/</span><span class="n">bcmwl</span><span class="o">-</span><span class="n">kernel</span><span class="o">-</span><span class="n">source_6</span><span class="mf">.30.223.141</span><span class="o">+</span><span class="n">bdcom</span><span class="o">-</span><span class="n">0ubuntu2_amd64</span><span class="p">.</span><span class="n">deb</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a network manager wakeup script <code>/etc/pm/sleep.d/99_wakeup</code> and make it executable.
+This will restore wireless networking when resuming from suspend.  Bugs
+<a href="https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/1299282">1299282</a> and
+<a href="https://bugs.launchpad.net/ubuntu/+source/bcmwl/+bug/1289884">1289884</a> are tracking this issue.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="k">in</span>
+  thaw<span class="p">|</span>resume<span class="o">)</span>
+    nmcli nm sleep <span class="nb">false</span>
+    <span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nb">exit</span> <span class="nv">$?</span>
+</code></pre></div>
+</td></tr></table>
+</li>
+</ol>
+</li>
+<li>
+<p>Install binary drivers for Intel Iris Pro Graphics 5200.</p>
+<ol>
+<li>Download the <a href="https://download.01.org/gfx/ubuntu/14.04/main/pool/main/i/intel-linux-graphics-installer/intel-linux-graphics-installer_1.0.7-0intel1_amd64.deb">64-bit Ubuntu installer</a>
+from <a href="https://01.org/linuxgraphics/">https://01.org/linuxgraphics/</a><div class="codehilite"><pre><span></span><code>sudo dpkg -i intel-linux-graphics-installer_1.0.7-0intel1_amd64.deb
+sudo apt-get install -f
+</code></pre></div>
+
+</li>
+</ol>
+</li>
+<li>
+<p>Disable suspend when closing the lid.</p>
+<div class="codehilite"><pre><span></span><code>sudo vi /etc/systemd/logind.conf
+
+HandleLidSwitch=ignore
+
+sudo restart systemd-logind
+</code></pre></div>
+
+</li>
+<li>
+<p>Configure mouse behavior.</p>
+<ol>
+<li>System Settings &gt; Mouse and Touchpad</li>
+<li>Check: Natural Scrolling</li>
+<li>Uncheck: Disable while typing</li>
+<li>Uncheck: Tap to click</li>
+</ol>
+</li>
+<li>
+<p>Disable turning the screen off.</p>
+<ol>
+<li>System Settings &gt; Brightness &amp; Lock</li>
+<li>Turn Screen Off When Inactive For: Never</li>
+<li>Lock Screen After: 10 minutes</li>
+</ol>
+</li>
+<li>
+<p>Add a screensaver.  The default gnome-screensaver is just a black screen.</p>
+<div class="codehilite"><pre><span></span><code>sudo apt-get remove gnome-screensaver
+sudo apt-get install xscreensaver xscreensaver-data-extra xscreensaver-gl-extra
+</code></pre></div>
+
+</li>
+</ol>
+</li>
+<li>
+<p>Install Applications</p>
+<ol>
+<li>
+<p><a href="http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html">Oracle Java 7 and Java 8</a></p>
+<div class="codehilite"><pre><span></span><code>sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+sudo apt-get install oracle-java7-installer
+
+echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+sudo apt-get install oracle-java8-installer
+
+# switching versions
+sudo update-java-alternatives -s java-7-oracle
+sudo update-java-alternatives -s java-8-oracle
+sudo apt-get install oracle-java8-set-default
+</code></pre></div>
+
+</li>
+<li>
+<p><a href="https://www.google.com/chrome/">Google Chrome</a></p>
+<ol>
+<li>As of version 35,
+<a href="http://askubuntu.com/questions/470594/how-do-i-get-java-plugin-working-on-google-chrome">Chrome no longer supports the NPAPI plugin</a>,
+which is required by the Oracle and OpenJDK Java plugins.  If you need to run a Java plugin
+from a web browser, use Firefox instead.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Test Java version.</p>
+<ol>
+<li><a href="https://www.java.com/en/download/testjava.jsp">https://www.java.com/en/download/testjava.jsp</a></li>
+</ol>
+</li>
+<li>
+<p>Test WiFi speed.</p>
+<ol>
+<li>Download large files.<div class="codehilite"><pre><span></span><code><span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">releases</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mf">14.10</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">-</span><span class="mf">14.10</span><span class="o">-</span><span class="n">desktop</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">iso</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">wswd</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">testdownloadfiles</span><span class="o">/</span><span class="mi">1</span><span class="n">GB</span><span class="o">.</span><span class="n">zip</span>
+</code></pre></div>
+
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="uninstalling">Uninstalling<a class="headerlink" href="#uninstalling" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Reboot into OSX.</p>
+</li>
+<li>
+<p>Uninstall rEFInd.</p>
+<div class="codehilite"><pre><span></span><code>diskutil list
+diskutil mount disk0s1
+sudo su -
+cd /Volumes/EFI
+rm -rf BOOT ubuntu
+</code></pre></div>
+
+</li>
+<li>
+<p>Download <a href="http://gparted.org/download.php">GParted Live</a> and install it on a USB stick.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">hdiutil</span> <span class="nb">convert</span> <span class="o">-</span><span class="n">format</span> <span class="n">UDRW</span> <span class="o">-</span><span class="n">o</span> <span class="o">~/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">target</span><span class="o">.</span><span class="n">img</span> <span class="o">~/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">gparted</span><span class="o">.</span><span class="n">iso</span>
+<span class="n">diskutil</span> <span class="n">list</span>
+<span class="c1"># find usb disk</span>
+<span class="n">diskutil</span> <span class="n">unmountDisk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">diskN</span>
+<span class="n">sudo</span> <span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">downloaded</span><span class="o">.</span><span class="n">img</span> <span class="n">of</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">rdiskN</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">m</span>
+<span class="n">diskutil</span> <span class="n">eject</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">diskN</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Reboot and hold down the option key.</p>
+</li>
+<li>Remove the Linux partitions.</li>
+<li>
+<p>Reboot into Mac OSX and extend the partition.</p>
+<ol>
+<li>
+<p><a href="http://awesometoast.com/yosemite-core-storage-and-partition-woes/">Covert the CoreStorage volume back into HFS+</a>.</p>
+<div class="codehilite"><pre><span></span><code>diskutil cs list
+diskutil coreStorage revert $VOLUME_UUID
+</code></pre></div>
+
+</li>
+<li>
+<p>Reboot.</p>
+</li>
+<li>Delete the recovery partition.</li>
+<li>Extend the primary partition.</li>
+<li><a href="http://www.techrepublic.com/article/how-to-restore-an-os-x-recovery-partition/">Recreate the recovery partition</a>.</li>
+<li>
+<p><a href="http://blog.fosketts.net/2012/10/03/mac-os-corestorage-convert/">Convert the HFS+ volume back to CoreStorage</a>.</p>
+<div class="codehilite"><pre><span></span><code>diskutil cs convert &quot;Macintosh HD&quot;
+</code></pre></div>
+
+</li>
+<li>
+<p>Reboot.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><br/></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../clone-stash-pull-requests/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Clone Stash Pull Requests" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Clone Stash Pull Requests
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../reset-jenkins-build-number/" class="md-footer__link md-footer__link--next" aria-label="Next: Reset Jenkins Build Number" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Reset Jenkins Build Number
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      
+        <script src="https://buttons.github.io/buttons.js"></script>
+      
+    
+  </body>
+</html>

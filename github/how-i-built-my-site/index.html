@@ -1,0 +1,1614 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A site for knowledge sharing and neat things.">
+      
+      
+        <meta name="author" content="Matthew Johnson">
+      
+      
+        <link rel="canonical" href="http://copperlight.github.io/github/how-i-built-my-site/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+    
+    
+      
+        <title>How I Built My Site - Copperlight Writes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-52382416-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-i-built-my-site" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Copperlight Writes" class="md-header__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Copperlight Writes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How I Built My Site
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Copperlight Writes" class="md-nav__button md-logo" aria-label="Copperlight Writes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Copperlight Writes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/copperlight/copperlight.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Ansible
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ansible" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ansible
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/ansible-vault-and-ssh-key-distribution/" class="md-nav__link">
+        Ansible Vault and SSH Key Distribution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/running-ansible-playbooks-on-windows/" class="md-nav__link">
+        Running Ansible Playbooks on Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/testing-ansible-galaxy-roles-with-docker/" class="md-nav__link">
+        Testing Ansible Galaxy Roles with Docker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          AWS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/assume-role-with-awscli/" class="md-nav__link">
+        Assume Role with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/aws-credential-files-for-java-and-python/" class="md-nav__link">
+        AWS Credential Files for Java and Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant/" class="md-nav__link">
+        Build a Fake Instance Metadata Server for Ubuntu on Vagrant
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/checking-and-changing-content-type-of-s3-object-with-awscli/" class="md-nav__link">
+        Checking and Changing Content-Type of S3 Object with AWSCLI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/configuring-multiple-interfaces-on-the-same-network-in-ec2/" class="md-nav__link">
+        Configuring Multiple Interfaces on the Same Network in EC2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          GitHub
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GitHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          GitHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          How I Built My Site
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        How I Built My Site
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-python-and-mkdocs-packages" class="md-nav__link">
+    Install Python and MkDocs Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sign-up-for-google-analytics" class="md-nav__link">
+    Sign Up for Google Analytics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-site" class="md-nav__link">
+    Build the Site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repo-configuration" class="md-nav__link">
+    Repo Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-post-workflow" class="md-nav__link">
+    New Post Workflow
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Linux
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linux" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/apache-deflate-and-cors-headers/" class="md-nav__link">
+        Apache Deflate and CORS Headers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/linux-ftrace-delivers-dtrace-like-functionality/" class="md-nav__link">
+        Linux ftrace Delivers dtrace-like Functionality
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/clone-stash-pull-requests/" class="md-nav__link">
+        Clone Stash Pull Requests
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/" class="md-nav__link">
+        Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/reset-jenkins-build-number/" class="md-nav__link">
+        Reset Jenkins Build Number
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/switching-jdks-in-osx/" class="md-nav__link">
+        Switching JDKs in OSX
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/accessing-google-apis-with-python/" class="md-nav__link">
+        Accessing Google APIs with Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/building-rest-apis-with-python-flask/" class="md-nav__link">
+        Building REST APIs with Python Flask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/install-the-latest-python-versions-on-macosx/" class="md-nav__link">
+        Install the Latest Python Versions on Mac OSX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/memory-profiling-with-pyrasite-and-heapy/" class="md-nav__link">
+        Memory Profiling with Pyrasite and Heapy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/stop-using-print-for-debugging/" class="md-nav__link">
+        Stop Using "print" for Debugging
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Recipes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Recipes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Recipes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recipes/galaxys-best-margarita/" class="md-nav__link">
+        Galaxy's Best Margarita
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Running
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Running" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Running
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../running/garmin-935-navigation/" class="md-nav__link">
+        Garmin 935 Navigation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Scala
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scala" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Scala
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/intellij-configuration-tips/" class="md-nav__link">
+        IntelliJ Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/jmh-testing-with-scala/" class="md-nav__link">
+        JMH Testing with Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/overview-of-debugging-tools/" class="md-nav__link">
+        Overview of Debugging Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/scalafmt-configuration-tips/" class="md-nav__link">
+        Scalafmt Configuration Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/starting-scala-repls-with-gradle-and-sbt/" class="md-nav__link">
+        Starting Scala REPLs with Gradle and SBT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/testing-aws-clients-with-iam-assumerole-credentials-in-scala/" class="md-nav__link">
+        Testing AWS Clients with IAM AssumeRole Credentials in Scala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-gradle-to-run-scala-projects-locally/" class="md-nav__link">
+        Using Gradle to Run Scala Projects Locally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scala/using-the-scala-repl-to-configure-amazon-ses-notifications/" class="md-nav__link">
+        Using the Scala REPL to Configure Amazon SES Notifications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          Shell
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Shell" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Shell
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/measuring-transfer-speed-over-time-with-curl/" class="md-nav__link">
+        Measuring Transfer Speed Over Time with cURL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/parsing-json-on-the-command-line/" class="md-nav__link">
+        Parsing JSON on the Command Line
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/pet-cli-snippet-manager/" class="md-nav__link">
+        pet - CLI Snippet Manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd/" class="md-nav__link">
+        Schedule Ad-Hoc Jobs for Later on an Instance with atd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell/zsh-keyboard-shortcuts/" class="md-nav__link">
+        Z Shell Keyboard Shortcuts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          Stocks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stocks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Stocks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stocks/nflx-quarterly-subscriber-growth/" class="md-nav__link">
+        Netflix Quarterly Growth
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          Talks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Talks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/favorite/" class="md-nav__link">
+        Favorite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-nav__link">
+        Netflix Atlas Telemetry - A Platform Begets an Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-python-and-mkdocs-packages" class="md-nav__link">
+    Install Python and MkDocs Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sign-up-for-google-analytics" class="md-nav__link">
+    Sign Up for Google Analytics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-site" class="md-nav__link">
+    Build the Site
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repo-configuration" class="md-nav__link">
+    Repo Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-post-workflow" class="md-nav__link">
+    New Post Workflow
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="how-i-built-my-site">How I Built My Site<a class="headerlink" href="#how-i-built-my-site" title="Permanent link">&para;</a></h1>
+<div class="meta">
+  <span class="date"><small>2017-10-12</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div>
+<p>I recently rebuilt my GitHub Pages site, switching my tech stack to <a href="https://www.python.org/">Python</a>, <a href="http://www.mkdocs.org/">MkDocs</a> and
+<a href="http://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>. The previous workflow had too many moving parts and the theme was hard to
+read.  It turns out that MkDocs has some nice automation hooks for GitHub Pages and it looks great
+on mobile browsers with the <a href="https://material.io/">Material</a> theme. Since I use MkDocs for site generation at work, I am
+already pretty familiar with it.</p>
+<p>Writing documents in <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> and turning them into web pages with a static site generator is the
+fastest and easiest way to post articles on your GitHub Pages site.  This format allows you to
+drop down into HTML, when necessary, to enhance your page formatting, but you shouldn't need to do
+this for most pages.</p>
+<h2 id="install-python-and-mkdocs-packages">Install Python and MkDocs Packages<a class="headerlink" href="#install-python-and-mkdocs-packages" title="Permanent link">&para;</a></h2>
+<p>If you are relying on a system Python, consider following these instructions:
+<a href="../../python/install-the-latest-python-versions-on-macosx/">Install the Latest Python Versions on Mac OSX</a>.</p>
+<p>Install <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>. These two packages will bring along all the necessary
+dependencies for a fully functioning site.</p>
+<div class="highlight"><pre><span></span><code>pip install mkdocs-material
+</code></pre></div>
+<h2 id="sign-up-for-google-analytics">Sign Up for Google Analytics<a class="headerlink" href="#sign-up-for-google-analytics" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must disable ad-blocking software in order to be able to see the Google Analytics page.</p>
+</div>
+<ol>
+<li>Navigate to <a href="https://analytics.google.com/analytics/web/">Google Analytics</a> &gt; Admin</li>
+<li>Property &gt; Create New Property<ol>
+<li><strong>Account Name:</strong> $YOUR_ACCOUNT_NAME</li>
+<li><strong>Website Name:</strong> username.github.io</li>
+<li><strong>Website URL:</strong> https://username.github.io</li>
+<li>Go with the default configuration options - you can change these later.</li>
+<li>Get Tracking ID</li>
+</ol>
+</li>
+<li>Note the Tracking ID (looks like: <code>UA-00000000-0</code>) assigned to this property.</li>
+</ol>
+<h2 id="build-the-site">Build the Site<a class="headerlink" href="#build-the-site" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><a href="https://github.com/new">Create a new repository</a> named <code>username.github.io</code>, where <code>username</code> is
+your username (or organization name) on GitHub.  It must match exactly, or it will not work.</p>
+</li>
+<li>
+<p>Clone the repository locally.  Requires <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">SSH keys</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">username</span><span class="o">/</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
+<span class="n">cd</span><span class="w"> </span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a directory structure that looks like the following:</p>
+<div class="codehilite"><pre><span></span><code>username.github.io/
+├── .gitignore
+├── docs
+│   ├── css
+│   │   └── custom.css
+│   └── index.md
+├── mkdocs.yml
+└── requirements.txt
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a <code>./mkdocs.yml</code> site configuration file. Choose a <a href="https://creativecommons.org/choose/">Creative Commons license</a> for your
+site - I chose <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> for my site. Add your Google Analytics property Tracking ID to
+<code>extra.analytics</code>.  If you do not have a Tracking ID, then delete these lines in the configuration
+file.</p>
+<div class="codehilite"><pre><span></span><code>site_name: My Site
+site_url: &#39;http://username.github.io/&#39;
+repo_url: &#39;https://github.com/username/username.github.io&#39;
+edit_uri: &#39;&#39;
+site_description: My Site
+site_author: My Name
+copyright: <span class="nt">&lt;a</span> <span class="na">rel=</span><span class="s">&quot;license&quot;</span> <span class="na">href=</span><span class="s">&quot;http://creativecommons.org/licenses/by-nc-sa/4.0/&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">alt=</span><span class="s">&quot;Creative Commons License&quot;</span> <span class="na">style=</span><span class="s">&quot;border-width:0&quot;</span> <span class="na">src=</span><span class="s">&quot;https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png&quot;</span> <span class="nt">/&gt;&lt;/a&gt;</span>
+
+strict: True
+
+pages:
+- Home: index.md
+
+theme: material
+
+extra:
+  analytics:
+    provider: google
+    property: UA-00000000-0
+
+extra_css:
+- css/custom.css
+
+markdown_extensions:
+- admonition
+- codehilite
+- pymdownx.tilde
+- toc:
+    permalink: True
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a <code>./docs/index.md</code> file.</p>
+<div class="codehilite"><pre><span></span><code>Hello World!
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a <code>./docs/css/custom.css</code> file.</p>
+<div class="codehilite"><pre><span></span><code><span class="c">/* Avoid showing first header, i.e., the page title in the sidebar.</span>
+<span class="c"> *</span>
+<span class="c"> * https://github.com/mkdocs/mkdocs/issues/318#issuecomment-98520139</span>
+<span class="c"> */</span>
+<span class="nt">li</span><span class="p">.</span><span class="nc">toctree-l3</span><span class="p">:</span><span class="nd">first-child</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">code</span> <span class="p">{</span>
+  <span class="k">font-family</span><span class="p">:</span> <span class="n">Menlo</span><span class="p">,</span> <span class="kc">monospace</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>.meta .date { float: left }
+   .meta .discuss { float: right }</p>
+</li>
+<li>
+<p>Create a <code>./requirements.txt</code> file, so that you can easily reinstall the necessary Python packages
+with <code>pip install -r requirements.txt</code>.</p>
+<div class="codehilite"><pre><span></span><code>mkdocs
+mkdocs-material
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a <code>./.gitignore</code> file.</p>
+<div class="codehilite"><pre><span></span><code>site
+</code></pre></div>
+
+</li>
+<li>
+<p>Build and serve the site locally, to verify that your changes look good.  When MkDocs is up and
+running, you will see <code>Serving on http://127.0.0.1:8000</code>. Leave this process running. When you are
+done developing and testing your site, you can stop this process with <code>ctrl+c</code>. Open a new Terminal
+to run the second command.</p>
+<div class="codehilite"><pre><span></span><code>mkdocs serve
+open http://localhost:8000
+</code></pre></div>
+
+</li>
+<li>
+<p>Push the source branch to GitHub to save your changes. You only need to set the upstream for the
+first push; subsequent pushes will be <code>git push origin</code> as long as you remain on the <code>source</code> branch.</p>
+<div class="codehilite"><pre><span></span><code>git add --all
+git commit -m &quot;first commit&quot;
+git push --set-upstream origin source
+</code></pre></div>
+
+</li>
+<li>
+<p>Build and deploy the site. The static HTML site generated by this process will be pushed to the
+<code>master</code> branch origin for this repository. Changes will be live within one minute. Navigate to
+the site url to see your changes.</p>
+<div class="codehilite"><pre><span></span><code>mkdocs gh-deploy
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="repo-configuration">Repo Configuration<a class="headerlink" href="#repo-configuration" title="Permanent link">&para;</a></h2>
+<p>Navigate to the repository on GitHub and set some useful configuration options.</p>
+<ol>
+<li>Code &gt; Description</li>
+<li>Code &gt; Website</li>
+<li>Code &gt; Manage topics</li>
+<li>Settings &gt; Branches &gt; Default branch: <code>source</code></li>
+<li>Settings &gt; Branches &gt; Protected branches: <code>source</code><ol>
+<li>Check: Protect this branch</li>
+<li>Check: Include administrators</li>
+</ol>
+</li>
+</ol>
+<h2 id="new-post-workflow">New Post Workflow<a class="headerlink" href="#new-post-workflow" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Start serving the site locally, with file change detection.</p>
+<div class="codehilite"><pre><span></span><code>mkdocs serve
+open http://localhost:8000
+</code></pre></div>
+
+</li>
+<li>
+<p>Start a new post by creating a markdown file in the <code>./docs</code> directory hierarchy.</p>
+</li>
+<li>
+<p>Images can be served from a location such as <code>./docs/images</code>, with references as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">!</span><span class="p">[</span><span class="n">Link</span><span class="w"> </span><span class="n">Name</span><span class="p">](</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">file</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="s">&quot;Alt Text&quot;</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Add the new markdown file to the <code>./mkdocs.yml</code> site configuration and continue editing. See
+<a href="http://www.mkdocs.org/user-guide/writing-your-docs/">Writing Your Docs</a> for tips on arranging
+your Markdown files.</p>
+</li>
+<li>
+<p>When editing is complete, commit and push the file to save your work.</p>
+<div class="codehilite"><pre><span></span><code>git add --all
+git commit -m &quot;my new post&quot;
+git push origin
+</code></pre></div>
+
+</li>
+<li>
+<p>Build and deploy the site, which uses the <code>remote_branch</code> key from the <code>mkdocs.yml</code> file to
+choose the branch that will receive the push. </p>
+<div class="codehilite"><pre><span></span><code>mkdocs gh-deploy
+</code></pre></div>
+
+</li>
+</ol>
+<p><br/></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../aws/configuring-multiple-interfaces-on-the-same-network-in-ec2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuring Multiple Interfaces on the Same Network in EC2" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Configuring Multiple Interfaces on the Same Network in EC2
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../linux/apache-deflate-and-cors-headers/" class="md-footer__link md-footer__link--next" aria-label="Next: Apache Deflate and CORS Headers" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Apache Deflate and CORS Headers
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      
+        <script src="https://buttons.github.io/buttons.js"></script>
+      
+    
+  </body>
+</html>
