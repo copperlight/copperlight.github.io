@@ -238,7 +238,8 @@ Navigate to the repository on GitHub and set some useful configuration options.
 your Markdown files.
 
 6. When editing is complete, commit changes and push. Open a PR on the GitHub site and check
-the build output. Merge when you are happy with the changes.
+the build output. Merge when you are happy with the changes and the release build will deploy
+the updated site.
 
         git add --all
         git commit -m "my new post"
