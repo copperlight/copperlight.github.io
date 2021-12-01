@@ -1,7 +1,7 @@
 
 ## Build
 
-[![Build Status](https://travis-ci.org/copperlight/copperlight.github.io.svg?branch=source)](https://travis-ci.org/copperlight/copperlight.github.io)
+[![Release](https://github.com/copperlight/copperlight.github.io/actions/workflows/release.yml/badge.svg)](https://github.com/copperlight/copperlight.github.io/actions/workflows/release.yml)
 
 ## Development
 
@@ -19,43 +19,12 @@
     source venv/bin/activate
     mkdocs serve
     open http://localhost:8000
-    ``` 
-
-## Deploy Configuration
-
-1. [Generate a new SSH key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key),
-named `travis-deploy-key`. 
-
-    ```shell
-    ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f travis-deploy-key
     ```
-
-1. Add the public key to your GitHub repository as a [Deploy Key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys),
-named `travis-deploy-key` and allow write access. 
-
-1. Install [Travis CLI](https://github.com/travis-ci/travis.rb) and login with GitHub credentials.
-
-    ```shell
-    travis login
-    travis whoami
-    ```
-
-1. Encrypt the private key, using Travis CLI. This will upload the key to Travis and provide a
-one-liner for decrypting the key, which should be added to `.travis.yml`. Add the encrypted key
-to the repo and delete the original files.
-
-    ```shell
-    travis encrypt-file travis-deploy-key
-    git add travis-deploy-key.enc
-    rm travis-deploy-key travis-deploy-key.pub
-    ``` 
-
-1. Configure the [Travis build](./.travis.yml). The remote branch for the `gh-deploy` command is
-specified in the [MkDocs configuration](https://github.com/copperlight/copperlight.github.io/blob/source/mkdocs.yml#L9).
 
 ## Deployment
 
-Pushing changes to the `source` branch will trigger the build and deploy steps on Travis.
+* Opening a PR will run the GitHub action to build the site.
+* Pushing changes to the `main` branch will trigger the GitHub action to build and deploy the site.
 
 ## Known Issues
 
