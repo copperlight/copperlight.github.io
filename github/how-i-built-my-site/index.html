@@ -1315,7 +1315,7 @@
 
 <h1 id="how-i-built-my-site">How I Built My Site<a class="headerlink" href="#how-i-built-my-site" title="Permanent link">&para;</a></h1>
 <div class="meta">
-  <span class="date"><small>2017-10-12</small></span>
+  <span class="date"><small>2021-12-01</small></span>
   <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
 </div>
 <p>I recently rebuilt my GitHub Pages site, switching my tech stack to <a href="https://www.python.org/">Python</a>, <a href="http://www.mkdocs.org/">MkDocs</a> and
@@ -1330,8 +1330,8 @@ this for most pages.</p>
 <h2 id="install-python-and-mkdocs-packages">Install Python and MkDocs Packages<a class="headerlink" href="#install-python-and-mkdocs-packages" title="Permanent link">&para;</a></h2>
 <p>If you are relying on a system Python, consider following these instructions:
 <a href="../../python/install-the-latest-python-versions-on-macosx/">Install the Latest Python Versions on Mac OSX</a>.</p>
-<p>Install <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>. These two packages will bring along all the necessary
-dependencies for a fully functioning site.</p>
+<p>Install <a href="http://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>. This package will bring along all the necessary dependencies,
+including <a href="http://www.mkdocs.org/">MkDocs</a>, for a fully functioning site.</p>
 <div class="highlight"><pre><span></span><code>pip install mkdocs-material
 </code></pre></div>
 <h2 id="sign-up-for-google-analytics">Sign Up for Google Analytics<a class="headerlink" href="#sign-up-for-google-analytics" title="Permanent link">&para;</a></h2>
@@ -1354,37 +1354,84 @@ dependencies for a fully functioning site.</p>
 <h2 id="build-the-site">Build the Site<a class="headerlink" href="#build-the-site" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p><a href="https://github.com/new">Create a new repository</a> named <code>username.github.io</code>, where <code>username</code> is
-your username (or organization name) on GitHub.  It must match exactly, or it will not work.</p>
+<p><a href="https://github.com/new">Create a new repository</a> named <code>$USERNAME.github.io</code>, where <code>$USERNAME</code>
+is your username (or organization name) on GitHub.  It must match exactly, or it will not work.</p>
 </li>
 <li>
-<p>Clone the repository locally.  Requires <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">SSH keys</a>.</p>
-<div class="codehilite"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="n">username</span><span class="o">/</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-<span class="n">cd</span><span class="w"> </span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+<p>Clone the repository locally. Requires <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">SSH keys</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">git</span><span class="nv">@github</span><span class="p">.</span><span class="nl">com</span><span class="p">:</span><span class="err">$</span><span class="n">USERNAME</span><span class="o">/</span><span class="err">$</span><span class="n">USERNAME</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
+<span class="n">cd</span><span class="w"> </span><span class="err">$</span><span class="n">USERNAME</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Create a directory structure that looks like the following:</p>
-<div class="codehilite"><pre><span></span><code>username.github.io/
+<div class="codehilite"><pre><span></span><code>$USERNAME.github.io/
+├── .github/
+│   └── workflows/
+│       ├── pr.yml
+│       └── release.yml
 ├── .gitignore
-├── docs
-│   ├── css
-│   │   └── custom.css
-│   └── index.md
+├── docs/
+│   ├── css/
+│   │   └── custom.css
+│   └── index.md
 ├── mkdocs.yml
 └── requirements.txt
 </code></pre></div>
 
 </li>
 <li>
+<p>Create a GitHub Actions configuration file for pull requests (<code>./.github/workflows/pr.yml</code>). This
+will build the site for every PR that is submitted.</p>
+<div class="codehilite"><pre><span></span><code><span class="nl">name</span><span class="p">:</span><span class="w"> </span><span class="n">pull</span><span class="o">-</span><span class="n">request</span><span class="w"></span>
+
+<span class="k">on</span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n">pull_request</span><span class="o">]</span><span class="w"></span>
+<span class="nl">jobs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">runs</span><span class="o">-</span><span class="k">on</span><span class="err">:</span><span class="w"> </span><span class="n">ubuntu</span><span class="o">-</span><span class="n">latest</span><span class="w"></span>
+<span class="w">    </span><span class="nl">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nl">uses</span><span class="p">:</span><span class="w"> </span><span class="n">actions</span><span class="o">/</span><span class="n">checkout</span><span class="nv">@v2</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nl">uses</span><span class="p">:</span><span class="w"> </span><span class="n">actions</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">python</span><span class="nv">@v2</span><span class="w"></span>
+<span class="w">        </span><span class="k">with</span><span class="err">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">python</span><span class="o">-</span><span class="nl">version</span><span class="p">:</span><span class="w"> </span><span class="mf">3.</span><span class="n">x</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nl">run</span><span class="p">:</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nl">run</span><span class="p">:</span><span class="w"> </span><span class="n">mkdocs</span><span class="w"> </span><span class="n">build</span><span class="w"></span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a GitHub Actions configuration file for deploying the site (<code>./.github/workflows/release.yml</code>),
+replacing <code>$USERNAME</code> with your username.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">release</span>
+
+<span class="n">on</span><span class="o">:</span>
+  <span class="n">push</span><span class="o">:</span>
+    <span class="n">branches</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">main</span>
+<span class="n">jobs</span><span class="o">:</span>
+  <span class="n">deploy</span><span class="o">:</span>
+    <span class="k">if</span><span class="o">:</span> <span class="n">$</span><span class="o">{{</span> <span class="n">github</span><span class="o">.</span><span class="na">repository</span> <span class="o">==</span> <span class="s1">&#39;$USERNAME/$USERNAME.github.io&#39;</span> <span class="o">}}</span>
+    <span class="n">runs</span><span class="o">-</span><span class="n">on</span><span class="o">:</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">latest</span>
+    <span class="n">steps</span><span class="o">:</span>
+      <span class="o">-</span> <span class="n">uses</span><span class="o">:</span> <span class="n">actions</span><span class="o">/</span><span class="n">checkout</span><span class="err">@</span><span class="n">v2</span>
+      <span class="o">-</span> <span class="n">uses</span><span class="o">:</span> <span class="n">actions</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">python</span><span class="err">@</span><span class="n">v2</span>
+        <span class="k">with</span><span class="o">:</span>
+          <span class="n">python</span><span class="o">-</span><span class="n">version</span><span class="o">:</span> <span class="mi">3</span><span class="o">.</span><span class="na">x</span>
+      <span class="o">-</span> <span class="n">run</span><span class="o">:</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="na">txt</span>
+      <span class="o">-</span> <span class="n">run</span><span class="o">:</span> <span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">:</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+      <span class="o">-</span> <span class="n">run</span><span class="o">:</span> <span class="n">mkdocs</span> <span class="n">gh</span><span class="o">-</span><span class="n">deploy</span>
+</code></pre></div>
+
+</li>
+<li>
 <p>Create a <code>./mkdocs.yml</code> site configuration file. Choose a <a href="https://creativecommons.org/choose/">Creative Commons license</a> for your
 site - I chose <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> for my site. Add your Google Analytics property Tracking ID to
-<code>extra.analytics</code>.  If you do not have a Tracking ID, then delete these lines in the configuration
+<code>extra.analytics</code>. If you do not have a Tracking ID, then delete these lines in the configuration
 file.</p>
 <div class="codehilite"><pre><span></span><code>site_name: My Site
-site_url: &#39;http://username.github.io/&#39;
-repo_url: &#39;https://github.com/username/username.github.io&#39;
+site_url: &#39;http://$USERNAME.github.io/&#39;
+repo_url: &#39;https://github.com/username/$USERNAME.github.io&#39;
 edit_uri: &#39;&#39;
 site_description: My Site
 site_author: My Name
@@ -1441,14 +1488,14 @@ markdown_extensions:
 <li>
 <p>Create a <code>./requirements.txt</code> file, so that you can easily reinstall the necessary Python packages
 with <code>pip install -r requirements.txt</code>.</p>
-<div class="codehilite"><pre><span></span><code>mkdocs
-mkdocs-material
+<div class="codehilite"><pre><span></span><code>mkdocs-material
 </code></pre></div>
 
 </li>
 <li>
 <p>Create a <code>./.gitignore</code> file.</p>
-<div class="codehilite"><pre><span></span><code>site
+<div class="codehilite"><pre><span></span><code>site/
+venv/
 </code></pre></div>
 
 </li>
@@ -1463,18 +1510,19 @@ open http://localhost:8000
 
 </li>
 <li>
-<p>Push the source branch to GitHub to save your changes. You only need to set the upstream for the
-first push; subsequent pushes will be <code>git push origin</code> as long as you remain on the <code>source</code> branch.</p>
+<p>Push the changes to GitHub to save your progress. The first release build will fail due to the
+absence of the <code>gh-pages</code> branch.</p>
 <div class="codehilite"><pre><span></span><code>git add --all
 git commit -m &quot;first commit&quot;
-git push --set-upstream origin source
+git push origin
 </code></pre></div>
 
 </li>
 <li>
-<p>Build and deploy the site. The static HTML site generated by this process will be pushed to the
-<code>master</code> branch origin for this repository. Changes will be live within one minute. Navigate to
-the site url to see your changes.</p>
+<p>Build and deploy the site for the first time. This step is done to establish the <code>gh-pages</code>
+branch which is used by GitHub Actions. The static HTML site generated by this process will be
+pushed to the <code>gh-pages</code> branch at the origin for this repository. Changes will be live within
+one minute. Navigate to the site url to see your changes.</p>
 <div class="codehilite"><pre><span></span><code>mkdocs gh-deploy
 </code></pre></div>
 
@@ -1486,8 +1534,7 @@ the site url to see your changes.</p>
 <li>Code &gt; Description</li>
 <li>Code &gt; Website</li>
 <li>Code &gt; Manage topics</li>
-<li>Settings &gt; Branches &gt; Default branch: <code>source</code></li>
-<li>Settings &gt; Branches &gt; Protected branches: <code>source</code><ol>
+<li>Settings &gt; Branches &gt; Protected branches: <code>main</code><ol>
 <li>Check: Protect this branch</li>
 <li>Check: Include administrators</li>
 </ol>
@@ -1495,6 +1542,12 @@ the site url to see your changes.</p>
 </ol>
 <h2 id="new-post-workflow">New Post Workflow<a class="headerlink" href="#new-post-workflow" title="Permanent link">&para;</a></h2>
 <ol>
+<li>
+<p>Create a new branch, so you can check your work in a PR.</p>
+<div class="codehilite"><pre><span></span><code>git checkout -b new-post
+</code></pre></div>
+
+</li>
 <li>
 <p>Start serving the site locally, with file change detection.</p>
 <div class="codehilite"><pre><span></span><code>mkdocs serve
@@ -1517,17 +1570,11 @@ open http://localhost:8000
 your Markdown files.</p>
 </li>
 <li>
-<p>When editing is complete, commit and push the file to save your work.</p>
+<p>When editing is complete, commit changes and push. Open a PR on the GitHub site and check
+the build output. Merge when you are happy with the changes.</p>
 <div class="codehilite"><pre><span></span><code>git add --all
 git commit -m &quot;my new post&quot;
 git push origin
-</code></pre></div>
-
-</li>
-<li>
-<p>Build and deploy the site, which uses the <code>remote_branch</code> key from the <code>mkdocs.yml</code> file to
-choose the branch that will receive the push. </p>
-<div class="codehilite"><pre><span></span><code>mkdocs gh-deploy
 </code></pre></div>
 
 </li>
