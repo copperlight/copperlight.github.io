@@ -170,9 +170,6 @@ file.
           font-family: Menlo, monospace;
         }
 
-       .meta .date { float: left }
-       .meta .discuss { float: right }
-
 3. Create a `./requirements.txt` file, so that you can easily reinstall the necessary Python packages
 with `pip install -r requirements.txt`.
 
