@@ -36,7 +36,7 @@ challenge proposed to [Donald Knuth](http://en.wikipedia.org/wiki/Donald_Knuth),
 critiqued the solution and provided an alternative solution in six shell commands.
 
 ```bash
-URL="http://cdimage.debian.org/debian-cd/7.5.0/amd64/iso-cd/debian-7.5.0-amd64-CD-1.iso"
+URL="https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"
 
 curl -L -o /dev/null "$URL" 2>&1 \
   |tr -u '\r' '\n' > curl.out
@@ -70,82 +70,86 @@ This results in an output file that looks like this:
   .
 ```
 
-Write a Python script `plot_curl_data.py` to process the data to convert it into a format useful for
+Write a Python script `plot-curl-data.py` to process the data to convert it into a format useful for
 [gnuplot](http://www.gnuplot.info/) and render a plot:
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-import os, sys
-
-
-def readCurlData(fname):
-    lines = []
-    with open(fname) as f:
-        for line in f:
-            lines.append(line.split())
-    return lines[3:]
+import subprocess
+import sys
 
 
-def convertUnits(lines):
-    converted = []
-    for line in lines:
-        if len(line) == 12 and not "--" in line[9]:
+def transform_curl_data(curl_data_filename: str) -> None:
+    raw_lines = []
+    with open(curl_data_filename) as f:
+        for line in f.readlines():
+            raw_lines.append(line.split())
+
+    converted_lines = []
+    for line in raw_lines[3:]:
+        if len(line) == 12 and '--' not in line[9]:
             # curl reports speed in bytes per second
             if 'k' in line[11]:
-                line[11] = str(float(line[11].replace('k','')) * 8 * 1024)
+                line[11] = str(float(line[11].replace('k', '')) * 8 * 1024)
             elif 'M' in line[11]:
-                line[11] = str(float(line[11].replace('M','')) * 8 * 1048576)
+                line[11] = str(float(line[11].replace('M', '')) * 8 * 1048576)
             elif 'G' in line[11]:
-                line[11] = str(float(line[11].replace('G','')) * 8 * 1073741824)
-            converted.append([line[9], line[11]])
-    return converted
+                line[11] = str(float(line[11].replace('G', '')) * 8 * 1073741824)
+            converted_lines.append([line[9], line[11]])
 
-
-def writeGnuplotData(fname, lines):
-    fname = fname + ".gnuplot.data"
-    with open(fname, 'w') as f:
-        for line in lines:
+    with open(f'{curl_data_filename}.gnuplot.data', 'w') as f:
+        for line in converted_lines:
             f.write(','.join(line) + '\n')
 
 
-def plot(fname):
-    gp_fname = fname + ".gp"
-    gpdata_fname = fname + ".gnuplot.data"
-    png_fname = fname + ".png"
+def plot(curl_data_filename: str) -> None:
+    payload = ''.join([
+        f'set output "{curl_data_filename}.png"\n',
+        'set datafile separator ","\n',
+        'set terminal png size 1400,800\n',
+        'set title "Download Speed"\n',
+        'set ylabel "Speed (Mbits/s)"\n',
+        'set xlabel "Time (seconds)"\n',
+        'set xdata time\n',
+        'set timefmt "%H:%M:%S"\n',
+        'set key outside\n',
+        'set grid\n',
+        'plot \\\n',
+        f'"{curl_data_filename}.gnuplot.data" using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title "speed"\n'
+    ])
 
-    f = open(gp_fname, "w")
-    f.write('set output "%s"\n' % png_fname)
-    f.write('set datafile separator ","\n')
-    f.write('set terminal png size 1400,800\n')
-    f.write('set title "Download Speed"\n')
-    f.write('set ylabel "Speed (Mbits/s)"\n')
-    f.write('set xlabel "Time (seconds)"\n')
-    f.write('set xdata time\n')
-    f.write('set timefmt "%H:%M:%S"\n')
-    f.write('set key outside\n')
-    f.write('set grid\n')
-    f.write('plot \\\n')
-    f.write('"%s" using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title "speed"\n' % gpdata_fname)
-    f.close()
+    gnuplot_command_file = f'{curl_data_filename}.gp'
+    with open(gnuplot_command_file, 'w') as f:
+        f.write(payload)
 
-    os.system("gnuplot %s" % gp_fname)
+    try:
+        subprocess.run(
+            ['which', 'gnuplot'],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT
+        )
+    except subprocess.CalledProcessError:
+        print(f'gnuplot is not available on the PATH')
+        exit(1)
+
+    subprocess.run(['gnuplot', gnuplot_command_file])
 
 
-if len(sys.argv) < 2:
-    print "Usage: %s [curl_data_filename]" % sys.argv[0]
-    exit(1)
-else:
-    lines = readCurlData(sys.argv[1])
-    lines = convertUnits(lines)
-    writeGnuplotData(sys.argv[1], lines)
-    plot(sys.argv[1])
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print(f'Usage: {sys.argv[0]} [curl_data_filename]')
+        exit(1)
+    else:
+        transform_curl_data(sys.argv[1])
+        plot(sys.argv[1])
 ```
 
 Run this script like so:
 
 ```bash
-./plot_curl_data.py curl.out
+./plot-curl-data.py curl.out
 ```
 
 You will end up with data (`curl.out.gp.data`) and configuration files (`curl.out.gp`) like so:
