@@ -1272,72 +1272,72 @@ curl -L -o /dev/null <span class="s2">&quot;</span><span class="nv">$URL</span><
 </code></pre></div>
 <p>Write a Python script <code>plot_curl_data.py</code> to process the data to convert it into a format useful for
 <a href="http://www.gnuplot.info/">gnuplot</a> and render a plot:</p>
-<div class="highlight"><pre><span></span><code>#!/usr/bin/env python
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
-import os, sys
-
-
-def readCurlData(fname):
-    lines = []
-    with open(fname) as f:
-        for line in f:
-            lines.append(line.split())
-    return lines[3:]
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 
 
-def convertUnits(lines):
-    converted = []
-    for line in lines:
-        if len(line) == 12 and not &quot;--&quot; in line[9]:
-            # curl reports speed in bytes per second
-            if &#39;k&#39; in line[11]:
-                line[11] = str(float(line[11].replace(&#39;k&#39;,&#39;&#39;)) * 8 * 1024)
-            elif &#39;M&#39; in line[11]:
-                line[11] = str(float(line[11].replace(&#39;M&#39;,&#39;&#39;)) * 8 * 1048576)
-            elif &#39;G&#39; in line[11]:
-                line[11] = str(float(line[11].replace(&#39;G&#39;,&#39;&#39;)) * 8 * 1073741824)
-            converted.append([line[9], line[11]])
-    return converted
+<span class="k">def</span> <span class="nf">readCurlData</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
 
 
-def writeGnuplotData(fname, lines):
-    fname = fname + &quot;.gnuplot.data&quot;
-    with open(fname, &#39;w&#39;) as f:
-        for line in lines:
-            f.write(&#39;,&#39;.join(line) + &#39;\n&#39;)
+<span class="k">def</span> <span class="nf">convertUnits</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="n">converted</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s2">&quot;--&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span>
+            <span class="c1"># curl reports speed in bytes per second</span>
+            <span class="k">if</span> <span class="s1">&#39;k&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
+                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;M&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
+                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1048576</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;G&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
+                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1073741824</span><span class="p">)</span>
+            <span class="n">converted</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">converted</span>
 
 
-def plot(fname):
-    gp_fname = fname + &quot;.gp&quot;
-    gpdata_fname = fname + &quot;.gnuplot.data&quot;
-    png_fname = fname + &quot;.png&quot;
-
-    f = open(gp_fname, &quot;w&quot;)
-    f.write(&#39;set output &quot;%s&quot;\n&#39; % png_fname)
-    f.write(&#39;set datafile separator &quot;,&quot;\n&#39;)
-    f.write(&#39;set terminal png size 1400,800\n&#39;)
-    f.write(&#39;set title &quot;Download Speed&quot;\n&#39;)
-    f.write(&#39;set ylabel &quot;Speed (Mbits/s)&quot;\n&#39;)
-    f.write(&#39;set xlabel &quot;Time (seconds)&quot;\n&#39;)
-    f.write(&#39;set xdata time\n&#39;)
-    f.write(&#39;set timefmt &quot;%H:%M:%S&quot;\n&#39;)
-    f.write(&#39;set key outside\n&#39;)
-    f.write(&#39;set grid\n&#39;)
-    f.write(&#39;plot \\\n&#39;)
-    f.write(&#39;&quot;%s&quot; using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title &quot;speed&quot;\n&#39; % gpdata_fname)
-    f.close()
-
-    os.system(&quot;gnuplot %s&quot; % gp_fname)
+<span class="k">def</span> <span class="nf">writeGnuplotData</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot;.gnuplot.data&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
-if len(sys.argv) &lt; 2:
-    print &quot;Usage: %s [curl_data_filename]&quot; % sys.argv[0]
-    exit(1)
-else:
-    lines = readCurlData(sys.argv[1])
-    lines = convertUnits(lines)
-    writeGnuplotData(sys.argv[1], lines)
-    plot(sys.argv[1])
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="n">gp_fname</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot;.gp&quot;</span>
+    <span class="n">gpdata_fname</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot;.gnuplot.data&quot;</span>
+    <span class="n">png_fname</span> <span class="o">=</span> <span class="n">fname</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">gp_fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set output &quot;</span><span class="si">%s</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">png_fname</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set datafile separator &quot;,&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set terminal png size 1400,800</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set title &quot;Download Speed&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set ylabel &quot;Speed (Mbits/s)&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set xlabel &quot;Time (seconds)&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set xdata time</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set timefmt &quot;%H:%M:%S&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set key outside</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set grid</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;plot </span><span class="se">\\\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot; using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title &quot;speed&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">gpdata_fname</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;gnuplot </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">gp_fname</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;Usage: </span><span class="si">%s</span><span class="s2"> [curl_data_filename]&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">readCurlData</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">convertUnits</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+    <span class="n">writeGnuplotData</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lines</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </code></pre></div>
 <p>Run this script like so:</p>
 <div class="highlight"><pre><span></span><code>./plot_curl_data.py curl.out
