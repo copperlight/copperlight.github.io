@@ -73,7 +73,7 @@ This results in an output file that looks like this:
 Write a Python script `plot_curl_data.py` to process the data to convert it into a format useful for
 [gnuplot](http://www.gnuplot.info/) and render a plot:
 
-```
+```python
 #!/usr/bin/env python
 
 import os, sys
@@ -171,7 +171,7 @@ You will end up with data (`curl.out.gp.data`) and configuration files (`curl.ou
 .
 ```
 
-```
+```text
 set output "curl.out.png"
 set datafile separator ","
 set terminal png size 1400,800
