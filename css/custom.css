@@ -9,3 +9,5 @@ li.toctree-l3:first-child {
 code {
     font-family: Menlo, monospace;
 }
+
+.meta .discuss { float:right }

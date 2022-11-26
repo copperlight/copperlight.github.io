@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction" class="md-skip">
+        <a href="#make-sublimetext-awesome" class="md-skip">
           Skip to content
         </a>
       
@@ -588,6 +588,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Make SublimeText Awesome
@@ -603,6 +605,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -1307,6 +1311,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1403,8 +1409,11 @@
               
                 
 
-  <h1>Make SublimeText Awesome</h1>
-
+<h1 id="make-sublimetext-awesome">Make SublimeText Awesome<a class="headerlink" href="#make-sublimetext-awesome" title="Permanent link">&para;</a></h1>
+<div class="meta">
+  <span class="date"><small>XXXX-XX-XX</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>I was using Atom for awhile, but it's slow (3+ second) startup times started to get to me.  Once I learned the magic of cmd+shift+p from Atom (inspired by the Sublime Text Command Palette), I went back to the original and figured out how to get it configured nicely.  One of the good things about this approach is that you end up with a reasonable Python IDE when you are done.  Also works nicely for Clojure - the REPL has good support for selecting and pasting code snippets from the editing window.  Comparing the two briefly:</p>
 <table>
@@ -1418,13 +1427,13 @@
 <tbody>
 <tr>
 <td>Atom</td>
-<td>Faster to get started. You end up with a prettier and functional setup with less configuration effort. <br> Package manager is batteries included. <br> Markdown preview rendering in the application. <br> Treeview colors files that have been modified in a Git repo.</td>
-<td>Super slow (3-10 second) application load times. <br> Python code completion still a work in progress. <br> No support for treeview directory flattening.</td>
+<td><ul><li>Faster to get started. You end up with a prettier and functional setup with less configuration effort.</li><li>Package manager is batteries included.</li><li>Markdown preview rendering in the application.</li><li>Treeview colors files that have been modified in a Git repo.</li></ul></td>
+<td><ul><li>Super slow (3-10 second) application load times.</li><li>Python code completion still a work in progress.</li><li>No support for treeview directory flattening.</li></ul></td>
 </tr>
 <tr>
 <td>SublimeText</td>
-<td>Super fast (0-1 second) application load times. <br> Python Jedi code completion. <br> Supports directory flattening into Java package names, although a bit weird. <br> Python console for programmatic configuration. <br> Multi-language REPL in the application.</td>
-<td>Package Control is not part of the standard distribution. <br> The ST2/ST3 schism, although ST3 seems to be in better shape these days. <br> Markdown preview rendering forks a browser process, although it keeps track of the rendered temporary file and can reload it. <br> No colorized flagging in treeview for modified Git repo files.</td>
+<td><ul><li>Super fast (0-1 second) application load times.</li><li>Python Jedi code completion.</li><li>Supports directory flattening into Java package names, although a bit weird.</li><li>Python console for programmatic configuration.</li>li&gt;<li>Multi-language REPL in the application.</li></ul></td>
+<td><ul><li>Package Control is not part of the standard distribution.</li><li>The ST2/ST3 schism, although ST3 seems to be in better shape these days.</li><li>Markdown preview rendering forks a browser process, although it keeps track of the rendered temporary file and can reload it.</li><li>No colorized flagging in treeview for modified Git repo files.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -1480,7 +1489,7 @@ subl .
 <tbody>
 <tr>
 <td><a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a></td>
-<td>Matches a variety of brackets such as: [], (), {}, "", '', #!xml <tag></tag>, and even custom brackets.</td>
+<td>Matches a variety of brackets such as: <code>[]</code>, <code>()</code>, <code>{}</code>, <code>""</code>, <code>''</code>, <code>#!xml</code>, <code>&lt;tag&gt;&lt;/tag&gt;</code>, and even custom brackets.</td>
 </tr>
 <tr>
 <td><a href="https://packagecontrol.io/packages/EditorConfig">EditorConfig</a></td>
@@ -1524,7 +1533,7 @@ subl .
 </tr>
 <tr>
 <td><a href="https://packagecontrol.io/packages/Origami">Origami</a></td>
-<td>You tell Sublime Text where you want a new pane, and it makes one for you. It works seamlessly alongside the built-in layout commands.</td>
+<td>You tell SublimeText where you want a new pane, and it makes one for you. It works seamlessly alongside the built-in layout commands.</td>
 </tr>
 <tr>
 <td><a href="https://packagecontrol.io/packages/ShellCommand">ShellCommand</a></td>
@@ -1540,15 +1549,11 @@ subl .
 </tr>
 <tr>
 <td><a href="https://packagecontrol.io/packages/SublimeLinter-flake8">SublimeLinter-flake8</a></td>
-<td>This linter plugin for SublimeLinter provides an interface to <a href="http://flake8.readthedocs.org/en/latest/">flake8</a>. It will be used with files that have the “Python” syntax.</td>
+<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://flake8.readthedocs.org/en/latest/">flake8</a>. It will be used with files that have the “Python” syntax.</td>
 </tr>
 <tr>
-<td>SublimeLinter-jshint</td>
-<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://www.jshint.com/docs/">jshint</a>. It will be used with files that have the “JavaScript” syntax, or within \&lt;script</td>
-</tr>
-<tr>
-<td>&gt; tags in HTML files.</td>
-<td></td>
+<td><a href="https://packagecontrol.io/packages/SublimeLinter-jshint">SublimeLinter-jshint</a></td>
+<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://www.jshint.com/docs/">jshint</a>. It will be used with files that have the “JavaScript” syntax, or within <code>&lt;script&gt;</code> tags in HTML files.</td>
 </tr>
 <tr>
 <td><a href="https://packagecontrol.io/packages/SublimeLinter-shellcheck">SublimeLinter-shellcheck</a></td>
@@ -1582,9 +1587,9 @@ npm install -g jshint
 <p>There are a number of configuration tweaks that you will want to make to SublimeText to improve overall behavior.  The easiest way to manage this is to establish a dotfiles repository and track changes in source control.  See the subl directory for a collection of configuration files; the init-dots.sh script describes how these are linked to the main configuration location on your machine.</p>
 <p>After installing the configuration files, quit and restart SublimeText - this is particularly necessary for SublimeLinter to function correctly.</p>
 <h3 id="automate-package-installation">Automate Package Installation<a class="headerlink" href="#automate-package-installation" title="Permanent link">&para;</a></h3>
-<p>http://stackoverflow.com/questions/19529999/add-package-control-in-sublime-text-3-through-the-command-line</p>
+<p>You can <a href="http://stackoverflow.com/questions/19529999/add-package-control-in-sublime-text-3-through-the-command-line">automate</a> the installation of Package Control packages on first startup.</p>
 <h2 id="editing-tips">Editing Tips<a class="headerlink" href="#editing-tips" title="Permanent link">&para;</a></h2>
-<p>SublimeText has some interesting multi-editing features. See also http://docs.sublimetext.info/en/latest/reference/keyboard_shortcuts_osx.html.</p>
+<p>SublimeText has some interesting multi-editing features.</p>
 <table>
 <thead>
 <tr>
@@ -1655,6 +1660,7 @@ npm install -g jshint
 </tr>
 </tbody>
 </table>
+<p><br/></p>
 
               
             </article>
