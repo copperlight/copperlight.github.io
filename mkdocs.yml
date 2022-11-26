@@ -28,6 +28,7 @@ nav:
   - Misc:
     - Clone Stash Pull Requests: misc/clone-stash-pull-requests.md
     - Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina: misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina.md
+    - Make SublimeText Awesome: misc/make-sublimetext-awesome.md
     - Reset Jenkins Build Number: misc/reset-jenkins-build-number.md
     - Switching JDKs in OSX: misc/switching-jdks-in-osx.md
   - Python:
