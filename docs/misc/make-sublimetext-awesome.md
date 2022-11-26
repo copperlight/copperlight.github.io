@@ -1,11 +1,18 @@
+# Make SublimeText Awesome
+
+<div class="meta">
+  <span class="date"><small>XXXX-XX-XX</small></span>
+  <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
+</div><br/>
+
 ## Introduction
 
 I was using Atom for awhile, but it's slow (3+ second) startup times started to get to me.  Once I learned the magic of cmd+shift+p from Atom (inspired by the Sublime Text Command Palette), I went back to the original and figured out how to get it configured nicely.  One of the good things about this approach is that you end up with a reasonable Python IDE when you are done.  Also works nicely for Clojure - the REPL has good support for selecting and pasting code snippets from the editing window.  Comparing the two briefly:
 
 | Application | Pros | Cons |
 |-------------|------|------|
-| Atom | Faster to get started. You end up with a prettier and functional setup with less configuration effort. <br> Package manager is batteries included. <br> Markdown preview rendering in the application. <br> Treeview colors files that have been modified in a Git repo. | Super slow (3-10 second) application load times. <br> Python code completion still a work in progress. <br> No support for treeview directory flattening. |
-| SublimeText | Super fast (0-1 second) application load times. <br> Python Jedi code completion. <br> Supports directory flattening into Java package names, although a bit weird. <br> Python console for programmatic configuration. <br> Multi-language REPL in the application. | Package Control is not part of the standard distribution. <br> The ST2/ST3 schism, although ST3 seems to be in better shape these days. <br> Markdown preview rendering forks a browser process, although it keeps track of the rendered temporary file and can reload it. <br> No colorized flagging in treeview for modified Git repo files. |
+| Atom | <ul><li>Faster to get started. You end up with a prettier and functional setup with less configuration effort.</li><li>Package manager is batteries included.</li><li>Markdown preview rendering in the application.</li><li>Treeview colors files that have been modified in a Git repo.</li></ul> | <ul><li>Super slow (3-10 second) application load times.</li><li>Python code completion still a work in progress.</li><li>No support for treeview directory flattening.</li></ul> |
+| SublimeText | <ul><li>Super fast (0-1 second) application load times.</li><li>Python Jedi code completion.</li><li>Supports directory flattening into Java package names, although a bit weird.</li><li>Python console for programmatic configuration.</li>li><li>Multi-language REPL in the application.</li></ul> | <ul><li>Package Control is not part of the standard distribution.</li><li>The ST2/ST3 schism, although ST3 seems to be in better shape these days.</li><li>Markdown preview rendering forks a browser process, although it keeps track of the rendered temporary file and can reload it.</li><li>No colorized flagging in treeview for modified Git repo files.</li></ul> |
 
 ## Install and Configure
 
@@ -68,7 +75,7 @@ Install the following packages (cmd+shift+p: Package Control: Install Package).
 
 | Package | Purpose |
 |---------|---------|
-| [BracketHighlighter](https://packagecontrol.io/packages/BracketHighlighter) | Matches a variety of brackets such as: [], (), {}, "", '', #!xml <tag></tag>, and even custom brackets. |
+| [BracketHighlighter](https://packagecontrol.io/packages/BracketHighlighter) | Matches a variety of brackets such as: `[]`, `()`, `{}`, `""`, `''`, `#!xml`, `<tag></tag>`, and even custom brackets. |
 | [EditorConfig](https://packagecontrol.io/packages/EditorConfig) | Standardize editor configurations for projects. |
 | [Enhanced Clojure](https://packagecontrol.io/packages/Enhanced%20Clojure) | Improved code completion for Clojure. |
 | [FileDiffs](https://packagecontrol.io/packages/FileDiffs) | Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes. |
@@ -79,18 +86,19 @@ Install the following packages (cmd+shift+p: Package Control: Install Package).
 | [Jedi - Python autocompletion](https://packagecontrol.io/packages/Jedi%20-%20Python%20autocompletion) | Plugin to the awesome autocomplete library [Jedi](https://github.com/davidhalter/jedi). |
 | [lispindent](https://packagecontrol.io/packages/lispindent) | Properly indents lisp code. |
 | [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview) | Preview and build your markdown files quickly in your web browser, supports Python Markdown Parser and Github Markdown.
-| [Origami](https://packagecontrol.io/packages/Origami) | You tell Sublime Text where you want a new pane, and it makes one for you. It works seamlessly alongside the built-in layout commands.
+| [Origami](https://packagecontrol.io/packages/Origami) | You tell SublimeText where you want a new pane, and it makes one for you. It works seamlessly alongside the built-in layout commands.
 | [ShellCommand](https://packagecontrol.io/packages/ShellCommand) | The ShellCommand plugin allows arbitrary shell commands to be run and their output to be sent to buffers or panels.
 | [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter) | A framework for interactive code linting in the Sublime Text 3 editor.
-| [SublimeLinter-contrib-scalastyle](https://packagecontrol.io/packages/SublimeLinter-contrib-scalastyle) | This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org/) provides an interface to [scalastyle](http://www.scalastyle.org/). It will be used with files that have the “scala” syntax.
-| [SublimeLinter-flake8](https://packagecontrol.io/packages/SublimeLinter-flake8) | This linter plugin for SublimeLinter provides an interface to [flake8](http://flake8.readthedocs.org/en/latest/). It will be used with files that have the “Python” syntax.
-| SublimeLinter-jshint | This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org/) provides an interface to [jshint](http://www.jshint.com/docs/). It will be used with files that have the “JavaScript” syntax, or within \<script
-> tags in HTML files. |
-| [SublimeLinter-shellcheck](https://packagecontrol.io/packages/SublimeLinter-shellcheck) | This linter plugin for [SublimeLinter](http://sublimelinter.readthedocs.org/) provides an interface to [shellcheck](http://www.shellcheck.net/about.html). It will be used with files that have the “Shell-Unix-Generic” syntax (aka Shell Script (Bash)). |
+| [SublimeLinter-contrib-scalastyle](https://packagecontrol.io/packages/SublimeLinter-contrib-scalastyle) | This linter plugin for [SublimeLinter] provides an interface to [scalastyle](http://www.scalastyle.org/). It will be used with files that have the “scala” syntax.
+| [SublimeLinter-flake8](https://packagecontrol.io/packages/SublimeLinter-flake8) | This linter plugin for [SublimeLinter] provides an interface to [flake8](http://flake8.readthedocs.org/en/latest/). It will be used with files that have the “Python” syntax.
+| [SublimeLinter-jshint](https://packagecontrol.io/packages/SublimeLinter-jshint) | This linter plugin for [SublimeLinter] provides an interface to [jshint](http://www.jshint.com/docs/). It will be used with files that have the “JavaScript” syntax, or within `<script>` tags in HTML files. |
+| [SublimeLinter-shellcheck](https://packagecontrol.io/packages/SublimeLinter-shellcheck) | This linter plugin for [SublimeLinter] provides an interface to [shellcheck](http://www.shellcheck.net/about.html). It will be used with files that have the “Shell-Unix-Generic” syntax (aka Shell Script (Bash)). |
 | [SublimeREPL](https://packagecontrol.io/packages/SublimeREPL) | Run an interpreter inside ST2 (Clojure, CoffeeScript, F#, Groovy, Haskell, Lua, MozRepl, NodeJS, Python + virtualenv, R, Ruby, Scala...).
 | [Theme - Soda](https://packagecontrol.io/packages/Theme%20-%20Soda) | Dark and light custom UI themes for Sublime Text.
 | [View In Browser](https://packagecontrol.io/packages/View%20In%20Browser) | Open whatever is in your current view/tab. If the file current open is new and has not been saved a temporary file is created (in your default temp directory for your OS) with the extension of .htm and your browser will open it. 
 | [Trailing Spaces](https://packagecontrol.io/packages/TrailingSpaces) | Highlights trailing spaces (and lets you delete them in a flash!) |
+
+[SublimeLinter]: http://sublimelinter.readthedocs.org/
 
 ### Install Package Helpers
 
@@ -110,11 +118,11 @@ After installing the configuration files, quit and restart SublimeText - this is
 
 ### Automate Package Installation
 
-http://stackoverflow.com/questions/19529999/add-package-control-in-sublime-text-3-through-the-command-line
+You can [automate](http://stackoverflow.com/questions/19529999/add-package-control-in-sublime-text-3-through-the-command-line) the installation of Package Control packages on first startup.
 
 ## Editing Tips
 
-SublimeText has some interesting multi-editing features. See also http://docs.sublimetext.info/en/latest/reference/keyboard_shortcuts_osx.html.
+SublimeText has some interesting multi-editing features.
 
 | Shortcut | Action |
 |----------|--------|
