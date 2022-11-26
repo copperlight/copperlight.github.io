@@ -12,14 +12,14 @@
         <meta name="author" content="Matthew Johnson">
       
       
-        <link rel="canonical" href="http://copperlight.github.io/talks/favorite/">
+        <link rel="canonical" href="http://copperlight.github.io/misc/make-sublimetext-awesome/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
     
     
       
-        <title>Favorite - Copperlight Writes</title>
+        <title>Make SublimeText Awesome - Copperlight Writes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#favorite-talks" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Favorite
+              Make SublimeText Awesome
             
           </span>
         </div>
@@ -524,12 +524,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
@@ -552,7 +554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/clone-stash-pull-requests/" class="md-nav__link">
+      <a href="../clone-stash-pull-requests/" class="md-nav__link">
         Clone Stash Pull Requests
       </a>
     </li>
@@ -566,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/" class="md-nav__link">
+      <a href="../dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/" class="md-nav__link">
         Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
       </a>
     </li>
@@ -578,11 +580,117 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../misc/make-sublimetext-awesome/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Make SublimeText Awesome
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Make SublimeText Awesome
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-configure" class="md-nav__link">
+    Install and Configure
+  </a>
+  
+    <nav class="md-nav" aria-label="Install and Configure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-pyenv" class="md-nav__link">
+    Install pyenv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-leiningen" class="md-nav__link">
+    Install leiningen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-application" class="md-nav__link">
+    Install Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-packages" class="md-nav__link">
+    Install Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-package-helpers" class="md-nav__link">
+    Install Package Helpers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-sublimetext" class="md-nav__link">
+    Configure SublimeText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-package-installation" class="md-nav__link">
+    Automate Package Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editing-tips" class="md-nav__link">
+    Editing Tips
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -594,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/reset-jenkins-build-number/" class="md-nav__link">
+      <a href="../reset-jenkins-build-number/" class="md-nav__link">
         Reset Jenkins Build Number
       </a>
     </li>
@@ -608,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/switching-jdks-in-osx/" class="md-nav__link">
+      <a href="../switching-jdks-in-osx/" class="md-nav__link">
         Switching JDKs in OSX
       </a>
     </li>
@@ -1126,14 +1234,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
       
       
       
@@ -1154,101 +1260,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Favorite
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../talks/favorite/" class="md-nav__link">
         Favorite
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    C
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#career" class="md-nav__link">
-    Career
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clojure" class="md-nav__link">
-    Clojure
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clojurescript" class="md-nav__link">
-    ClojureScript
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#netflix-atlas" class="md-nav__link">
-    Netflix Atlas
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scala" class="md-nav__link">
-    Scala
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unix" class="md-nav__link">
-    Unix
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1260,7 +1276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-nav__link">
+      <a href="../../talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-nav__link">
         Netflix Atlas Telemetry - A Platform Begets an Ecosystem
       </a>
     </li>
@@ -1291,8 +1307,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1301,57 +1315,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    C
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#career" class="md-nav__link">
-    Career
+  <a href="#install-and-configure" class="md-nav__link">
+    Install and Configure
   </a>
+  
+    <nav class="md-nav" aria-label="Install and Configure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-pyenv" class="md-nav__link">
+    Install pyenv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-leiningen" class="md-nav__link">
+    Install leiningen
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-application" class="md-nav__link">
+    Install Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-packages" class="md-nav__link">
+    Install Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-package-helpers" class="md-nav__link">
+    Install Package Helpers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-sublimetext" class="md-nav__link">
+    Configure SublimeText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-package-installation" class="md-nav__link">
+    Automate Package Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#clojure" class="md-nav__link">
-    Clojure
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clojurescript" class="md-nav__link">
-    ClojureScript
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#netflix-atlas" class="md-nav__link">
-    Netflix Atlas
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scala" class="md-nav__link">
-    Scala
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unix" class="md-nav__link">
-    Unix
+  <a href="#editing-tips" class="md-nav__link">
+    Editing Tips
   </a>
   
 </li>
@@ -1369,81 +1403,258 @@
               
                 
 
-<h1 id="favorite-talks">Favorite Talks<a class="headerlink" href="#favorite-talks" title="Permanent link">&para;</a></h1>
-<h2 id="c">C<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/Ee3EtYb8d1o">Handmade Hero Day 001: Setting Up the Windows Build - Casey Muratori | 2014</a></li>
-</ul>
-<h2 id="career">Career<a class="headerlink" href="#career" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/yIPbE7BssOs">Rethinking the Developer Career Path – Randall Koutnik | The Lead Developer UK 2017</a></li>
-</ul>
-<h2 id="clojure">Clojure<a class="headerlink" href="#clojure" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey">Are We There Yet? - Rich Hickey | JVM Language Summit 2009</a></li>
-<li><a href="https://www.youtube.com/watch/TcnzB2tB-8Q">Boot Can Built It - Alan Dipert, Micha Niskin | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch/Tb823aqgX_0">Bottom Up vs Top Down Design in Clojure - Mark Bastian | Clojure/conj 2015</a></li>
-<li><a href="https://www.youtube.com/watch/dGVqrGmwOAw">Clojure Concurrency - Rich Hickey | Western Mass. Developers Group</a></li>
-<li><a href="https://www.infoq.com/presentations/clojure-core-async">Clojure core.async - Rich Hickey | Strange Loop 2013</a></li>
-<li><a href="https://www.youtube.com/watch/VSdnJDO-xdg">Clojure Made Simple - Rich Hickey | Oracle Developers 2015</a></li>
-<li><a href="https://www.youtube.com/watch/BzKjIk0vgzE">Clojure Parallelism Beyond Futures - Leon Barrett | Clojure/west 2015</a></li>
-<li><a href="https://vimeo.com/195711510">clojure.spec - Rich Hickey | LispNYC 2017</a></li>
-<li><a href="https://www.youtube.com/watch/rOKOCAkHNYw">Composing Interactive Apps With Zelkova - James MacAulay | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch/V2E1PdboYLk">Dagobah, a Data centric Meta scheduler - Matt Bossenbroek | Clojure/conj 2015</a></li>
-<li><a href="https://www.youtube.com/watch/ql77RwhcCK0">Debugging Clojure Code with Cursive - Colin Fleming | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch/i1KVwoE3n28">Design and Prototype a Language In Clojure - Jeanine Adkisson | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch?v=f84n5oFoZBc">Hammock Driven Development - Rich Hickey | Clojure/conj 2010</a></li>
-<li><a href="https://www.youtube.com/watch?v=fA9ZXy4N13s">Parallel Programming, Fork Join, and Reducers - Daniel Higginbotham | Clojure/west 2016</a></li>
-<li><a href="https://www.youtube.com/watch?v=9Q--oX5muxw">Parsing Text with a Virtual Machine - Ghadi Shayban | Clojure/west 2016</a></li>
-<li><a href="https://vimeo.com/230220635">REPL-Based Development Demo - Valentin Waeselynck | 2017</a> (from <a href="https://vvvvalvalval.github.io/posts/what-makes-a-good-repl.html">What makes a good REPL?</a>)</li>
-<li><a href="https://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy - Rich Hickey | Strange Loop 2011</a></li>
-<li><a href="https://www.youtube.com/watch/oyLBGkS5ICk">Spec-ulation - Rich Hickey | Clojure/conj 2016</a></li>
-<li><a href="https://www.youtube.com/watch?v=-RaFcpNiYCo">The Joys and Perils of Interactive Development - Stuart Sierra | Clojure/west 2016</a></li>
-<li><a href="https://www.youtube.com/watch/oRmj3IUkRVk">The ReactJS Landscape - Luke VanderHart | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch?v=XTl7Jn_kmio">Types are Like the Weather, Type Systems are Like Weathermen - Matthias Felleisen | Clojure/west 2016</a></li>
-</ul>
-<h2 id="clojurescript">ClojureScript<a class="headerlink" href="#clojurescript" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/gsffg5xxFQI">ClojureScript for Skeptics - Derek Slager | Clojure/conj 2015</a></li>
-<li><a href="https://www.youtube.com/watch/j-kj2qwJa_E">Developing ClojureScript With Figwheel - Bruce Hauman | Clojure/west 2015</a></li>
-<li><a href="https://www.youtube.com/watch/DdkwNTgtIJ0">From 0 to Prototype Using ClojureScript, Re-Frame and Friends - Martin Clausen | Dutch Clojure Days 2017</a></li>
-<li><a href="https://www.youtube.com/watch/KZjFVdU8VLI">Interactive Programming Flappy Bird in ClojureScript - Bruce Hauman | 2014</a></li>
-</ul>
-<h2 id="netflix-atlas">Netflix Atlas<a class="headerlink" href="#netflix-atlas" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/tHrT6kQR7vw">Netflix: Amazon S3 &amp; Amazon Elastic MapReduce to Monitor at Gigascale - Roy Rapoport | AWS re:Invent 2013</a></li>
-<li><a href="https://player.vimeo.com/video/221068885">Monitoring Monitoring Systems at Netflix - Roy Rapoport | Monitorama PDX 2017</a></li>
-<li><a href="https://www.youtube.com/watch/cd-5ADtsTK4">Netflix Atlas Telemetry - A Platform Begets an Ecosystem</a></li>
-</ul>
-<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/dZLyfbSQPXI">Automating Your Browser and Desktop Apps - Al Sweigart | PyBay2016</a></li>
-<li><a href="https://www.youtube.com/watch/wf-BqAjZb8M">Beyond PEP 8: Best Practices for Beautiful Intelligible Code - Raymond Hettinger | PyCon 2015</a></li>
-<li><a href="https://www.youtube.com/watch/lyDLAutA88s">Built in Super Heroes - David Beazley | PyData Chicago 2016</a></li>
-<li><a href="https://www.youtube.com/watch/E-1Y4kSsAFc">Fear and Awaiting in Async: A Savage Journey to the Heart of the Coroutine Dream - David Beazley | PyOhio 2016</a></li>
-<li><a href="https://www.youtube.com/watch/ONCVvS-gDMA">Logging and Testing and Debugging, Oh My! - Albert Sweigart | PyBay2017</a></li>
-<li><a href="https://www.youtube.com/watch/bAcfPzxB3dk">Machete-Mode Debugging: Hacking Your Way Out of a Tight Spot - Ned Batchelder | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/cLWUD9VnLmA">Python as a Configuration Language - Guillermo Pérez | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/MCs5OvhV9S4">Python Concurrency From the Ground Up: LIVE! - David Beazley | PyCon 2015</a></li>
-<li><a href="https://www.youtube.com/watch/YgtL4S7Hrwo">Python Language - Guido van Rossum | PyCon 2016</a></li>
-<li><a href="https://player.vimeo.com/video/9471538">Python vs Ruby: A Battle to The Death - Gary Bernhardt | NWPD 2010</a></li>
-<li><a href="https://www.youtube.com/watch/D_6ybDcU5gc">Refactoring Python: Why and How to Restructure Your Code - Brett Slatkin | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/P3AyI_u66Bw">Removing Python's GIL: The Gilectomy - Larry Hastings | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/o9pEzgHorH0">Stop Writing Classes - Jack Diederich | PyCon 2012</a></li>
-<li><a href="https://www.youtube.com/watch/iLVNWfPWAC8">The Packaging Gradient - Mahmoud Hashemi | PyBay 2017</a></li>
-<li><a href="https://www.youtube.com/watch/M4gPxbo6G6k">Think Like a Pythonista - Luciano Ramalho | PyBay 2017</a></li>
-<li><a href="https://www.youtube.com/watch/l4Nn-y9ktd4">Thinking In Coroutines - Łukasz Langa | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/KYG5C1CEkOk">To Mock, or Not to Mock, That is the Question - Ana Balica | PyCon 2016</a></li>
-<li><a href="https://www.youtube.com/watch/gR73nLbbgqY">Writing Awesome Command-Line Programs in Python - Mark Smith | EuroPython 2014</a></li>
-</ul>
-<h2 id="scala">Scala<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/dP5tkmWAhjg&quot;">A Better Scala REPL - Li Haoyi | SBTB 2015</a></li>
-</ul>
-<h2 id="unix">Unix<a class="headerlink" href="#unix" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.youtube.com/watch/sCZJblyT_XM">The Unix Chainsaw - Gary Bernhardt | Cascadia Ruby Conf 2011</a></li>
-</ul>
+  <h1>Make SublimeText Awesome</h1>
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>I was using Atom for awhile, but it's slow (3+ second) startup times started to get to me.  Once I learned the magic of cmd+shift+p from Atom (inspired by the Sublime Text Command Palette), I went back to the original and figured out how to get it configured nicely.  One of the good things about this approach is that you end up with a reasonable Python IDE when you are done.  Also works nicely for Clojure - the REPL has good support for selecting and pasting code snippets from the editing window.  Comparing the two briefly:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atom</td>
+<td>Faster to get started. You end up with a prettier and functional setup with less configuration effort. <br> Package manager is batteries included. <br> Markdown preview rendering in the application. <br> Treeview colors files that have been modified in a Git repo.</td>
+<td>Super slow (3-10 second) application load times. <br> Python code completion still a work in progress. <br> No support for treeview directory flattening.</td>
+</tr>
+<tr>
+<td>SublimeText</td>
+<td>Super fast (0-1 second) application load times. <br> Python Jedi code completion. <br> Supports directory flattening into Java package names, although a bit weird. <br> Python console for programmatic configuration. <br> Multi-language REPL in the application.</td>
+<td>Package Control is not part of the standard distribution. <br> The ST2/ST3 schism, although ST3 seems to be in better shape these days. <br> Markdown preview rendering forks a browser process, although it keeps track of the rendered temporary file and can reload it. <br> No colorized flagging in treeview for modified Git repo files.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="install-and-configure">Install and Configure<a class="headerlink" href="#install-and-configure" title="Permanent link">&para;</a></h2>
+<h3 id="install-pyenv">Install pyenv<a class="headerlink" href="#install-pyenv" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When you use pyenv with Sublime Text and SublimeLinter-flake8, it will attempt to use python3 from the /usr/local/var/pyenv/shims directory, regardless of your global configuration. You must have flake8 installed with the latest version of python3 on your system in order for the plugin to work.</p>
+</div>
+<p>Uses <a href="http://brew.sh/">Homebrew</a>; this makes it easy to switch between Python2 and Python3.</p>
+<div class="highlight"><pre><span></span><code>xcode-select --install
+
+brew update
+brew install pyenv readline
+
+cat &gt;&gt; <span class="nv">$HOME</span>/.bash_profile &lt;&lt;<span class="s2">&quot;EOF&quot;</span>
+<span class="nb">export</span> <span class="nv">PYENV_ROOT</span><span class="o">=</span>/usr/local/var/pyenv
+<span class="k">if</span> which pyenv &gt; /dev/null<span class="p">;</span> <span class="k">then</span> <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">fi</span>
+EOF
+
+<span class="nb">source</span> <span class="nv">$HOME</span>/.bash_profile
+pyenv install --list
+pyenv install <span class="m">2</span>.7.10
+pyenv install <span class="m">3</span>.5.0
+
+pyenv versions
+pyenv global <span class="m">2</span>.7.10
+pip install pip --upgrade
+</code></pre></div>
+<h3 id="install-leiningen">Install leiningen<a class="headerlink" href="#install-leiningen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>brew install leiningen
+</code></pre></div>
+<h3 id="install-application">Install Application<a class="headerlink" href="#install-application" title="Permanent link">&para;</a></h3>
+<p>Install <a href="http://www.sublimetext.com/3">Sublime Text 3</a>.</p>
+<p>Create the following symlinks so you can launch SublimeText from the command line:</p>
+<div class="highlight"><pre><span></span><code>ln -nsf <span class="s2">&quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot;</span> /usr/local/bin/subl
+
+<span class="c1"># open current directory in sublimetext to see a treeview</span>
+subl .
+</code></pre></div>
+<h3 id="install-packages">Install Packages<a class="headerlink" href="#install-packages" title="Permanent link">&para;</a></h3>
+<p>Install Package Control (ctrl+`):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">hashlib</span><span class="p">;</span> <span class="n">h</span> <span class="o">=</span> <span class="s1">&#39;6f4c264a24d933ce70df5dedcf1dcaee&#39;</span> <span class="o">+</span> <span class="s1">&#39;ebe013ee18cced0ef93d5f746d80ef60&#39;</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="n">by</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://packagecontrol.io/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">();</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error validating download (got </span><span class="si">%s</span><span class="s1"> instead of </span><span class="si">%s</span><span class="s1">), please try manual install&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="k">if</span> <span class="n">dh</span> <span class="o">!=</span> <span class="n">h</span> <span class="k">else</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">by</span><span class="p">)</span>
+</code></pre></div>
+<p>Install the following packages (cmd+shift+p: Package Control: Install Package).</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a></td>
+<td>Matches a variety of brackets such as: [], (), {}, "", '', #!xml <tag></tag>, and even custom brackets.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/EditorConfig">EditorConfig</a></td>
+<td>Standardize editor configurations for projects.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Enhanced%20Clojure">Enhanced Clojure</a></td>
+<td>Improved code completion for Clojure.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/FileDiffs">FileDiffs</a></td>
+<td>Shows diffs between the current file, or selection(s) in the current file, and clipboard, another file, or unsaved changes.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/fish-shell">fish-shell</a></td>
+<td>Syntax highlighting and whatnot for fish-shell.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Git">Git</a></td>
+<td>Git integration.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/GitGutter">GitGutter</a></td>
+<td>Show an icon in the gutter area indicating whether a line has been inserted, modified or deleted.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Gradle_Language">Gradle_Language</a></td>
+<td>Gradle language support.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Jedi%20-%20Python%20autocompletion">Jedi - Python autocompletion</a></td>
+<td>Plugin to the awesome autocomplete library <a href="https://github.com/davidhalter/jedi">Jedi</a>.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/lispindent">lispindent</a></td>
+<td>Properly indents lisp code.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a></td>
+<td>Preview and build your markdown files quickly in your web browser, supports Python Markdown Parser and Github Markdown.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Origami">Origami</a></td>
+<td>You tell Sublime Text where you want a new pane, and it makes one for you. It works seamlessly alongside the built-in layout commands.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/ShellCommand">ShellCommand</a></td>
+<td>The ShellCommand plugin allows arbitrary shell commands to be run and their output to be sent to buffers or panels.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/SublimeLinter">SublimeLinter</a></td>
+<td>A framework for interactive code linting in the Sublime Text 3 editor.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/SublimeLinter-contrib-scalastyle">SublimeLinter-contrib-scalastyle</a></td>
+<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://www.scalastyle.org/">scalastyle</a>. It will be used with files that have the “scala” syntax.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/SublimeLinter-flake8">SublimeLinter-flake8</a></td>
+<td>This linter plugin for SublimeLinter provides an interface to <a href="http://flake8.readthedocs.org/en/latest/">flake8</a>. It will be used with files that have the “Python” syntax.</td>
+</tr>
+<tr>
+<td>SublimeLinter-jshint</td>
+<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://www.jshint.com/docs/">jshint</a>. It will be used with files that have the “JavaScript” syntax, or within \&lt;script</td>
+</tr>
+<tr>
+<td>&gt; tags in HTML files.</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/SublimeLinter-shellcheck">SublimeLinter-shellcheck</a></td>
+<td>This linter plugin for <a href="http://sublimelinter.readthedocs.org/">SublimeLinter</a> provides an interface to <a href="http://www.shellcheck.net/about.html">shellcheck</a>. It will be used with files that have the “Shell-Unix-Generic” syntax (aka Shell Script (Bash)).</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/SublimeREPL">SublimeREPL</a></td>
+<td>Run an interpreter inside ST2 (Clojure, CoffeeScript, F#, Groovy, Haskell, Lua, MozRepl, NodeJS, Python + virtualenv, R, Ruby, Scala...).</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Theme%20-%20Soda">Theme - Soda</a></td>
+<td>Dark and light custom UI themes for Sublime Text.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/View%20In%20Browser">View In Browser</a></td>
+<td>Open whatever is in your current view/tab. If the file current open is new and has not been saved a temporary file is created (in your default temp directory for your OS) with the extension of .htm and your browser will open it.</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/TrailingSpaces">Trailing Spaces</a></td>
+<td>Highlights trailing spaces (and lets you delete them in a flash!)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="install-package-helpers">Install Package Helpers<a class="headerlink" href="#install-package-helpers" title="Permanent link">&para;</a></h3>
+<p>In order for some packages to work properly, they need helper binaries to be installed separately, such as:</p>
+<div class="highlight"><pre><span></span><code>brew install scalastyle shellcheck
+pip install flake8 jedi
+npm install -g jshint
+</code></pre></div>
+<h3 id="configure-sublimetext">Configure SublimeText<a class="headerlink" href="#configure-sublimetext" title="Permanent link">&para;</a></h3>
+<p>There are a number of configuration tweaks that you will want to make to SublimeText to improve overall behavior.  The easiest way to manage this is to establish a dotfiles repository and track changes in source control.  See the subl directory for a collection of configuration files; the init-dots.sh script describes how these are linked to the main configuration location on your machine.</p>
+<p>After installing the configuration files, quit and restart SublimeText - this is particularly necessary for SublimeLinter to function correctly.</p>
+<h3 id="automate-package-installation">Automate Package Installation<a class="headerlink" href="#automate-package-installation" title="Permanent link">&para;</a></h3>
+<p>http://stackoverflow.com/questions/19529999/add-package-control-in-sublime-text-3-through-the-command-line</p>
+<h2 id="editing-tips">Editing Tips<a class="headerlink" href="#editing-tips" title="Permanent link">&para;</a></h2>
+<p>SublimeText has some interesting multi-editing features. See also http://docs.sublimetext.info/en/latest/reference/keyboard_shortcuts_osx.html.</p>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctrl+g</td>
+<td>Go to line number.</td>
+</tr>
+<tr>
+<td>cmd+d</td>
+<td>Select the next match of the current selection.</td>
+</tr>
+<tr>
+<td>cmd+ctrl+g</td>
+<td>Select all matches of the current selection.</td>
+</tr>
+<tr>
+<td>cmd+l</td>
+<td>Select the next line.</td>
+</tr>
+<tr>
+<td>cmd+shift+j</td>
+<td>Select all child elements within a structured (e.g. HTML) document.</td>
+</tr>
+<tr>
+<td>cmd+r</td>
+<td>Jump to function.</td>
+</tr>
+<tr>
+<td>cmd+shift+d</td>
+<td>Duplicate current line, preserving all indentation.</td>
+</tr>
+<tr>
+<td>cmd+ctrl+up</td>
+<td>Move line up.</td>
+</tr>
+<tr>
+<td>cmd+ctrl+down</td>
+<td>Move line down.</td>
+</tr>
+<tr>
+<td>cmd+k,b</td>
+<td>Hide or show the sidebar.</td>
+</tr>
+<tr>
+<td>cmd+click</td>
+<td>Create multiple cursors.</td>
+</tr>
+<tr>
+<td>cmd+p</td>
+<td>Search for file within project.</td>
+</tr>
+<tr>
+<td>cmd+alt+left</td>
+<td>Go to left tab.</td>
+</tr>
+<tr>
+<td>cmd+alt+right</td>
+<td>Go to right tab.</td>
+</tr>
+<tr>
+<td>ctrl+shift+m    Select text within brackets (expandable).</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
               
             </article>
@@ -1457,7 +1668,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../stocks/nflx-quarterly-subscriber-growth/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Netflix Quarterly Growth" rel="prev">
+        <a href="../dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1466,20 +1677,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Netflix Quarterly Growth
+              Dual Boot OSX 10.10 and Ubuntu 14.04 on a 2013 Macbook Pro Retina
             </div>
           </div>
         </a>
       
       
         
-        <a href="../netflix-atlas-telemetry-a-platform-begets-an-ecosystem/" class="md-footer__link md-footer__link--next" aria-label="Next: Netflix Atlas Telemetry - A Platform Begets an Ecosystem" rel="next">
+        <a href="../reset-jenkins-build-number/" class="md-footer__link md-footer__link--next" aria-label="Next: Reset Jenkins Build Number" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Netflix Atlas Telemetry - A Platform Begets an Ecosystem
+              Reset Jenkins Build Number
             </div>
           </div>
           <div class="md-footer__button md-icon">
