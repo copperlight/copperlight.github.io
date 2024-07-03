@@ -67,7 +67,7 @@ theme: material
 extra:
   analytics:
     provider: google
-    property: UA-52382416-1
+    property: G-DC72N3VD1X
 
 extra_css:
   - css/custom.css

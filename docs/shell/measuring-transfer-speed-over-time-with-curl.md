@@ -192,4 +192,4 @@ plot \
 
 The graph will be rendered in PNG format:
 
-![Curl Transfer Speed](/images/curl-out.png "Curl Transfer Speed")
+![Curl Transfer Speed](../images/curl-out.png "Curl Transfer Speed")
