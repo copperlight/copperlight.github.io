@@ -2,162 +2,162 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://copperlight.github.io/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/ansible/ansible-vault-and-ssh-key-distribution/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/ansible/running-ansible-playbooks-on-windows/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/ansible/testing-ansible-galaxy-roles-with-docker/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/aws/assume-role-with-awscli/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/aws/aws-credential-files-for-java-and-python/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/aws/build-a-fake-instance-metadata-server-for-ubuntu-on-vagrant/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/aws/checking-and-changing-content-type-of-s3-object-with-awscli/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/aws/configuring-multiple-interfaces-on-the-same-network-in-ec2/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/github/how-i-built-my-site/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/linux/apache-deflate-and-cors-headers/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/linux/linux-ftrace-delivers-dtrace-like-functionality/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/misc/clone-stash-pull-requests/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/misc/dual-boot-osx-10.10-and-ubuntu-14.04-on-a-2013-macbook-pro-retina/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/misc/make-sublimetext-awesome/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/misc/reset-jenkins-build-number/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/misc/switching-jdks-in-osx/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/python/accessing-google-apis-with-python/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/python/building-rest-apis-with-python-flask/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/python/install-the-latest-python-versions-on-macosx/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/python/memory-profiling-with-pyrasite-and-heapy/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/python/stop-using-print-for-debugging/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/recipes/galaxys-best-margarita/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/running/garmin-935-navigation/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/intellij-configuration-tips/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/jmh-testing-with-scala/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/overview-of-debugging-tools/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/scalafmt-configuration-tips/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/starting-scala-repls-with-gradle-and-sbt/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/testing-aws-clients-with-iam-assumerole-credentials-in-scala/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/using-gradle-to-run-scala-projects-locally/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/scala/using-the-scala-repl-to-configure-amazon-ses-notifications/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/shell/measuring-transfer-speed-over-time-with-curl/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/shell/parsing-json-on-the-command-line/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/shell/pet-cli-snippet-manager/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/shell/schedule-ad-hoc-jobs-for-later-on-an-instance-with-atd/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/shell/zsh-keyboard-shortcuts/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/stocks/nflx-quarterly-subscriber-growth/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/talks/favorite/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
     <url>
          <loc>http://copperlight.github.io/talks/netflix-atlas-telemetry-a-platform-begets-an-ecosystem/</loc>
-         <lastmod>2025-06-10</lastmod>
+         <lastmod>2025-06-19</lastmod>
     </url>
 </urlset>
