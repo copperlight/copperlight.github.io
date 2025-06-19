@@ -26,6 +26,6 @@ PyYAML==6.0.2
 pyyaml_env_tag==1.1
 requests==2.32.4
 six==1.17.0
-urllib3==2.4.0
+urllib3==2.5.0
 watchdog==6.0.0
 wheel==0.45.1
