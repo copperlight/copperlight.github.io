@@ -28,4 +28,4 @@ requests==2.32.4
 six==1.17.0
 urllib3==2.6.3
 watchdog==6.0.0
-wheel==0.45.1
+wheel==0.46.2
