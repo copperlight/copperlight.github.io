@@ -1741,37 +1741,21 @@
 </div>
 <p>If you have either static or instance profile credentials that grant you STS permissions, then you
 can gather a set of time-limited role credentials as follows:</p>
-<div class="highlight"><pre><span></span><code>#!/bin/bash
-
-TEST_CREDENTIALS=$( \
+<p>```</p>
+<h1 id="binbash">!/bin/bash<a class="headerlink" href="#binbash" title="Permanent link">&para;</a></h1>
+<p>TEST_CREDENTIALS=$( \
   aws sts assume-role \
   --role-arn arn:aws:iam::$AWS_ACCOUNT_ID_1:role/$ROLE_NAME \
   --role-session-name $USER \
-  |jq &#39;.Credentials&#39;
-)
-
-PROD_CREDENTIALS=$( \
+  |jq '.Credentials'
+)</p>
+<p>PROD_CREDENTIALS=$( \
   aws sts assume-role \
   --role-arn arn:aws:iam::$AWS_ACCOUNT_ID_2:role/$ROLE_NAME \
   --role-session-name $USER \
-  |jq &#39;.Credentials&#39;
-)
-
-cat &gt;&gt;$HOME/.aws/credentials &lt;&lt;EOF
-[test-$ROLE_NAME]
-aws_access_key_id=$(echo $TEST_CREDENTIALS |jq -r &#39;.AccessKeyId&#39;)
-aws_secret_access_key=$(echo $TEST_CREDENTIALS |jq -r &#39;.SecretAccessKey&#39;)
-aws_session_token=$(echo $TEST_CREDENTIALS |jq -r &#39;.SessionToken&#39;)
-expiration=$(echo $TEST_CREDENTIALS |jq -r &#39;.Expiration&#39;)
-
-[prod-$ROLE_NAME]
-aws_access_key_id=$(echo $PROD_CREDENTIALS |jq -r &#39;.AccessKeyId&#39;)
-aws_secret_access_key=$(echo $PROD_CREDENTIALS |jq -r &#39;.SecretAccessKey&#39;)
-aws_session_token=$(echo $PROD_CREDENTIALS |jq -r &#39;.SessionToken&#39;)
-expiration=$(echo $PROD_CREDENTIALS |jq -r &#39;.Expiration&#39;)
-EOF
-</code></pre></div>
-<p><br/></p>
+  |jq '.Credentials'
+)</p>
+<p>cat &gt;&gt;$HOME/.aws/credentials &lt;<br/></p>
 
 
 

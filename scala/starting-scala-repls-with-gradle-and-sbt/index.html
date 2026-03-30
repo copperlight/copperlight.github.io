@@ -1742,56 +1742,49 @@
 <p>These examples are tailored for usage with the Atomic Scala exercises, but they demonstrate the
 principles.</p>
 <p><strong>build.gradle</strong>
-<div class="highlight"><pre><span></span><code><span class="n">apply</span><span class="w"> </span><span class="nl">plugin:</span><span class="w"> </span><span class="s1">&#39;scala&#39;</span>
+```groovy
+apply plugin: 'scala'</p>
+<p>repositories {
+    mavenCentral()
+}</p>
+<p>ext {
+    versions = [
+        commons_math3: '3.5',
+        jline: '2.12.1',
+        scala: '2.11.6'
+    ]
+}</p>
+<p>dependencies {
+    compile "org.apache.commons:commons-math3:${versions.commons_math3}"
+    compile "org.scala-lang:scala-library:${versions.scala}"</p>
+<div class="codehilite"><pre><span></span><code>runtime<span class="w"> </span>&quot;jline:jline:<span class="cp">${</span><span class="n">versions</span><span class="o">.</span><span class="n">jline</span><span class="cp">}</span>&quot;
+runtime<span class="w"> </span>&quot;org.scala-lang:scala-compiler:<span class="cp">${</span><span class="n">versions</span><span class="o">.</span><span class="n">scala</span><span class="cp">}</span>&quot;
+</code></pre></div>
 
-<span class="n">repositories</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">mavenCentral</span><span class="o">()</span>
-<span class="o">}</span>
-
-<span class="n">ext</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<span class="w">        </span><span class="nl">commons_math3:</span><span class="w"> </span><span class="s1">&#39;3.5&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="nl">jline:</span><span class="w"> </span><span class="s1">&#39;2.12.1&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="nl">scala:</span><span class="w"> </span><span class="s1">&#39;2.11.6&#39;</span>
-<span class="w">    </span><span class="o">]</span>
-<span class="o">}</span>
-
-<span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">compile</span><span class="w"> </span><span class="s2">&quot;org.apache.commons:commons-math3:${versions.commons_math3}&quot;</span>
-<span class="w">    </span><span class="n">compile</span><span class="w"> </span><span class="s2">&quot;org.scala-lang:scala-library:${versions.scala}&quot;</span>
-
-<span class="w">    </span><span class="n">runtime</span><span class="w"> </span><span class="s2">&quot;jline:jline:${versions.jline}&quot;</span>
-<span class="w">    </span><span class="n">runtime</span><span class="w"> </span><span class="s2">&quot;org.scala-lang:scala-compiler:${versions.scala}&quot;</span>
-<span class="o">}</span>
-
-<span class="n">sourceSets</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="n">scala</span><span class="w"> </span><span class="o">{</span>
-<span class="w">            </span><span class="n">srcDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;.&#39;</span><span class="o">]</span>
-<span class="w">            </span><span class="n">include</span><span class="w"> </span><span class="s1">&#39;AtomicTest.scala&#39;</span>
-<span class="w">        </span><span class="o">}</span>
-<span class="w">    </span><span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">scalaConsole</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">build</span><span class="o">)</span>
-<span class="n">scalaConsole</span><span class="o">.</span><span class="na">classpath</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">runtimeClasspath</span>
-
-<span class="c1">// usage: gradlew scalaConsole -q</span>
-</code></pre></div></p>
+<p>}</p>
+<p>sourceSets {
+    main {
+        scala {
+            srcDirs = ['.']
+            include 'AtomicTest.scala'
+        }
+    }
+}</p>
+<p>scalaConsole.dependsOn(build)
+scalaConsole.classpath += sourceSets.main.runtimeClasspath</p>
+<p>// usage: gradlew scalaConsole -q
+```</p>
 <p><strong>build.sbt</strong>
-<div class="highlight"><pre><span></span><code><span class="n">scalaVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;2.11.6&quot;</span>
-
-<span class="n">sources</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Compile</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">sources</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Compile</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;AtomicTest.scala&quot;</span><span class="p">))</span>
-
-<span class="n">libraryDependencies</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;org.apache.commons&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;commons-math3&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s">&quot;3.5&quot;</span>
-
-<span class="n">initialCommands</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">console</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">    |import org.apache.commons.math3._</span>
-<span class="s">    |import com.atomicscala.AtomicTest._</span>
-<span class="s">    |&quot;&quot;&quot;</span><span class="p">.</span><span class="n">stripMargin</span>
-
-<span class="c1">// usage: sbt console</span>
-</code></pre></div></p>
+```scala
+scalaVersion := "2.11.6"</p>
+<p>sources in Compile &lt;&lt;= (sources in Compile).map(<em> filter(</em>.name == "AtomicTest.scala"))</p>
+<p>libraryDependencies += "org.apache.commons" % "commons-math3" % "3.5"</p>
+<p>initialCommands in console := """
+    |import org.apache.commons.math3.<em>
+    |import com.atomicscala.AtomicTest.</em>
+    |""".stripMargin</p>
+<p>// usage: sbt console
+```</p>
 <p><br/></p>
 
 

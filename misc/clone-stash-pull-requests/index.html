@@ -1740,18 +1740,18 @@
   <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
 </div>
 <p><a href="https://answers.atlassian.com/questions/179848/local-checkout-of-a-pull-request-in-stash">https://answers.atlassian.com/questions/179848/local-checkout-of-a-pull-request-in-stash</a></p>
-<div class="highlight"><pre><span></span><code><span class="k">[alias]</span>
-<span class="w">  </span><span class="na">prstash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;!f() { git fetch $1 refs/pull-requests/$2/from:$3; } ; f&quot;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># where 3 is the 3rd pull request</span>
-git<span class="w"> </span>prstash<span class="w"> </span>origin<span class="w"> </span><span class="m">3</span><span class="w"> </span>dest-branch
-git<span class="w"> </span>checkout<span class="w"> </span>dest-branch
-
-<span class="c1"># to reclone</span>
-git<span class="w"> </span>checkout<span class="w"> </span>master
-git<span class="w"> </span>prstash<span class="w"> </span>origin<span class="w"> </span><span class="m">3</span><span class="w"> </span>dest-branch
-git<span class="w"> </span>checkout<span class="w"> </span>dest-branch
-</code></pre></div>
+<p><code>ini
+[alias]
+  prstash = "!f() { git fetch $1 refs/pull-requests/$2/from:$3; } ; f"</code></p>
+<p>```bash</p>
+<h1 id="where-3-is-the-3rd-pull-request">where 3 is the 3rd pull request<a class="headerlink" href="#where-3-is-the-3rd-pull-request" title="Permanent link">&para;</a></h1>
+<p>git prstash origin 3 dest-branch
+git checkout dest-branch</p>
+<h1 id="to-reclone">to reclone<a class="headerlink" href="#to-reclone" title="Permanent link">&para;</a></h1>
+<p>git checkout master
+git prstash origin 3 dest-branch
+git checkout dest-branch
+```</p>
 <p><br/></p>
 
 

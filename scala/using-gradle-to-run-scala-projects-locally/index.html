@@ -1745,46 +1745,42 @@ debugger and performing interactive integration testing.</p>
 distracting and not effective, especially if you need to build up anything more than simple state.
 You will be better served by using the <a href="https://www.jetbrains.com/help/idea/working-with-scala-worksheet.html">IntelliJ Scala Worksheet</a>, which makes it easy to gain
 access to the libraries you have included in your build.</p>
-<div class="highlight"><pre><span></span><code><span class="n">buildscript</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="n">classpath</span><span class="w"> </span><span class="s2">&quot;gradle.plugin.com.github.maiflai:gradle-scalatest:0.14&quot;</span>
-<span class="w">        </span><span class="n">classpath</span><span class="w"> </span><span class="s2">&quot;org.akhikhl.gretty:gretty:2.0.0&quot;</span>
-<span class="w">    </span><span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">apply</span><span class="w"> </span><span class="nl">plugin:</span><span class="w"> </span><span class="s1">&#39;com.github.maiflai.scalatest&#39;</span>
-<span class="n">apply</span><span class="w"> </span><span class="nl">plugin:</span><span class="w"> </span><span class="s1">&#39;org.akhikhl.gretty&#39;</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">ScalaCompile</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">scalaCompileOptions</span><span class="o">.</span><span class="na">setAdditionalParameters</span><span class="o">([</span>
-<span class="w">        </span><span class="s1">&#39;-deprecation&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="s1">&#39;-unchecked&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="s1">&#39;-Xexperimental&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="s1">&#39;-Xlint:_,-infer-any&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="s1">&#39;-feature&#39;</span><span class="o">,</span>
-<span class="w">        </span><span class="s1">&#39;-Ydelambdafy:method&#39;</span>
-<span class="w">    </span><span class="o">])</span>
-<span class="o">}</span>
-
-<span class="c1">// for servlet applications</span>
-<span class="n">gretty</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">httpPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7101</span>
-<span class="w">    </span><span class="n">contextPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/&#39;</span>
-<span class="w">    </span><span class="n">servletContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;jetty7&#39;</span>
-<span class="w">    </span><span class="n">jvmArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<span class="w">        </span><span class="s2">&quot;-Dlog4j.configurationFile=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s2">&quot;user.dir&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/src/main/resources/log4j_dev.xml&quot;</span>
-<span class="w">    </span><span class="o">]</span>
-<span class="o">}</span>
-
-<span class="c1">// for main class applications</span>
-<span class="n">task</span><span class="w"> </span><span class="nf">runService</span><span class="o">(</span><span class="nl">dependsOn:</span><span class="w"> </span><span class="s1">&#39;classes&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">type:</span><span class="w"> </span><span class="n">JavaExec</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;com.example.app.Main&#39;</span>
-<span class="w">    </span><span class="n">classpath</span><span class="w"> </span><span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">runtimeClasspath</span>
-<span class="o">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>./gradlew appRun
-./gradlew runService
-</code></pre></div>
+<p>```groovy
+buildscript {
+    dependencies {
+        classpath "gradle.plugin.com.github.maiflai:gradle-scalatest:0.14"
+        classpath "org.akhikhl.gretty:gretty:2.0.0"
+    }
+}</p>
+<p>apply plugin: 'com.github.maiflai.scalatest'
+apply plugin: 'org.akhikhl.gretty'</p>
+<p>tasks.withType(ScalaCompile) {
+    scalaCompileOptions.setAdditionalParameters([
+        '-deprecation',
+        '-unchecked',
+        '-Xexperimental',
+        '-Xlint:_,-infer-any',
+        '-feature',
+        '-Ydelambdafy:method'
+    ])
+}</p>
+<p>// for servlet applications
+gretty {
+    httpPort = 7101
+    contextPath = '/'
+    servletContainer = 'jetty7'
+    jvmArgs = [
+        "-Dlog4j.configurationFile=" + System.getProperty("user.dir") + "/src/main/resources/log4j_dev.xml"
+    ]
+}</p>
+<p>// for main class applications
+task runService(dependsOn: 'classes', type: JavaExec) {
+    main = 'com.example.app.Main'
+    classpath sourceSets.main.runtimeClasspath
+}
+```</p>
+<p><code>./gradlew appRun
+./gradlew runService</code></p>
 <p><br/></p>
 
 

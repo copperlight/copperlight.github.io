@@ -1743,12 +1743,12 @@
 sophisticated shell scripts that can interact with your favorite services.  Most first attempts at
 JSON parsing using some variation of the following to get the job done, which initially seems
 reasonable:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://endpoint.info<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>python<span class="w"> </span>-mjson.tool<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>grep<span class="w"> </span>foo<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/&quot;//g&#39;</span>
-</code></pre></div>
+<p><code>bash
+curl -s http://endpoint.info \
+    |python -mjson.tool \
+    |grep foo \
+    |cut -d: -f2 \
+    |sed -e 's/"//g'</code></p>
 <p>However, this can rapidly get out of hand, if you have key duplication, complex nested structures or
 you need to pull in all of the elements of a list.  For awhile,
 <a href="https://github.com/ddopson/underscore-cli">underscore-cli</a> was my favorite fully-featured JSON
@@ -1757,28 +1757,28 @@ November 2012.  Since then, I found <a href="http://stedolan.github.io/jq/">jq</
 well-written <a href="http://stedolan.github.io/jq/manual/">manual</a> with many usage examples and it is under
 active development.  It also has the benefit of being written in C, which helps speed and it has a
 fairly concise descriptor language.  To install:</p>
-<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>jq
-</code></pre></div>
+<p><code>bash
+brew install jq</code></p>
 <p>Then you can do things like flattening a complex JSON structure into a simple CSV:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">PAYLOADS</span><span class="o">=</span><span class="k">$(</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="nv">$URL</span><span class="w"> </span><span class="p">|</span>jq<span class="w"> </span><span class="s1">&#39;.payloads&#39;</span><span class="w"> </span><span class="k">)</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PAYLOADS</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PAYLOADS</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[] | .minutes[].payload.items[] | [.actions.actionTime, (.actions | {actions} | .actions.email.state), .sourceInstance, (.actions | {actions} | .actions.email.info )] | @csv&#39;</span>
-<span class="k">fi</span>
-</code></pre></div>
+<p><code>bash
+PAYLOADS=$( curl -s $URL |jq '.payloads' )
+if [ "$PAYLOADS" != "[]" ]; then
+    echo $PAYLOADS \
+        | jq -r '.[] | .minutes[].payload.items[] | [.actions.actionTime, (.actions | {actions} | .actions.email.state), .sourceInstance, (.actions | {actions} | .actions.email.info )] | @csv'
+fi</code></p>
 <p>As a bonus feature, if you have to deal in XML rather than JSON, then
 <a href="http://xmlstar.sourceforge.net/">xmlstarlet</a> is a good choice for handling it.  Naturally,
 installation:</p>
-<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>xmlstarlet
-</code></pre></div>
+<p><code>bash
+brew install xmlstarlet</code></p>
 <p>Once you have xmlstarlet, you can do things like pull the build number out of an Atlassian Bamboo
 HTML page, which was necessary when they did not have an API call available to report the version
 number of the last known good build for a project:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>--insecure<span class="w"> </span>https://bamboo.local/browse/<span class="si">${</span><span class="nv">BUILDKEY</span><span class="si">}${</span><span class="nv">BUILD</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>tidy<span class="w"> </span>-asxhtml<span class="w"> </span>-numeric<span class="w"> </span>--force-output<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>xmlstarlet<span class="w"> </span>sel<span class="w"> </span>-N<span class="w"> </span><span class="nv">x</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="w"> </span>-t<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;//x:div[@id=&#39;sr-build&#39;]/x:h2/x:a&quot;</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;s/#//g&quot;</span>
-</code></pre></div>
+<p><code>bash
+curl -s --insecure https://bamboo.local/browse/${BUILDKEY}${BUILD} \
+    |tidy -asxhtml -numeric --force-output true 2&gt;/dev/null \
+    |xmlstarlet sel -N x="http://www.w3.org/1999/xhtml" -t -m "//x:div[@id='sr-build']/x:h2/x:a" -v "." \
+    |sed -e "s/#//g"</code></p>
 <p><br/></p>
 
 

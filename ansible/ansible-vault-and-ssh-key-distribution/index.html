@@ -1753,117 +1753,121 @@ to be base64 encoded so that line breaks are preserved when it is stored as a ya
 <code>vars_files</code>.  Template files are created for the public and private keys to preserve file change
 detection.</p>
 <p>Generate a new key pair:</p>
-<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ssh-keygen<span class="w"> </span>-b<span class="w"> </span><span class="m">2048</span><span class="w"> </span>-f<span class="w"> </span>junk_key<span class="w"> </span>-C<span class="w"> </span>junk
-Generating<span class="w"> </span>public/private<span class="w"> </span>rsa<span class="w"> </span>key<span class="w"> </span>pair.
-Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="o">(</span>empty<span class="w"> </span><span class="k">for</span><span class="w"> </span>no<span class="w"> </span>passphrase<span class="o">)</span>:
-Enter<span class="w"> </span>same<span class="w"> </span>passphrase<span class="w"> </span>again:
-Your<span class="w"> </span>identification<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>saved<span class="w"> </span><span class="k">in</span><span class="w"> </span>junk_key.
-Your<span class="w"> </span>public<span class="w"> </span>key<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>saved<span class="w"> </span><span class="k">in</span><span class="w"> </span>junk_key.pub.
-The<span class="w"> </span>key<span class="w"> </span>fingerprint<span class="w"> </span>is:
-<span class="m">94</span>:94:ae:ac:c3:5e:ee:7d:fa:2c:cb:0f:ae:19:c8:99<span class="w"> </span>junk
-The<span class="w"> </span>key<span class="err">&#39;</span>s<span class="w"> </span>randomart<span class="w"> </span>image<span class="w"> </span>is:
-+--<span class="o">[</span><span class="w"> </span>RSA<span class="w"> </span><span class="m">2048</span><span class="o">]</span>----+
-<span class="p">|</span><span class="w">        </span>..<span class="w">       </span><span class="p">|</span>
-<span class="p">|</span><span class="w">       </span>...<span class="w">       </span><span class="p">|</span>
-<span class="p">|</span><span class="w">       </span>.o<span class="w">        </span><span class="p">|</span>
-<span class="p">|</span><span class="w">       </span>..<span class="w">        </span><span class="p">|</span>
-<span class="p">|</span><span class="w">     </span>.<span class="w"> </span>.S<span class="w">        </span><span class="p">|</span>
-<span class="p">|</span><span class="w">   </span>.<span class="w"> </span>+o<span class="w">          </span><span class="p">|</span>
-<span class="p">|</span><span class="w">   </span>.E.o<span class="w"> </span>.<span class="w">        </span><span class="p">|</span>
-<span class="p">|</span><span class="w">    </span>+o<span class="w"> </span>*.o.<span class="w">      </span><span class="p">|</span>
-<span class="p">|</span><span class="w">   </span>..o<span class="o">=</span>.*B+<span class="w">      </span><span class="p">|</span>
+<p><code>bash
+$ ssh-keygen -b 2048 -f junk_key -C junk
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in junk_key.
+Your public key has been saved in junk_key.pub.
+The key fingerprint is:
+94:94:ae:ac:c3:5e:ee:7d:fa:2c:cb:0f:ae:19:c8:99 junk
+The key's randomart image is:
++--[ RSA 2048]----+
+|        ..       |
+|       ...       |
+|       .o        |
+|       ..        |
+|     . .S        |
+|   . +o          |
+|   .E.o .        |
+|    +o *.o.      |
+|   ..o=.*B+      |
 +-----------------+
-&lt;/pre&gt;
-</code></pre></div>
+&lt;/pre&gt;</code></p>
 <p>Base64 encode the private key:</p>
-<div class="highlight"><pre><span></span><code>base64<span class="w"> </span>-i<span class="w"> </span>junk_key<span class="w"> </span>&gt;<span class="w"> </span>junk_key.b64
-</code></pre></div>
+<p><code>bash
+base64 -i junk_key &gt; junk_key.b64</code></p>
 <p>Create an Ansible vars_files yaml data file named <code>ssh_keys/ssh_key_vault.yml</code>.  The
 <code>ssh_private_key</code> variable should contain the base64 encoded private key and the <code>ssh_public_key</code>
 variable should contain the public key. Encrypt the file with <code>ansible-vault</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">ssh_private_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBeUtIRlhKWFJweXlCV2FobGExM2I5S2t1aGlwSHNkVkR4dDhaZnJrMWpqd1NnNEhCCmEzMzBnQnBxUFk1SkVxeEtPV0F3WWZleExwZ3VFcHk0Z2o5S1JxZGxTb0lsYllWbEtaUnY4RmhRSC9iT3lIKzAKVytJb0VzZ096MjR6U1ZQRU9ybWV6d3QzMzN0OWh0NDFsWVBBTHpzbkVaem9vVWE4ZTVKc1RzT0YzQzdmaUh3NApBSXZTOStWVUp5Mm8wUnZQN2ZMQkttV0FBN2dvWVA3d1Z6aVNQbEVrVVJIRGEyNXBVTmRTU1lxQzI2Y0c0UWNPCk14Q3VOeXdFRks0TGl5Q21zcHNXSnkzV3BkQ1FYQ0k1Q0J0SUVVTnR6Y1FpTFQvd0ZwbzRpRnp4NEREbkRsZWcKdkc2L1JHelFqMVJyeWRFdCtTNVdHenMzYkJHbDgxOWMvSmpPNVFJREFRQUJBb0lCQUYyQXZ5a3lEWDVheUlIUApjRXpFZG5Fa3M3RUZYVnBzcU9Tekx2K1hNM1Z4VzdOOE1uZDFRUkMrdnNxbldEamlvTWp5b2puV0pQWXhLQysyCmFHc1RNZnVSb2l4Q1VVMGtnUXdLeU14N2JBUXBreDl3SE05QnJDbHNvVEpkQ252ZkZUSEZObFVKNURqOEpYbEkKY0RLWkwyVVRyVmFSQ1AyNHFManllWldQbkFBTDZPc1JwSUc1Ukp1ays2QTVmVEppL0FVTmp4a2FIM1VOUklmTwpMZjYwOVJIUHZKUEtPNkNnNWVzK3RSY0VlbnR6ZVJxeENkYkh1b2NESjluUWNRQjVIVVBaeVdYOGwzODhJQ1hhCm5oaCt6VUhlYWY4cEM1dE9STGh0aDdsR1FFN3NOQ1FQRkovMHVCVWhleEVWREwxcU1Vd2JRZUpFU2orUmMrMi8KazRZeFhEVUNnWUVBNjhaNzRGUlJuUmViZy8xT2Z2K3ZlY0p2akEyRi9oWTBDVkpBOHdTcHdpNTlHTUpUS3g1TQpFWCtwNHBhMlY3NDZTZFFjY2l4K3hlWlhyZXkvbXhLWlByZnE0bVl1ZkJRRmVPT2tuWWdXTEhXUjV2cW1zUkFwCmZMQlhTbGdZNzV6SGFzSWJmOVlQZDhZQytLV1J4RlZyQml4eEtPQ2o1WFlrZmhoZkFnaDJsNnNDZ1lFQTJkZU4KM3FvR1lDM09GdllmWTJKVTQ4a2RvejNuT09uN09rd1pHNTFZOW5GM3JTYWpUeW9XRHpLTzc5MUNtK0hGNmhFWgpBWFlzeDlTcXJER1JYT2lvUi9ZMEpNVDZsS0ZuTUJpWERmRWROUVFCYStQQ3RFNWhqdTFoS1dPOHlIN21pZk1DCnQ0OHZBbGk5NEQxZjNxa2FjREtmRWVpa2VaazZaWWFhUWFTZ1k2OENnWUVBb0cxb3dzWjgxZWhIVURNZW96bDAKKytONkpSRGFtSDRoSUNxUXVRcjJPNE9JYVQxb2U5RmNyeGR2MEJiK3NZdGxlL0RRL2pzYWM2djlBd0l4aWVISQoxaTBzcktvY2ZSN2VibGh2SFNXSStPMXl2bmpVeld3UzNwM2FkMktrYlAzL2pydlBIRmZhSklSZVp6TzVrSjhTCmVKdnF6NGF5M3FKWnlGYnE1cVk5azRzQ2dZQmlzNVhtTTJkY0lLVG1KbkltVjZGYTYvN3Z2ZGFNSlFmZGJDbGMKSjdqdFFKQVc5aEM4aDdjaS82ZGY2d0tKR296UDl4czdYRTRCNU12SDVWV1ZvUnpPTGpHR0QzSHg4Z2VNOVRkTAo2OWx0OGZpcTU3R0tmSkViYjFhOHFDSWJQZFE2NE01MFdQM1Z0RnVqeEdzeHViRHU4U0M5dm9qM1I0UDhDRGJRClUwVVFwUUtCZ1FDc0pyMlBrdFl0QWJteHdCbUMrT1FVOFd4dHQwZ2ZoNGluZHpVV2J3MFZWY3Ivb3A5aDliekoKWG9TSVVSenQwUjZmNVVDK1RwQUdxY3ZPKzhtTUgwbnZpZ2VuYkhXdk01WFBuSUtwR2RLZmc4QkxUMUZnR2t3Ugpma2tydnpwWjM1dWpCTkRWdnl4ZWVCTyt2MTVqc0N1YTFTS0FsaXpzaWJrdE9lM1F1VTkwS3c9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=</span>
-
-<span class="nt">ssh_public_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIocVcldGnLIFZqGVrXdv0qS6GKkex1UPG3xl+uTWOPBKDgcFrffSAGmo9jkkSrEo5YDBh97EumC4SnLiCP0pGp2VKgiVthWUplG/wWFAf9s7If7Rb4igSyA7PbjNJU8Q6uZ7PC3ffe32G3jWVg8AvOycRnOihRrx7kmxOw4XcLt+IfDgAi9L35VQnLajRG8/t8sEqZYADuChg/vBXOJI+USRREcNrbmlQ11JJioLbpwbhBw4zEK43LAQUrguLIKaymxYnLdal0JBcIjkIG0gRQ23NxCItP/AWmjiIXPHgMOcOV6C8br9EbNCPVGvJ0S35LlYbOzdsEaXzX1z8mM7l junk</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>ansible-vault<span class="w"> </span>encrypt<span class="w"> </span>ssh_keys/ssh_key_vault.yml
-Vault<span class="w"> </span>password:
-Confirm<span class="w"> </span>Vault<span class="w"> </span>password:
-Encryption<span class="w"> </span>successful
-</code></pre></div>
+<p>```yaml
+ssh_private_key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBeUtIRlhKWFJweXlCV2FobGExM2I5S2t1aGlwSHNkVkR4dDhaZnJrMWpqd1NnNEhCCmEzMzBnQnBxUFk1SkVxeEtPV0F3WWZleExwZ3VFcHk0Z2o5S1JxZGxTb0lsYllWbEtaUnY4RmhRSC9iT3lIKzAKVytJb0VzZ096MjR6U1ZQRU9ybWV6d3QzMzN0OWh0NDFsWVBBTHpzbkVaem9vVWE4ZTVKc1RzT0YzQzdmaUh3NApBSXZTOStWVUp5Mm8wUnZQN2ZMQkttV0FBN2dvWVA3d1Z6aVNQbEVrVVJIRGEyNXBVTmRTU1lxQzI2Y0c0UWNPCk14Q3VOeXdFRks0TGl5Q21zcHNXSnkzV3BkQ1FYQ0k1Q0J0SUVVTnR6Y1FpTFQvd0ZwbzRpRnp4NEREbkRsZWcKdkc2L1JHelFqMVJyeWRFdCtTNVdHenMzYkJHbDgxOWMvSmpPNVFJREFRQUJBb0lCQUYyQXZ5a3lEWDVheUlIUApjRXpFZG5Fa3M3RUZYVnBzcU9Tekx2K1hNM1Z4VzdOOE1uZDFRUkMrdnNxbldEamlvTWp5b2puV0pQWXhLQysyCmFHc1RNZnVSb2l4Q1VVMGtnUXdLeU14N2JBUXBreDl3SE05QnJDbHNvVEpkQ252ZkZUSEZObFVKNURqOEpYbEkKY0RLWkwyVVRyVmFSQ1AyNHFManllWldQbkFBTDZPc1JwSUc1Ukp1ays2QTVmVEppL0FVTmp4a2FIM1VOUklmTwpMZjYwOVJIUHZKUEtPNkNnNWVzK3RSY0VlbnR6ZVJxeENkYkh1b2NESjluUWNRQjVIVVBaeVdYOGwzODhJQ1hhCm5oaCt6VUhlYWY4cEM1dE9STGh0aDdsR1FFN3NOQ1FQRkovMHVCVWhleEVWREwxcU1Vd2JRZUpFU2orUmMrMi8KazRZeFhEVUNnWUVBNjhaNzRGUlJuUmViZy8xT2Z2K3ZlY0p2akEyRi9oWTBDVkpBOHdTcHdpNTlHTUpUS3g1TQpFWCtwNHBhMlY3NDZTZFFjY2l4K3hlWlhyZXkvbXhLWlByZnE0bVl1ZkJRRmVPT2tuWWdXTEhXUjV2cW1zUkFwCmZMQlhTbGdZNzV6SGFzSWJmOVlQZDhZQytLV1J4RlZyQml4eEtPQ2o1WFlrZmhoZkFnaDJsNnNDZ1lFQTJkZU4KM3FvR1lDM09GdllmWTJKVTQ4a2RvejNuT09uN09rd1pHNTFZOW5GM3JTYWpUeW9XRHpLTzc5MUNtK0hGNmhFWgpBWFlzeDlTcXJER1JYT2lvUi9ZMEpNVDZsS0ZuTUJpWERmRWROUVFCYStQQ3RFNWhqdTFoS1dPOHlIN21pZk1DCnQ0OHZBbGk5NEQxZjNxa2FjREtmRWVpa2VaazZaWWFhUWFTZ1k2OENnWUVBb0cxb3dzWjgxZWhIVURNZW96bDAKKytONkpSRGFtSDRoSUNxUXVRcjJPNE9JYVQxb2U5RmNyeGR2MEJiK3NZdGxlL0RRL2pzYWM2djlBd0l4aWVISQoxaTBzcktvY2ZSN2VibGh2SFNXSStPMXl2bmpVeld3UzNwM2FkMktrYlAzL2pydlBIRmZhSklSZVp6TzVrSjhTCmVKdnF6NGF5M3FKWnlGYnE1cVk5azRzQ2dZQmlzNVhtTTJkY0lLVG1KbkltVjZGYTYvN3Z2ZGFNSlFmZGJDbGMKSjdqdFFKQVc5aEM4aDdjaS82ZGY2d0tKR296UDl4czdYRTRCNU12SDVWV1ZvUnpPTGpHR0QzSHg4Z2VNOVRkTAo2OWx0OGZpcTU3R0tmSkViYjFhOHFDSWJQZFE2NE01MFdQM1Z0RnVqeEdzeHViRHU4U0M5dm9qM1I0UDhDRGJRClUwVVFwUUtCZ1FDc0pyMlBrdFl0QWJteHdCbUMrT1FVOFd4dHQwZ2ZoNGluZHpVV2J3MFZWY3Ivb3A5aDliekoKWG9TSVVSenQwUjZmNVVDK1RwQUdxY3ZPKzhtTUgwbnZpZ2VuYkhXdk01WFBuSUtwR2RLZmc4QkxUMUZnR2t3Ugpma2tydnpwWjM1dWpCTkRWdnl4ZWVCTyt2MTVqc0N1YTFTS0FsaXpzaWJrdE9lM1F1VTkwS3c9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=</p>
+<p>ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIocVcldGnLIFZqGVrXdv0qS6GKkex1UPG3xl+uTWOPBKDgcFrffSAGmo9jkkSrEo5YDBh97EumC4SnLiCP0pGp2VKgiVthWUplG/wWFAf9s7If7Rb4igSyA7PbjNJU8Q6uZ7PC3ffe32G3jWVg8AvOycRnOihRrx7kmxOw4XcLt+IfDgAi9L35VQnLajRG8/t8sEqZYADuChg/vBXOJI+USRREcNrbmlQ11JJioLbpwbhBw4zEK43LAQUrguLIKaymxYnLdal0JBcIjkIG0gRQ23NxCItP/AWmjiIXPHgMOcOV6C8br9EbNCPVGvJ0S35LlYbOzdsEaXzX1z8mM7l junk
+```</p>
+<p><code>bash
+ansible-vault encrypt ssh_keys/ssh_key_vault.yml
+Vault password:
+Confirm Vault password:
+Encryption successful</code></p>
 <p>Create an inventory file named <code>inventory</code>, showing off the SSH jump host connection capability:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[localhost]</span>
-<span class="na">localhost ansible_connection</span><span class="o">=</span><span class="s">local</span>
-
-<span class="k">[group-all:children]</span>
-<span class="na">group-01</span>
-<span class="na">group-02</span>
-
-<span class="k">[group-01]</span>
-<span class="na">i-00000001 ansible_ssh_host</span><span class="o">=</span><span class="s">bastion+192.168.1.1 ansible_ssh_user=remoteuser</span>
-<span class="na">i-00000002 ansible_ssh_host</span><span class="o">=</span><span class="s">bastion+192.168.1.2 ansible_ssh_user=remoteuser</span>
-
-<span class="k">[group-02]</span>
-<span class="na">i-00000003 ansible_ssh_host</span><span class="o">=</span><span class="s">bastion+192.168.1.3 ansible_ssh_user=remoteuser</span>
-<span class="na">i-00000004 ansible_ssh_host</span><span class="o">=</span><span class="s">bastion+192.168.1.4 ansible_ssh_user=remoteuser</span>
-</code></pre></div>
+<p>```ini
+[localhost]
+localhost ansible_connection=local</p>
+<p>[group-all:children]
+group-01
+group-02</p>
+<p>[group-01]
+i-00000001 ansible_ssh_host=bastion+192.168.1.1 ansible_ssh_user=remoteuser
+i-00000002 ansible_ssh_host=bastion+192.168.1.2 ansible_ssh_user=remoteuser</p>
+<p>[group-02]
+i-00000003 ansible_ssh_host=bastion+192.168.1.3 ansible_ssh_user=remoteuser
+i-00000004 ansible_ssh_host=bastion+192.168.1.4 ansible_ssh_user=remoteuser
+```</p>
 <p>Create a template file for the private key named <code>templates/HOME_.ssh_junk</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{{</span><span class="nv">ssh_private_key_decoded.stdout</span><span class="cp">}}</span>
-</code></pre></div>
+<p><code>jinja
+{{ssh_private_key_decoded.stdout}}</code></p>
 <p>Create a template file for the public key named <code>templates/HOME_.ssh_junk.pub</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{{</span><span class="nv">ssh_public_key</span><span class="cp">}}</span>
-</code></pre></div>
+<p><code>jinja
+{{ssh_public_key}}</code></p>
 <p>Create a template file for the SSH jump host configuration named <code>templates/HOME_.ssh_config</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">Host *</span>
-<span class="x">    ServerAliveInterval 30</span>
-<span class="x">    ServerAliveCountMax 5</span>
-
-<span class="x">Host bastion</span>
-<span class="x">    User </span><span class="cp">{{</span><span class="nv">remote_user</span><span class="cp">}}</span>
-<span class="x">    IdentityFile ~/.ssh/junk</span>
-<span class="x">    Hostname bastion</span>
-
-<span class="x">Host bastion+*</span>
-<span class="x">    User </span><span class="cp">{{</span><span class="nv">remote_user</span><span class="cp">}}</span>
-<span class="x">    IdentityFile ~/.ssh/junk</span>
-<span class="x">    ProxyCommand ssh -T -a bastion nc $(echo %h |cut -d+ -f2) %p 2&gt;/dev/null</span>
-<span class="x">    StrictHostKeyChecking no</span>
-</code></pre></div>
+<p>```jinja
+Host *
+    ServerAliveInterval 30
+    ServerAliveCountMax 5</p>
+<p>Host bastion
+    User {{remote_user}}
+    IdentityFile ~/.ssh/junk
+    Hostname bastion</p>
+<p>Host bastion+*
+    User {{remote_user}}
+    IdentityFile ~/.ssh/junk
+    ProxyCommand ssh -T -a bastion nc $(echo %h |cut -d+ -f2) %p 2&gt;/dev/null
+    StrictHostKeyChecking no
+```</p>
 <p>This configuration assumes that you have a consistent remote username defined on the bastion server
 and your protected hosts.</p>
 <p>Write a playbook to install the SSH key and configuration on your local workstation named
 <code>config_local-ssh.yml</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configure local ssh</span>
-<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
-<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">  </span><span class="nt">sudo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">local_home</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;env&#39;,&#39;HOME&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">local_user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;env&#39;,&#39;USER&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
-<span class="w">    </span><span class="nt">remote_user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">remoteuser</span>
-<span class="w">  </span><span class="nt">vars_files</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh_keys/ssh_key_vault.yml</span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path={{local_home}}/.ssh state=directory mode=0700 owner={{local_user}}</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=templates/HOME_.ssh_config dest={{local_home}}/.ssh/config mode=0644 owner={{local_user}} backup=yes</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo {{ssh_private_key}} |base64 --decode</span>
-<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh_private_key_decoded</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=templates/HOME_.ssh_junk dest={{local_home}}/.ssh/junk mode=0600 owner={{local_user}}</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=templates/HOME_.ssh_junk.pub dest={{local_home}}/.ssh/junk.pub mode=0644 owner={{local_user}}</span>
-</code></pre></div>
+<p>```yaml
+- name: configure local ssh
+  hosts:
+  - localhost
+  gather_facts: false
+  sudo: false
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+    local_user: "{{ lookup('env','USER') }}"
+    remote_user: remoteuser
+  vars_files:
+  - ssh_keys/ssh_key_vault.yml
+  tasks:
+  - file: path={{local_home}}/.ssh state=directory mode=0700 owner={{local_user}}</p>
+<ul>
+<li>
+<p>template: src=templates/HOME_.ssh_config dest={{local_home}}/.ssh/config mode=0644 owner={{local_user}} backup=yes</p>
+</li>
+<li>
+<p>shell: echo {{ssh_private_key}} |base64 --decode
+    register: ssh_private_key_decoded</p>
+</li>
+<li>
+<p>template: src=templates/HOME_.ssh_junk dest={{local_home}}/.ssh/junk mode=0600 owner={{local_user}}</p>
+</li>
+<li>
+<p>template: src=templates/HOME_.ssh_junk.pub dest={{local_home}}/.ssh/junk.pub mode=0644 owner={{local_user}}
+```</p>
+</li>
+</ul>
 <p>Run the playbook to setup your local workstation with SSH keys and configuration:</p>
-<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory<span class="w"> </span>config_local-ssh.yml<span class="w"> </span>--ask-vault-pass
-Vault<span class="w"> </span>password:
-</code></pre></div>
+<p><code>bash
+ansible-playbook -i inventory config_local-ssh.yml --ask-vault-pass
+Vault password:</code></p>
 <p>Test your SSH tunneling access to a remote host behind the bastion server:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>bastion+192.168.1.1
-ssh<span class="w"> </span>bastion+192.168.1.1<span class="w"> </span><span class="s2">&quot;date; date &gt; /tmp/date.out&quot;</span>
-scp<span class="w"> </span>bastion+192.168.1.1:/tmp/date.out<span class="w"> </span>.
-</code></pre></div>
+<p><code>bash
+ssh bastion+192.168.1.1
+ssh bastion+192.168.1.1 "date; date &gt; /tmp/date.out"
+scp bastion+192.168.1.1:/tmp/date.out .</code></p>
 <p>Notice that the hosts behind the bastion server are referenced in the SSH command the same way that
 they are referenced in the Ansible inventory file.  The "+" character used as a separator was
 selected explicitly for its ability to be used interchangeably at the command line and in the
@@ -1875,130 +1879,125 @@ such as <code>bastion+webserver01</code>.  This host selection technique can be 
 inventory script, if you were running instances at a cloud provider such as AWS.  When you write a
 <a href="http://docs.ansible.com/developing_inventory.html">dynamic inventory script</a>, the data format
 should look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;group-01&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;hosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;i-00000001&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;i-00000002&quot;</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;group-02&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;hosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;i-00000003&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;i-00000004&quot;</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;group-all&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;group-01&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;group-02&quot;</span>
-<span class="w">        </span><span class="p">]</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;localhost&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;localhost&quot;</span>
-<span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;_meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;hostvars&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;i-00000001&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bastion+192.168.1.1&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remoteuser&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;i-00000002&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bastion+192.168.1.2&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remoteuser&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;i-00000003&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bastion+192.168.1.3&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remoteuser&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;i-00000004&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bastion+192.168.1.4&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;ansible_ssh_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;remoteuser&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;localhost&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;ansible_connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><code>json
+{
+    "group-01": {
+        "hosts": [
+            "i-00000001",
+            "i-00000002"
+        ]
+    },
+    "group-02": {
+        "hosts": [
+            "i-00000003",
+            "i-00000004"
+        ]
+    },
+    "group-all": {
+        "children": [
+            "group-01",
+            "group-02"
+        ]
+    },
+    "localhost": [
+        "localhost"
+    ],
+    "_meta": {
+        "hostvars": {
+            "i-00000001": {
+                "ansible_ssh_host": "bastion+192.168.1.1",
+                "ansible_ssh_user": "remoteuser"
+            },
+            "i-00000002": {
+                "ansible_ssh_host": "bastion+192.168.1.2",
+                "ansible_ssh_user": "remoteuser"
+            },
+            "i-00000003": {
+                "ansible_ssh_host": "bastion+192.168.1.3",
+                "ansible_ssh_user": "remoteuser"
+            },
+            "i-00000004": {
+                "ansible_ssh_host": "bastion+192.168.1.4",
+                "ansible_ssh_user": "remoteuser"
+            },
+            "localhost": {
+                "ansible_connection": "local"
+            },
+        }
+    }
+}</code></p>
 <p>The nice thing about this style of SSH configuration is that you can have multiple bastion hosts in
 different locations and target the hosts behind each of them, provided that you give your bastion
 hosts different names.  The method of accessing them is the same between direct SSH connections and
 Ansible execution.  Once you have this infrastructure in place, you can start distributing public
 SSH keys to your protected hosts.</p>
 <p>Write a <code>templates/etc_sudoers</code> file that grants NOPASSWD access to the sudo group:</p>
-<div class="highlight"><pre><span></span><code>Defaults    env_reset
+<p>```
+Defaults    env_reset
 Defaults    mail_badpass
-Defaults    secure_path=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
-
-# Host alias specification
-
-# User alias specification
-
-# Cmnd alias specification
-
-# User privilege specification
-root    ALL=(ALL:ALL) ALL
-
-# Allow members of group sudo to execute any command
-%sudo   ALL=NOPASSWD: ALL
-
-#includedir /etc/sudoers.d
-</code></pre></div>
+Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</p>
+<h1 id="host-alias-specification">Host alias specification<a class="headerlink" href="#host-alias-specification" title="Permanent link">&para;</a></h1>
+<h1 id="user-alias-specification">User alias specification<a class="headerlink" href="#user-alias-specification" title="Permanent link">&para;</a></h1>
+<h1 id="cmnd-alias-specification">Cmnd alias specification<a class="headerlink" href="#cmnd-alias-specification" title="Permanent link">&para;</a></h1>
+<h1 id="user-privilege-specification">User privilege specification<a class="headerlink" href="#user-privilege-specification" title="Permanent link">&para;</a></h1>
+<p>root    ALL=(ALL:ALL) ALL</p>
+<h1 id="allow-members-of-group-sudo-to-execute-any-command">Allow members of group sudo to execute any command<a class="headerlink" href="#allow-members-of-group-sudo-to-execute-any-command" title="Permanent link">&para;</a></h1>
+<p>%sudo   ALL=NOPASSWD: ALL</p>
+<h1 id="includedir-etcsudoersd">includedir /etc/sudoers.d<a class="headerlink" href="#includedir-etcsudoersd" title="Permanent link">&para;</a></h1>
+<p>```</p>
 <p>Write a playbook <code>update_remote-ssh.yml</code> to configure NOPASSWD sudo access for your remote user and
 distribute SSH public keys on your remote hosts.  This will allow subsequent playbook execution to
 operate more easily against your remote hosts.  In order for this to work, the paramiko connection
 type must be used initially, so that the password can be requested once and re-used across all hosts.</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update remote ssh</span>
-<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">group-all</span>
-<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">  </span><span class="nt">sudo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paramiko</span>
-<span class="w">  </span><span class="nt">vars_files</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh_keys/ssh_key_vault.yml</span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">copy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=templates/etc_sudoers dest=/etc/sudoers mode=0440 owner=root group=root</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name=remoteuser groups=sudo shell=/bin/bash state=present</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">authorized_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user=remoteuser state=present key={{ssh_public_key}}</span>
-</code></pre></div>
+<p>```yaml
+- name: update remote ssh
+  hosts:
+  - group-all
+  gather_facts: false
+  sudo: true
+  connection: paramiko
+  vars_files:
+  - ssh_keys/ssh_key_vault.yml
+  tasks:
+  - copy: src=templates/etc_sudoers dest=/etc/sudoers mode=0440 owner=root group=root</p>
+<ul>
+<li>
+<p>user: name=remoteuser groups=sudo shell=/bin/bash state=present</p>
+</li>
+<li>
+<p>authorized_key: user=remoteuser state=present key={{ssh_public_key}}
+```</p>
+</li>
+</ul>
 <p>Run an SSH configuration playbook against remote hosts through the SSH tunnel, providing the SSH
 password, sudo password and vault password:</p>
-<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>inventory<span class="w"> </span>update_remote-ssh.yml<span class="w"> </span>--ask-pass<span class="w"> </span>--ask-sudo-pass<span class="w"> </span>--ask-vault-pass
-SSH<span class="w"> </span>password:
-sudo<span class="w"> </span>password<span class="w"> </span><span class="o">[</span>defaults<span class="w"> </span>to<span class="w"> </span>SSH<span class="w"> </span>password<span class="o">]</span>:
-Vault<span class="w"> </span>password:
-
-PLAY<span class="w"> </span><span class="o">[</span>update<span class="w"> </span>ssh<span class="o">]</span><span class="w"> </span>*************************************************************
-
-TASK:<span class="w"> </span><span class="o">[</span>copy<span class="w"> </span><span class="nv">src</span><span class="o">=</span>templates/etc_sudoers<span class="w"> </span><span class="nv">dest</span><span class="o">=</span>/etc/sudoers<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="m">0440</span><span class="w"> </span><span class="nv">owner</span><span class="o">=</span>root<span class="w"> </span><span class="nv">group</span><span class="o">=</span>root<span class="o">]</span><span class="w"> </span>***
-ok:<span class="w"> </span><span class="o">[</span>i-00000001<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000002<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000003<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000004<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>user<span class="w"> </span><span class="nv">name</span><span class="o">=</span>remoteuser<span class="w"> </span><span class="nv">groups</span><span class="o">=</span>sudo<span class="w"> </span><span class="nv">shell</span><span class="o">=</span>/bin/bash<span class="w"> </span><span class="nv">state</span><span class="o">=</span>present<span class="o">]</span><span class="w"> </span>***
-ok:<span class="w"> </span><span class="o">[</span>i-00000001<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000002<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000003<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000004<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>authorized_key<span class="w"> </span><span class="nv">user</span><span class="o">=</span>remoteuser<span class="w"> </span><span class="nv">state</span><span class="o">=</span>present<span class="w"> </span><span class="nv">key</span><span class="o">=</span><span class="s2">&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIocVcldGnLIFZqGVrXdv0qS6GKkex1UPG3xl+uTWOPBKDgcFrffSAGmo9jkkSrEo5YDBh97EumC4SnLiCP0pGp2VKgiVthWUplG/wWFAf9s7If7Rb4igSyA7PbjNJU8Q6uZ7PC3ffe32G3jWVg8AvOycRnOihRrx7kmxOw4XcLt+IfDgAi9L35VQnLajRG8/t8sEqZYADuChg/vBXOJI+USRREcNrbmlQ11JJioLbpwbhBw4zEK43LAQUrguLIKaymxYnLdal0JBcIjkIG0gRQ23NxCItP/AWmjiIXPHgMOcOV6C8br9EbNCPVGvJ0S35LlYbOzdsEaXzX1z8mM7l junk&quot;</span><span class="o">]</span><span class="w"> </span>***
-ok:<span class="w"> </span><span class="o">[</span>i-00000001<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000002<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000003<span class="o">]</span>
-ok:<span class="w"> </span><span class="o">[</span>i-00000004<span class="o">]</span>
-
-
-PLAY<span class="w"> </span>RECAP<span class="w"> </span>********************************************************************
-i-00000001<span class="w">               </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">3</span><span class="w">    </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-i-00000002<span class="w">               </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">3</span><span class="w">    </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-i-00000003<span class="w">               </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">3</span><span class="w">    </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-i-00000004<span class="w">               </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">3</span><span class="w">    </span><span class="nv">changed</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w">    </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-</code></pre></div>
+<p>```bash
+ansible-playbook -i inventory update_remote-ssh.yml --ask-pass --ask-sudo-pass --ask-vault-pass
+SSH password:
+sudo password [defaults to SSH password]:
+Vault password:</p>
+<p>PLAY [update ssh] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong></p>
+<p>TASK: [copy src=templates/etc_sudoers dest=/etc/sudoers mode=0440 owner=root group=root] ***
+ok: [i-00000001]
+ok: [i-00000002]
+ok: [i-00000003]
+ok: [i-00000004]</p>
+<p>TASK: [user name=remoteuser groups=sudo shell=/bin/bash state=present] ***
+ok: [i-00000001]
+ok: [i-00000002]
+ok: [i-00000003]
+ok: [i-00000004]</p>
+<p>TASK: [authorized_key user=remoteuser state=present key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIocVcldGnLIFZqGVrXdv0qS6GKkex1UPG3xl+uTWOPBKDgcFrffSAGmo9jkkSrEo5YDBh97EumC4SnLiCP0pGp2VKgiVthWUplG/wWFAf9s7If7Rb4igSyA7PbjNJU8Q6uZ7PC3ffe32G3jWVg8AvOycRnOihRrx7kmxOw4XcLt+IfDgAi9L35VQnLajRG8/t8sEqZYADuChg/vBXOJI+USRREcNrbmlQ11JJioLbpwbhBw4zEK43LAQUrguLIKaymxYnLdal0JBcIjkIG0gRQ23NxCItP/AWmjiIXPHgMOcOV6C8br9EbNCPVGvJ0S35LlYbOzdsEaXzX1z8mM7l junk"] ***
+ok: [i-00000001]
+ok: [i-00000002]
+ok: [i-00000003]
+ok: [i-00000004]</p>
+<p>PLAY RECAP <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong>
+i-00000001               : ok=3    changed=0    unreachable=0    failed=0
+i-00000002               : ok=3    changed=0    unreachable=0    failed=0
+i-00000003               : ok=3    changed=0    unreachable=0    failed=0
+i-00000004               : ok=3    changed=0    unreachable=0    failed=0
+```</p>
 <p>The best way to keep Ansible output concise is to run without verbosity -- only crank this up if you
 need it to diagnose a problem.</p>
 <p><br/></p>

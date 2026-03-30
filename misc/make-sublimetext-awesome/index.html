@@ -872,53 +872,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-packages" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install Packages
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-package-helpers" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install Package Helpers
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configure-sublimetext" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure SublimeText
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#automate-package-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Automate Package Installation
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#editing-tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      Editing Tips
-    </span>
-  </a>
   
 </li>
       
@@ -1900,53 +1855,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-packages" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install Packages
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-package-helpers" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install Package Helpers
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configure-sublimetext" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure SublimeText
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#automate-package-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Automate Package Installation
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#editing-tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      Editing Tips
-    </span>
-  </a>
   
 </li>
       
@@ -2001,40 +1911,37 @@
 <p>When you use pyenv with Sublime Text and SublimeLinter-flake8, it will attempt to use python3 from the /usr/local/var/pyenv/shims directory, regardless of your global configuration. You must have flake8 installed with the latest version of python3 on your system in order for the plugin to work.</p>
 </div>
 <p>Uses <a href="http://brew.sh/">Homebrew</a>; this makes it easy to switch between Python2 and Python3.</p>
-<div class="highlight"><pre><span></span><code>xcode-select<span class="w"> </span>--install
-
-brew<span class="w"> </span>update
-brew<span class="w"> </span>install<span class="w"> </span>pyenv<span class="w"> </span>readline
-
-cat<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$HOME</span>/.bash_profile<span class="w"> </span>&lt;&lt;<span class="s2">&quot;EOF&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">PYENV_ROOT</span><span class="o">=</span>/usr/local/var/pyenv
-<span class="k">if</span><span class="w"> </span>which<span class="w"> </span>pyenv<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>pyenv<span class="w"> </span>init<span class="w"> </span>-<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
-EOF
-
-<span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/.bash_profile
-pyenv<span class="w"> </span>install<span class="w"> </span>--list
-pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">2</span>.7.10
-pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.5.0
-
-pyenv<span class="w"> </span>versions
-pyenv<span class="w"> </span>global<span class="w"> </span><span class="m">2</span>.7.10
-pip<span class="w"> </span>install<span class="w"> </span>pip<span class="w"> </span>--upgrade
-</code></pre></div>
+<p>```shell
+xcode-select --install</p>
+<p>brew update
+brew install pyenv readline</p>
+<p>cat &gt;&gt; $HOME/.bash_profile &lt;&lt;"EOF"
+export PYENV_ROOT=/usr/local/var/pyenv
+if which pyenv &gt; /dev/null; then eval "$(pyenv init -)"; fi
+EOF</p>
+<p>source $HOME/.bash_profile
+pyenv install --list
+pyenv install 2.7.10
+pyenv install 3.5.0</p>
+<p>pyenv versions
+pyenv global 2.7.10
+pip install pip --upgrade
+```</p>
 <h3 id="install-leiningen">Install leiningen<a class="headerlink" href="#install-leiningen" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>leiningen
-</code></pre></div>
+<p><code>shell
+brew install leiningen</code></p>
 <h3 id="install-application">Install Application<a class="headerlink" href="#install-application" title="Permanent link">&para;</a></h3>
 <p>Install <a href="http://www.sublimetext.com/3">Sublime Text 3</a>.</p>
 <p>Create the following symlinks so you can launch SublimeText from the command line:</p>
-<div class="highlight"><pre><span></span><code>ln<span class="w"> </span>-nsf<span class="w"> </span><span class="s2">&quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot;</span><span class="w"> </span>/usr/local/bin/subl
-
-<span class="c1"># open current directory in sublimetext to see a treeview</span>
-subl<span class="w"> </span>.
-</code></pre></div>
+<p>```shell
+ln -nsf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl</p>
+<h1 id="open-current-directory-in-sublimetext-to-see-a-treeview">open current directory in sublimetext to see a treeview<a class="headerlink" href="#open-current-directory-in-sublimetext-to-see-a-treeview" title="Permanent link">&para;</a></h1>
+<p>subl .
+```</p>
 <h3 id="install-packages">Install Packages<a class="headerlink" href="#install-packages" title="Permanent link">&para;</a></h3>
 <p>Install Package Control (ctrl+`):</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">hashlib</span><span class="p">;</span> <span class="n">h</span> <span class="o">=</span> <span class="s1">&#39;6f4c264a24d933ce70df5dedcf1dcaee&#39;</span> <span class="o">+</span> <span class="s1">&#39;ebe013ee18cced0ef93d5f746d80ef60&#39;</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="n">by</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://packagecontrol.io/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">();</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error validating download (got </span><span class="si">%s</span><span class="s1"> instead of </span><span class="si">%s</span><span class="s1">), please try manual install&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="k">if</span> <span class="n">dh</span> <span class="o">!=</span> <span class="n">h</span> <span class="k">else</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">by</span><span class="p">)</span>
-</code></pre></div>
+<p><code>python
+import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)</code></p>
 <p>Install the following packages (cmd+shift+p: Package Control: Install Package).</p>
 <table>
 <thead>
@@ -2136,10 +2043,10 @@ subl<span class="w"> </span>.
 </table>
 <h3 id="install-package-helpers">Install Package Helpers<a class="headerlink" href="#install-package-helpers" title="Permanent link">&para;</a></h3>
 <p>In order for some packages to work properly, they need helper binaries to be installed separately, such as:</p>
-<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>scalastyle<span class="w"> </span>shellcheck
-pip<span class="w"> </span>install<span class="w"> </span>flake8<span class="w"> </span>jedi
-npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>jshint
-</code></pre></div>
+<p><code>shell
+brew install scalastyle shellcheck
+pip install flake8 jedi
+npm install -g jshint</code></p>
 <h3 id="configure-sublimetext">Configure SublimeText<a class="headerlink" href="#configure-sublimetext" title="Permanent link">&para;</a></h3>
 <p>There are a number of configuration tweaks that you will want to make to SublimeText to improve overall behavior.  The easiest way to manage this is to establish a dotfiles repository and track changes in source control.  See the subl directory for a collection of configuration files; the init-dots.sh script describes how these are linked to the main configuration location on your machine.</p>
 <p>After installing the configuration files, quit and restart SublimeText - this is particularly necessary for SublimeLinter to function correctly.</p>

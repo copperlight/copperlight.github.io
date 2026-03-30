@@ -1917,35 +1917,31 @@ them.  This tool was inspired by and forked from <a href="https://github.com/rbe
 </li>
 <li>
 <p>Install <a href="https://brew.sh/">Homebrew</a> and Xcode Command Line Tools.</p>
-<div class="highlight"><pre><span></span><code>xcode-select --install
-
-/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre></div>
+<p>```
+xcode-select --install</p>
+<p>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```</p>
 </li>
 <li>
 <p>Install <code>pyenv</code>.</p>
-<div class="highlight"><pre><span></span><code>brew install pyenv
-</code></pre></div>
+<p><code>brew install pyenv</code></p>
 </li>
 <li>
 <p>If you already have <code>pyenv</code> installed, you can upgrade it to gain access to the latest Python
 versions.  The <code>pyenv</code> tool is updated periodically with new formulas for the latest releases.</p>
-<div class="highlight"><pre><span></span><code>brew upgrade pyenv
-</code></pre></div>
+<p><code>brew upgrade pyenv</code></p>
 </li>
 <li>
 <p>Add configuration to your <code>.bash_profile</code> to initialize <code>pyenv</code> every time you start a new
 Terminal. The <code>PYENV_ROOT</code>, which is where Python versions and packages will be installed,
 defaults to <code>$HOME/.pyenv</code>.</p>
-<div class="highlight"><pre><span></span><code>cat &gt;&gt;$HOME/.bash_profile &lt;&lt;&quot;EOF&quot;
-if which pyenv &gt; /dev/null 2&amp;&gt;1; then eval &quot;$(pyenv init -)&quot;; fi
-EOF
-</code></pre></div>
+<p><code>cat &gt;&gt;$HOME/.bash_profile &lt;&lt;"EOF"
+if which pyenv &gt; /dev/null 2&amp;&gt;1; then eval "$(pyenv init -)"; fi
+EOF</code></p>
 </li>
 <li>
 <p>Load your <code>.bash_profile</code> configuration changes.</p>
-<div class="highlight"><pre><span></span><code>source $HOME/.bash_profile
-</code></pre></div>
+<p><code>source $HOME/.bash_profile</code></p>
 </li>
 <li>
 <p>List the available Python versions.  Notice that you have access to several different
@@ -1953,73 +1949,66 @@ distributions: python.org (plain version numbers), anaconda, ironpython, jython,
 pypy and stackless.  We will install the standard Python versions released by
 <a href="https://www.python.org/downloads/">python.org</a>, otherwise known as CPython, because the
 interpreter is written in C.</p>
-<div class="highlight"><pre><span></span><code>pyenv install --list
-</code></pre></div>
+<p><code>pyenv install --list</code></p>
 </li>
 <li>
 <p>If you are running OSX 10.13, you will need to set the following environment variables, when you
 install new Python versions. See <a href="https://github.com/pyenv/pyenv/issues/988">#988</a> for more details.</p>
-<div class="highlight"><pre><span></span><code>export CFLAGS=&quot;-I$(brew --prefix openssl)/include&quot;
-export LDFLAGS=&quot;-L$(brew --prefix openssl)/lib&quot;
-</code></pre></div>
+<p><code>export CFLAGS="-I$(brew --prefix openssl)/include"
+export LDFLAGS="-L$(brew --prefix openssl)/lib"</code></p>
 </li>
 <li>
 <p>Install Python versions.</p>
-<div class="highlight"><pre><span></span><code>pyenv install 2.7.14
-pyenv install 3.6.3
-</code></pre></div>
+<p><code>pyenv install 2.7.14
+pyenv install 3.6.3</code></p>
 </li>
 <li>
 <p>List the available Python versions.</p>
-<div class="highlight"><pre><span></span><code>pyenv versions
-</code></pre></div>
+<p><code>pyenv versions</code></p>
 </li>
 <li>
 <p>Activate a Python version and verify that it is available.</p>
-<div class="highlight"><pre><span></span><code>pyenv global 2.7.14
+<p><code>pyenv global 2.7.14
 pyenv versions
-python -V
-</code></pre></div>
+python -V</code></p>
 </li>
 <li>
 <p>Activate another Python version and verify that it is available.</p>
-<div class="highlight"><pre><span></span><code>pyenv global 3.6.3
+<p><code>pyenv global 3.6.3
 pyenv versions
-python -V
-</code></pre></div>
+python -V</code></p>
 </li>
 <li>
 <p>If desired, activate multiple Python versions and verify that they are available.
 <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394 -- The "python" Command on Unix-Like Systems</a>
 explains conventions for naming <code>python</code> binaries.</p>
-<div class="highlight"><pre><span></span><code>pyenv global 2.7.14 3.6.3
+<p><code>pyenv global 2.7.14 3.6.3
 pyenv versions
 python -V
 python2 -V
 python2.7 -V
 python3 -V
-python3.6 -V
-</code></pre></div>
+python3.6 -V</code></p>
 </li>
 <li>
 <p>Create new directories for Python projects, add <code>pyenv local</code> version files and verify the Python
 versions.  Your <code>python</code> version will automatically switch when you change into these directories.</p>
-<div class="highlight"><pre><span></span><code>mkdir python2-project
+<p>```
+mkdir python2-project
 cd python2-project
 pyenv local 2.7.13
 cat .python-version
 pyenv local
 python -V
-cd ..
-
-mkdir python3-project
+cd ..</p>
+<p>mkdir python3-project
 cd python3-project
 pyenv local 3.6.3
 cat .python-version
 pyenv local
 python -V
 cd ..
-</code></pre></div>
+```</p>
 </li>
 </ol>
 <h2 id="useful-python-packages">Useful Python Packages<a class="headerlink" href="#useful-python-packages" title="Permanent link">&para;</a></h2>
@@ -2029,64 +2018,67 @@ with Python.</p>
 good Python coding style and alerts you to coding mistakes.  Now that you have Python installed,
 you can use the <code>pip</code> command to install any additional modules that you want to use.  You will
 need to install modules separately for each version of Python you are actively using.</p>
-<div class="highlight"><pre><span></span><code>pip install flake8
-</code></pre></div>
+<p><code>pip install flake8</code></p>
 <p>Install advanced Python Read-Eval-Print-Loop (REPL) packages, which will make it easier to explore
 Python code, because they grant access to tab completion and fancy editing capabilities.  The <code>ipython</code>
 tool is a command line REPL, which can be exited with <code>ctrl-d</code>.  Jupyter Notebook is a browser-based
 REPL that operates on individual cells of code.  The <a href="https://ipython.org/">IPython Interactive Computing</a>
 website has more information on these tools.</p>
-<div class="highlight"><pre><span></span><code>pip install ipython jupyter
+<p><code>pip install ipython jupyter
 ipython
-jupyter notebook
-</code></pre></div>
+jupyter notebook</code></p>
 <p>Install <a href="http://docs.python-requests.org/en/master/">Requests: HTTP for Humans</a>, which makes it easy
 to consume HTTP services. See GitHub's <a href="https://developer.github.com/v3/">REST API v3</a> documentation
 for more details on endpoints that are avaialble.</p>
-<div class="highlight"><pre><span></span><code>pip install requests
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">python</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/users/copperlight&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">ok</span>
-<span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
-<span class="mi">200</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">]</span>
-<span class="s1">&#39;application/json; charset=utf8&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
-<span class="s1">&#39;utf-8&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
-<span class="sa">u</span><span class="s1">&#39;{&quot;login&quot;:&quot;copperlight&quot;, ...}&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="p">{</span><span class="sa">u</span><span class="s1">&#39;public_repos&#39;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;login&#39;</span><span class="p">]</span>
-<span class="sa">u</span><span class="s1">&#39;copperlight&#39;</span>
-</code></pre></div>
+<p><code>pip install requests</code></p>
+<p>```python
+python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import requests
+r = requests.get('https://api.github.com/users/copperlight')
+r.ok
+True
+r.status_code
+200
+r.headers['content-type']
+'application/json; charset=utf8'
+r.encoding
+'utf-8'
+r.text
+u'{"login":"copperlight", ...}'
+r.json()
+{u'public_repos': 27, ...}
+r.json()['login']
+u'copperlight'
+```</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <p>Install <a href="http://flask.pocoo.org/">Flask: A Python Microframework</a>, which can be used to quickly build
 small websites that automate everyday tasks.</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>Flask
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello World!&quot;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>FLASK_APP=hello.py flask run
-curl http://127.0.0.1:5000
-</code></pre></div>
+<p><code>bash
+pip install Flask</code></p>
+<p>```python
+from flask import Flask
+app = Flask(<strong>name</strong>)</p>
+<p>@app.route("/")
+def hello():
+    return "Hello World!"
+```</p>
+<p><code>FLASK_APP=hello.py flask run
+curl http://127.0.0.1:5000</code></p>
 <p>If you need Python package isolation on a per-project basis, because you have conflicting sets
 of packages specified for different projects, you can use <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a>
 to set up separate environments.  The <code>virtualenv</code> tool establishes a clean room Python installation,
 either based upon the current version of Python in use, or a version specified on the command line.
 If you have multiple Python versions activated in <code>pyenv</code>, you can use <code>virtualenv</code> to switch between
 them easily.</p>
-<div class="highlight"><pre><span></span><code>pip install virtualenv
-pip list
-
-mkdir python2-project
+<p>```
+pip install virtualenv
+pip list</p>
+<p>mkdir python2-project
 cd python2-project
 virtualenv -p python2.7 venv
 source venv/bin/activate
@@ -2095,9 +2087,8 @@ which python
 pip list
 which pip
 deactivate
-cd ..
-
-mkdir python3-project
+cd ..</p>
+<p>mkdir python3-project
 cd python3-project
 virtualenv -p python3.6 venv
 source venv/bin/activate
@@ -2107,7 +2098,7 @@ pip list
 which pip
 deactivate
 cd ..
-</code></pre></div>
+```</p>
 <h2 id="automated-testing-with-python">Automated Testing with Python<a class="headerlink" href="#automated-testing-with-python" title="Permanent link">&para;</a></h2>
 <p>While working on Python programs, you may be interested in automating testing.  The most common
 choice for implementing this is <a href="https://tox.readthedocs.io/en/latest/index.html">tox</a>, which will
@@ -2117,23 +2108,20 @@ allow you to run tests with multiple different versions of Python, if needed.</p
 effectively.  The <a href="https://packaging.python.org/">Python Packaging User Guide</a> has some good advice
 on this topic.</p>
 <h2 id="quickstart-commands">Quickstart Commands<a class="headerlink" href="#quickstart-commands" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code># if you need homebrew
-xcode-select --install
-/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-
-# install pyenv and latest major python versions
-brew install pyenv
-
-cat &gt;&gt;$HOME/.bash_profile &lt;&lt;&quot;EOF&quot;
-if which pyenv &gt; /dev/null; then eval &quot;$(pyenv init -)&quot;; fi
-EOF
-
-source $HOME/.bash_profile
-
-pyenv install 2.7.14
+<p>```</p>
+<h1 id="if-you-need-homebrew">if you need homebrew<a class="headerlink" href="#if-you-need-homebrew" title="Permanent link">&para;</a></h1>
+<p>xcode-select --install
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</p>
+<h1 id="install-pyenv-and-latest-major-python-versions">install pyenv and latest major python versions<a class="headerlink" href="#install-pyenv-and-latest-major-python-versions" title="Permanent link">&para;</a></h1>
+<p>brew install pyenv</p>
+<p>cat &gt;&gt;$HOME/.bash_profile &lt;&lt;"EOF"
+if which pyenv &gt; /dev/null; then eval "$(pyenv init -)"; fi
+EOF</p>
+<p>source $HOME/.bash_profile</p>
+<p>pyenv install 2.7.14
 pyenv install 3.6.3
 pyenv versions
-</code></pre></div>
+```</p>
 
 
 

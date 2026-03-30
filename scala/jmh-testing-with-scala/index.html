@@ -1839,7 +1839,7 @@ sections subject to many iterations.</p>
 <h2 id="gradle">Gradle<a class="headerlink" href="#gradle" title="Permanent link">&para;</a></h2>
 <p>A <a href="https://github.com/melix/jmh-gradle-plugin">Gradle plugin</a> is available for JMH.</p>
 <p>Project layout:</p>
-<div class="highlight"><pre><span></span><code>.
+<p><code>.
 ├── build.gradle
 ├── gradle
 │   └── wrapper
@@ -1856,37 +1856,33 @@ sections subject to many iterations.</p>
                         ├── AtomicLongUpdate.scala
                         ├── CurrentTimeMillis.scala
                         ├── NanoTime.scala
-                        └── TimeLimiting.scala
-</code></pre></div>
+                        └── TimeLimiting.scala</code></p>
 <p>The <code>build.gradle</code> configuration:</p>
-<div class="highlight"><pre><span></span><code>plugins {
-    id &#39;scala&#39;
-    id &#39;idea&#39;
-    id &#39;me.champeau.gradle.jmh&#39; version &#39;0.4.5&#39;
-}
-
-repositories {
+<p>```
+plugins {
+    id 'scala'
+    id 'idea'
+    id 'me.champeau.gradle.jmh' version '0.4.5'
+}</p>
+<p>repositories {
     jcenter()
-}
-
-dependencies {
-    compile &#39;com.netflix.servo:servo-core:0.12.17&#39;
-    compile &#39;org.scala-lang:scala-library:2.12.4&#39;
-}
-
-idea {
+}</p>
+<p>dependencies {
+    compile 'com.netflix.servo:servo-core:0.12.17'
+    compile 'org.scala-lang:scala-library:2.12.4'
+}</p>
+<p>idea {
     module {
         testSourceDirs += sourceSets.jmh.scala.srcDirs
     }
 }
-</code></pre></div>
+```</p>
 <p>Run the tests:</p>
-<div class="highlight"><pre><span></span><code>./gradlew jmh
-</code></pre></div>
+<p><code>./gradlew jmh</code></p>
 <h2 id="sbt">sbt<a class="headerlink" href="#sbt" title="Permanent link">&para;</a></h2>
 <p>An <a href="https://github.com/ktoso/sbt-jmh">sbt plugin</a> is available for JMH.</p>
 <p>Example <a href="https://github.com/brharrington/misc-jmh">project layout</a>:</p>
-<div class="highlight"><pre><span></span><code>.
+<p><code>.
 ├── build.sbt
 ├── project
 │   ├── build.properties
@@ -1902,59 +1898,46 @@ idea {
                         ├── AtomicLongUpdate.scala
                         ├── CurrentTimeMillis.scala
                         ├── NanoTime.scala
-                        └── TimeLimiting.scala
-</code></pre></div>
+                        └── TimeLimiting.scala</code></p>
 <p>The <code>build.sbt</code> configuration:</p>
-<div class="highlight"><pre><span></span><code>name := &quot;misc-jmh&quot;
-
-organization := &quot;io.github.brharrington&quot;
-
-scalaVersion := &quot;2.12.4&quot;
-
-enablePlugins(JmhPlugin)
-
-libraryDependencies ++= Seq(
-    &quot;com.netflix.servo&quot; % &quot;servo-core&quot; % &quot;0.12.17&quot;
+<p>```
+name := "misc-jmh"</p>
+<p>organization := "io.github.brharrington"</p>
+<p>scalaVersion := "2.12.4"</p>
+<p>enablePlugins(JmhPlugin)</p>
+<p>libraryDependencies ++= Seq(
+    "com.netflix.servo" % "servo-core" % "0.12.17"
 )
-</code></pre></div>
+```</p>
 <p>The <code>plugins.sbt</code> configuration:</p>
-<div class="highlight"><pre><span></span><code>addSbtPlugin(&quot;pl.project13.scala&quot; % &quot;sbt-jmh&quot; % &quot;0.2.27&quot;)
-</code></pre></div>
+<p><code>addSbtPlugin("pl.project13.scala" % "sbt-jmh" % "0.2.27")</code></p>
 <p>Run the tests:</p>
-<div class="highlight"><pre><span></span><code>./project/sbt jmh:run
-</code></pre></div>
+<p><code>./project/sbt jmh:run</code></p>
 <h2 id="example-test-class">Example Test Class<a class="headerlink" href="#example-test-class" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>package io.github.brharrington
-
-import java.util.concurrent.atomic.AtomicLong
-
-import org.openjdk.jmh.annotations.Benchmark
+<p>```
+package io.github.brharrington</p>
+<p>import java.util.concurrent.atomic.AtomicLong</p>
+<p>import org.openjdk.jmh.annotations.Benchmark
 import org.openjdk.jmh.annotations.Scope
 import org.openjdk.jmh.annotations.State
-import org.openjdk.jmh.infra.Blackhole
-
-@State(Scope.Thread)
-class AtomicLongUpdate {
-
-  private val value = new AtomicLong()
-
-  @Benchmark
+import org.openjdk.jmh.infra.Blackhole</p>
+<p>@State(Scope.Thread)
+class AtomicLongUpdate {</p>
+<p>private val value = new AtomicLong()</p>
+<p>@Benchmark
   def incrementAndGet(bh: Blackhole): Unit = {
     bh.consume(value.incrementAndGet())
-  }
-
-  @Benchmark
+  }</p>
+<p>@Benchmark
   def addAndGet(bh: Blackhole): Unit = {
     bh.consume(value.addAndGet(42))
-  }
-
-  @Benchmark
+  }</p>
+<p>@Benchmark
   def get(bh: Blackhole): Unit = {
     bh.consume(value.get())
-  }
-
-}
-</code></pre></div>
+  }</p>
+<p>}
+```</p>
 <p><br/></p>
 
 

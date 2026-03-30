@@ -1742,63 +1742,59 @@
 <p>This technique is meant to be used with IntelliJ Scala worksheets or similar scratch code, so you
 can test clients and validate their behavior. Don't check-in secrets – use on-instance credentials
 with the <code>DefaultAWSCredentialsProviderChain</code> in production code.</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">auth</span><span class="p">.</span><span class="nc">AWSStaticCredentialsProvider</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">auth</span><span class="p">.</span><span class="nc">BasicSessionCredentials</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">regions</span><span class="p">.</span><span class="nc">Regions</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">services</span><span class="p">.</span><span class="nn">autoscaling</span><span class="p">.</span><span class="nc">AmazonAutoScalingClientBuilder</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">services</span><span class="p">.</span><span class="nn">securitytoken</span><span class="p">.</span><span class="nc">AWSSecurityTokenServiceClientBuilder</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">amazonaws</span><span class="p">.</span><span class="nn">services</span><span class="p">.</span><span class="nn">securitytoken</span><span class="p">.</span><span class="nn">model</span><span class="p">.</span><span class="nc">AssumeRoleRequest</span>
-
-<span class="c1">// config values</span>
-
-<span class="kd">val</span><span class="w"> </span><span class="n">accessKeyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">secretAccessKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-
-<span class="kd">val</span><span class="w"> </span><span class="n">role</span><span class="p">:</span><span class="w"> </span><span class="nc">Option</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">None</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">accountId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Regions</span><span class="p">.</span><span class="nc">US_WEST_1</span>
-
-<span class="c1">// client configuration</span>
-
-<span class="kd">val</span><span class="w"> </span><span class="n">staticProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">role</span><span class="p">.</span><span class="n">fold</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">BasicSessionCredentials</span><span class="p">(</span><span class="n">accessKeyId</span><span class="p">,</span><span class="w"> </span><span class="n">secretAccessKey</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">)</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nc">AWSStaticCredentialsProvider</span><span class="p">(</span><span class="n">basic</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="o">=&gt;</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">instanceProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="kd">val</span><span class="w"> </span><span class="n">basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">BasicSessionCredentials</span><span class="p">(</span><span class="n">accessKeyId</span><span class="p">,</span><span class="w"> </span><span class="n">secretAccessKey</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">)</span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="nc">AWSStaticCredentialsProvider</span><span class="p">(</span><span class="n">basic</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">stsClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AWSSecurityTokenServiceClientBuilder</span>
-<span class="w">      </span><span class="p">.</span><span class="n">standard</span><span class="p">()</span>
-<span class="w">      </span><span class="p">.</span><span class="n">withCredentials</span><span class="p">(</span><span class="n">instanceProvider</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="n">withRegion</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="n">build</span><span class="p">()</span>
-
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">AssumeRoleRequest</span><span class="p">()</span>
-<span class="w">      </span><span class="p">.</span><span class="n">withRoleSessionName</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">$</span><span class="n">role</span><span class="s">-testing&quot;</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="n">withRoleArn</span><span class="p">(</span><span class="s">s&quot;arn:aws:iam::</span><span class="si">$</span><span class="n">accountId</span><span class="s">:role/</span><span class="si">$</span><span class="n">role</span><span class="s">&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">assumedCreds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stsClient</span><span class="p">.</span><span class="n">assumeRole</span><span class="p">(</span><span class="n">req</span><span class="p">).</span><span class="n">getCredentials</span>
-
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">BasicSessionCredentials</span><span class="p">(</span>
-<span class="w">      </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getAccessKeyId</span><span class="p">,</span>
-<span class="w">      </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getSecretAccessKey</span><span class="p">,</span>
-<span class="w">      </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getSessionToken</span>
-<span class="w">    </span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nc">AWSStaticCredentialsProvider</span><span class="p">(</span><span class="n">basic</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">val</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">AmazonAutoScalingClientBuilder</span>
+<p>```scala
+import com.amazonaws.auth.AWSStaticCredentialsProvider
+import com.amazonaws.auth.BasicSessionCredentials
+import com.amazonaws.regions.Regions
+import com.amazonaws.services.autoscaling.AmazonAutoScalingClientBuilder
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
+import com.amazonaws.services.securitytoken.model.AssumeRoleRequest</p>
+<p>// config values</p>
+<p>val accessKeyId = ""
+val secretAccessKey = ""
+val token = ""</p>
+<p>val role: Option[String] = None
+val accountId = ""
+val region = Regions.US_WEST_1</p>
+<p>// client configuration</p>
+<p>val staticProvider = {
+  role.fold {
+    val basic = new BasicSessionCredentials(accessKeyId, secretAccessKey, token)
+    new AWSStaticCredentialsProvider(basic)
+  } { role =&gt;
+    val instanceProvider = {
+      val basic = new BasicSessionCredentials(accessKeyId, secretAccessKey, token)
+      new AWSStaticCredentialsProvider(basic)
+    }</p>
+<div class="codehilite"><pre><span></span><code><span class="n">val</span><span class="w"> </span><span class="n">stsClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AWSSecurityTokenServiceClientBuilder</span>
 <span class="w">  </span><span class="p">.</span><span class="n">standard</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">withCredentials</span><span class="p">(</span><span class="n">staticProvider</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">withCredentials</span><span class="p">(</span><span class="n">instanceProvider</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="n">withRegion</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="n">val</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">AssumeRoleRequest</span><span class="p">()</span>
+<span class="w">  </span><span class="p">.</span><span class="n">withRoleSessionName</span><span class="p">(</span><span class="n">s</span><span class="s">&quot;$role-testing&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">withRoleArn</span><span class="p">(</span><span class="n">s</span><span class="s">&quot;arn:aws:iam::$accountId:role/$role&quot;</span><span class="p">)</span>
+
+<span class="n">val</span><span class="w"> </span><span class="n">assumedCreds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stsClient</span><span class="p">.</span><span class="n">assumeRole</span><span class="p">(</span><span class="n">req</span><span class="p">).</span><span class="n">getCredentials</span>
+
+<span class="n">val</span><span class="w"> </span><span class="n">basic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">BasicSessionCredentials</span><span class="p">(</span>
+<span class="w">  </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getAccessKeyId</span><span class="p">,</span>
+<span class="w">  </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getSecretAccessKey</span><span class="p">,</span>
+<span class="w">  </span><span class="n">assumedCreds</span><span class="p">.</span><span class="n">getSessionToken</span>
+<span class="p">)</span>
+
+<span class="n">new</span><span class="w"> </span><span class="n">AWSStaticCredentialsProvider</span><span class="p">(</span><span class="n">basic</span><span class="p">)</span>
 </code></pre></div>
+
+<p>}
+}</p>
+<p>val client = AmazonAutoScalingClientBuilder
+  .standard()
+  .withCredentials(staticProvider)
+  .withRegion(region)
+  .build()
+```</p>
 <p><br/></p>
 
 

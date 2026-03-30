@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#once-a-resource-becomes-stale-caches-must-not-use-their-stale-copy-without-successful" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -640,6 +645,8 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
+      
+        
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
@@ -1710,6 +1717,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1725,14 +1734,12 @@
 
 
 
-  <h1>Apache Deflate and CORS Headers</h1>
-
 <p>For internal static websites, you may want to configure CORS headers with generous permissions,
 to improve the cross-site experience. A reasonable deflate configuration is provided which will
 compress the largest elements of a website.</p>
-<div class="highlight"><pre><span></span><code>LoadModule deflate_module modules/mod_deflate.so
-
-&lt;IfModule mod_deflate.c&gt;
+<p>```
+LoadModule deflate_module modules/mod_deflate.so</p>
+<p><IfModule mod_deflate.c>
   # Compress HTML, CSS, JavaScript, Text, XML and fonts
   AddOutputFilterByType DEFLATE application/javascript
   AddOutputFilterByType DEFLATE application/rss+xml
@@ -1755,34 +1762,28 @@ compress the largest elements of a website.</p>
   AddOutputFilterByType DEFLATE text/javascript
   AddOutputFilterByType DEFLATE text/plain
   AddOutputFilterByType DEFLATE text/xml
-&lt;/IfModule&gt;
-
-LoadModule headers_module modules/mod_headers.so
-
-# Once a resource becomes stale, caches must not use their stale copy without successful
-# validation on the origin server.
-Header always set Cache-Control &quot;public, must-revalidate, max-age=0&quot;
-
-# Expose the response to frontend JavaScript code, when the request&#39;s credentials mode is
-# include. Credentials are cookies, authorization headers or TLS client certificates.
-Header always set Access-Control-Allow-Credentials true
-
-# When the Origin header is set, copy it from the request to the response.
-SetEnvIf Origin &quot;(.+)&quot; HAVE_origin=1
+</IfModule></p>
+<p>LoadModule headers_module modules/mod_headers.so</p>
+<h1 id="once-a-resource-becomes-stale-caches-must-not-use-their-stale-copy-without-successful">Once a resource becomes stale, caches must not use their stale copy without successful<a class="headerlink" href="#once-a-resource-becomes-stale-caches-must-not-use-their-stale-copy-without-successful" title="Permanent link">&para;</a></h1>
+<h1 id="validation-on-the-origin-server">validation on the origin server.<a class="headerlink" href="#validation-on-the-origin-server" title="Permanent link">&para;</a></h1>
+<p>Header always set Cache-Control "public, must-revalidate, max-age=0"</p>
+<h1 id="expose-the-response-to-frontend-javascript-code-when-the-requests-credentials-mode-is">Expose the response to frontend JavaScript code, when the request's credentials mode is<a class="headerlink" href="#expose-the-response-to-frontend-javascript-code-when-the-requests-credentials-mode-is" title="Permanent link">&para;</a></h1>
+<h1 id="include-credentials-are-cookies-authorization-headers-or-tls-client-certificates">include. Credentials are cookies, authorization headers or TLS client certificates.<a class="headerlink" href="#include-credentials-are-cookies-authorization-headers-or-tls-client-certificates" title="Permanent link">&para;</a></h1>
+<p>Header always set Access-Control-Allow-Credentials true</p>
+<h1 id="when-the-origin-header-is-set-copy-it-from-the-request-to-the-response">When the Origin header is set, copy it from the request to the response.<a class="headerlink" href="#when-the-origin-header-is-set-copy-it-from-the-request-to-the-response" title="Permanent link">&para;</a></h1>
+<p>SetEnvIf Origin "(.+)" HAVE_origin=1
 RewriteCond %{HTTP:Origin} (.+)
 RewriteRule .* - [E=ORIGIN:%1]
-Header always set Access-Control-Allow-Origin &quot;%{ORIGIN}e&quot; env=HAVE_origin
-
-# When the Access-Control-Allow-Methods header is set, replace it with GET,PATCH,POST,PUT,DELETE.
-SetEnvIf Access-Control-Request-Method &quot;(.+)&quot; HAVE_method=1
-Header always set Access-Control-Allow-Methods &quot;GET,PATCH,POST,PUT,DELETE&quot; env=HAVE_method
-
-# When the Access-Control-Request-Headers header is set, copy it from the request to the response.
-SetEnvIf Access-Control-Request-Headers &quot;(.+)&quot; HAVE_headers=1
+Header always set Access-Control-Allow-Origin "%{ORIGIN}e" env=HAVE_origin</p>
+<h1 id="when-the-access-control-allow-methods-header-is-set-replace-it-with-getpatchpostputdelete">When the Access-Control-Allow-Methods header is set, replace it with GET,PATCH,POST,PUT,DELETE.<a class="headerlink" href="#when-the-access-control-allow-methods-header-is-set-replace-it-with-getpatchpostputdelete" title="Permanent link">&para;</a></h1>
+<p>SetEnvIf Access-Control-Request-Method "(.+)" HAVE_method=1
+Header always set Access-Control-Allow-Methods "GET,PATCH,POST,PUT,DELETE" env=HAVE_method</p>
+<h1 id="when-the-access-control-request-headers-header-is-set-copy-it-from-the-request-to-the-response">When the Access-Control-Request-Headers header is set, copy it from the request to the response.<a class="headerlink" href="#when-the-access-control-request-headers-header-is-set-copy-it-from-the-request-to-the-response" title="Permanent link">&para;</a></h1>
+<p>SetEnvIf Access-Control-Request-Headers "(.+)" HAVE_headers=1
 RewriteCond %{HTTP:Access-Control-Request-Headers} (.+)
 RewriteRule .* - [E=HEADERS:%1]
-Header always set Access-Control-Allow-Headers &quot;%{HEADERS}e&quot; env=HAVE_headers
-</code></pre></div>
+Header always set Access-Control-Allow-Headers "%{HEADERS}e" env=HAVE_headers
+```</p>
 
 
 

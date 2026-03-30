@@ -1825,28 +1825,26 @@
 <li><a href="https://github.com/google/oauth2client/pull/420">https://github.com/google/oauth2client/pull/420</a></li>
 </ul>
 <h2 id="method">Method<a class="headerlink" href="#method" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">httplib2</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">secure_storage</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">apiclient.discovery</span><span class="w"> </span><span class="kn">import</span> <span class="n">build</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">oauth2client.service_account</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServiceAccountCredentials</span>
-
-<span class="n">client_email</span> <span class="o">=</span> <span class="s1">&#39;...@developer.gserviceaccount.com&#39;</span>
-<span class="n">scopes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;https://www.googleapis.com/auth/admin.directory.user.readonly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;https://www.googleapis.com/auth/admin.directory.group.readonly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;https://www.googleapis.com/auth/apps.groups.settings&#39;</span>
-<span class="p">]</span>
-<span class="n">uname</span> <span class="o">=</span> <span class="s1">&#39;...@example.com&#39;</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;/.../private_key.p12&#39;</span>
-
-<span class="n">creds</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="o">.</span><span class="n">from_p12_keyfile</span><span class="p">(</span><span class="n">client_email</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">scopes</span><span class="o">=</span><span class="n">scopes</span><span class="p">)</span>
-<span class="n">delegated_creds</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">create_delegated</span><span class="p">(</span><span class="n">uname</span><span class="p">)</span>
-
-<span class="n">http_auth</span> <span class="o">=</span> <span class="n">delegated_creds</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">httplib2</span><span class="o">.</span><span class="n">Http</span><span class="p">())</span>
-<span class="n">service</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;directory_v1&#39;</span><span class="p">,</span> <span class="n">http</span><span class="o">=</span><span class="n">http_auth</span><span class="p">)</span>
-<span class="n">service</span><span class="o">.</span><span class="n">users</span><span class="p">()</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;example.com&#39;</span><span class="p">,</span> <span class="n">maxResults</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">orderBy</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-<span class="n">service</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s1">&#39;example.com&#39;</span><span class="p">,</span> <span class="n">maxResults</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-</code></pre></div>
+<p>```python
+import httplib2
+import secure_storage
+from apiclient.discovery import build
+from oauth2client.service_account import ServiceAccountCredentials</p>
+<p>client_email = '...@developer.gserviceaccount.com'
+scopes = [
+    'https://www.googleapis.com/auth/admin.directory.user.readonly',
+    'https://www.googleapis.com/auth/admin.directory.group.readonly',
+    'https://www.googleapis.com/auth/apps.groups.settings'
+]
+uname = '...@example.com'
+fname = '/.../private_key.p12'</p>
+<p>creds = ServiceAccountCredentials.from_p12_keyfile(client_email, fname, scopes=scopes)
+delegated_creds = creds.create_delegated(uname)</p>
+<p>http_auth = delegated_creds.authorize(httplib2.Http())
+service = build('admin', 'directory_v1', http=http_auth)
+service.users().list(domain='example.com', maxResults=10, orderBy='email').execute()
+service.groups().list(domain='example.com', maxResults=10).execute()
+```</p>
 <p><br/></p>
 
 

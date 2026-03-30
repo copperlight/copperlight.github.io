@@ -1883,16 +1883,16 @@ patchwork solution to be able to have a unified credentials file.</p>
 <p>The standard location for the credentials file is <code>~/.aws/credentials</code>, which can be overridden with
 the <code>AWS_CREDENTIAL_PROFILES_FILE</code> environment variable or by specifying an alternate file location
 in the constructor.  The format of this file is described below:</p>
-<div class="highlight"><pre><span></span><code>[default]
+<p>```
+[default]
+aws_access_key_id=testAccessKey
+aws_secret_access_key=testSecretKey
+aws_session_token=testSessionToken</p>
+<p>[test-user]
 aws_access_key_id=testAccessKey
 aws_secret_access_key=testSecretKey
 aws_session_token=testSessionToken
-
-[test-user]
-aws_access_key_id=testAccessKey
-aws_secret_access_key=testSecretKey
-aws_session_token=testSessionToken
-</code></pre></div>
+```</p>
 <h2 id="java-command-line-tools">Java Command Line Tools<a class="headerlink" href="#java-command-line-tools" title="Permanent link">&para;</a></h2>
 <table>
     <tr> <th>Version: <td>1.6.13.0
@@ -1903,11 +1903,10 @@ aws_session_token=testSessionToken
 <p>The standard configuration is to use environment variables, since these tools have not been updated
 to read the standard AWS credentials file.  Add the following to your <code>~/.bash_profile</code>, to link the
 required data to the standard credentials file and allow for session tokens:</p>
-<div class="highlight"><pre><span></span><code>export AWS_CREDENTIAL_FILE=&quot;$HOME/.aws/credentials&quot;
-export AWS_ACCESS_KEY=&quot;$(grep aws_access_key_id $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-export AWS_SECRET_KEY=&quot;$(grep aws_secret_access_key $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-export AWS_DELEGATION_TOKEN=&quot;$(grep aws_session_token $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-</code></pre></div>
+<p><code>export AWS_CREDENTIAL_FILE="$HOME/.aws/credentials"
+export AWS_ACCESS_KEY="$(grep aws_access_key_id $AWS_CREDENTIAL_FILE |cut -d= -f2)"
+export AWS_SECRET_KEY="$(grep aws_secret_access_key $AWS_CREDENTIAL_FILE |cut -d= -f2)"
+export AWS_DELEGATION_TOKEN="$(grep aws_session_token $AWS_CREDENTIAL_FILE |cut -d= -f2)"</code></p>
 <h2 id="python-boto">Python Boto<a class="headerlink" href="#python-boto" title="Permanent link">&para;</a></h2>
 <table>
     <tr> <th>Version: <td>boto==2.31.1 <br> botocore==0.56.0
@@ -1933,37 +1932,34 @@ property.</p>
 credential file format as-is, including the use of <code>aws_session_token</code>, whereas previous versions
 wanted <code>aws_security_token</code> instead.  When you have multiple profiles in the credentials file, you
 can select a profile with the tool like so:</p>
-<div class="highlight"><pre><span></span><code>aws --profile test-user s3 ls
-</code></pre></div>
+<p><code>aws --profile test-user s3 ls</code></p>
 <h2 id="unified-solution">Unified Solution<a class="headerlink" href="#unified-solution" title="Permanent link">&para;</a></h2>
 <p>The best approach for creating a unified credentials file is to follow the Java credentials file
 format as closely as possible, while redirecting the Python tools to that file and adding properties
 to cover the corner cases.</p>
 <p>To do this, create a <code>~/.aws/credentials</code> file that duplicates the necessary properties:</p>
-<div class="highlight"><pre><span></span><code>[default]
+<p>```
+[default]
+aws_access_key_id=testAccessKey
+aws_secret_access_key=testSecretKey
+aws_session_token=testSessionToken
+aws_security_token=testSessionToken</p>
+<p>[test-user]
+aws_access_key_id=testAccessKey
+aws_secret_access_key=testSecretKey
+aws_session_token=testSessionToken
+aws_security_token=testSessionToken</p>
+<p>[prod-user]
 aws_access_key_id=testAccessKey
 aws_secret_access_key=testSecretKey
 aws_session_token=testSessionToken
 aws_security_token=testSessionToken
-
-[test-user]
-aws_access_key_id=testAccessKey
-aws_secret_access_key=testSecretKey
-aws_session_token=testSessionToken
-aws_security_token=testSessionToken
-
-[prod-user]
-aws_access_key_id=testAccessKey
-aws_secret_access_key=testSecretKey
-aws_session_token=testSessionToken
-aws_security_token=testSessionToken
-</code></pre></div>
+```</p>
 <p>And add a section to your <code>~/.bash_profile</code>:</p>
-<div class="highlight"><pre><span></span><code>export AWS_CREDENTIAL_FILE=&quot;$HOME/.aws/credentials&quot;
-export AWS_ACCESS_KEY=&quot;$(grep aws_access_key_id $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-export AWS_SECRET_KEY=&quot;$(grep aws_secret_access_key $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-export AWS_DELEGATION_TOKEN=&quot;$(grep aws_session_token $AWS_CREDENTIAL_FILE |cut -d= -f2)&quot;
-</code></pre></div>
+<p><code>export AWS_CREDENTIAL_FILE="$HOME/.aws/credentials"
+export AWS_ACCESS_KEY="$(grep aws_access_key_id $AWS_CREDENTIAL_FILE |cut -d= -f2)"
+export AWS_SECRET_KEY="$(grep aws_secret_access_key $AWS_CREDENTIAL_FILE |cut -d= -f2)"
+export AWS_DELEGATION_TOKEN="$(grep aws_session_token $AWS_CREDENTIAL_FILE |cut -d= -f2)"</code></p>
 <p>With this configuration, you should be able to move seamlessly between the various Java and Python
 tools available for AWS.</p>
 

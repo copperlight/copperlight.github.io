@@ -1740,19 +1740,19 @@
   <span class="discuss"><a class="github-button" href="https://github.com/copperlight/copperlight.github.io/issues" data-icon="octicon-issue-opened" aria-label="Discuss copperlight/copperlight.github.io on GitHub">Discuss</a></span>
 </div>
 <p>Add the following to your <code>$HOME/.bash_profile</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA7_HOME</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>/usr/libexec/java_home<span class="w"> </span>-v<span class="w"> </span><span class="m">1</span>.7<span class="k">)</span><span class="s2">&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">JAVA8_HOME</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>/usr/libexec/java_home<span class="w"> </span>-v<span class="w"> </span><span class="m">1</span>.8<span class="k">)</span><span class="s2">&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="nv">$JAVA8_HOME</span>
-
-switch_java<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$JAVA_HOME</span><span class="w"> </span><span class="p">|</span>grep<span class="w"> </span>-q<span class="w"> </span><span class="m">1</span>.8<span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="nv">$JAVA7_HOME</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="nv">$JAVA8_HOME</span>
-<span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;JAVA_HOME=</span><span class="nv">$JAVA_HOME</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-</code></pre></div>
+<p>```bash
+export JAVA7_HOME="$(/usr/libexec/java_home -v 1.7)"
+export JAVA8_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA_HOME=$JAVA8_HOME</p>
+<p>switch_java() {
+    if echo $JAVA_HOME |grep -q 1.8; then
+        export JAVA_HOME=$JAVA7_HOME
+    else
+        export JAVA_HOME=$JAVA8_HOME
+    fi
+    echo "JAVA_HOME=$JAVA_HOME"
+}
+```</p>
 <p><br/></p>
 
 

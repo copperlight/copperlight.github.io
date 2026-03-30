@@ -1746,68 +1746,53 @@
 install <a href="https://github.com/boot2docker/boot2docker">boot2docker</a>, using <a href="http://brew.sh/">Homebrew</a>.
 The boot2docker package will install docker as a dependency and it runs a small (24MB) Linux
 VirtualBox virtual machine that provides a platform for running Docker images:</p>
-<div class="highlight"><pre><span></span><code>brew install boot2docker
+<p><code>brew install boot2docker
 boot2docker init
 boot2docker up
-$(boot2docker shellinit)
-</code></pre></div>
+$(boot2docker shellinit)</code></p>
 <p>The Ansible Team (thanks, <a href="https://github.com/abadger">Toshio!</a>) has
 <a href="https://github.com/ansible/ansible-docker-base/blob/master/examples/memcached-from-galaxy/site.yml">released</a>
 Docker images that are included in the <a href="https://registry.hub.docker.com/repos/ansible/">Docker Hub Registry</a>,
 which can be used for testing:</p>
-<div class="highlight"><pre><span></span><code>docker search ansible |grep ^ansible
+<p><code>docker search ansible |grep ^ansible
 ansible/ubuntu14.04-ansible                    Ubuntu 14.04 LTS with ansible                   12
-ansible/centos7-ansible                        Ansible on Centos7                              11
-</code></pre></div>
+ansible/centos7-ansible                        Ansible on Centos7                              11</code></p>
 <p>There are two tags associated with each of these images: latest and devel.  The latest contains a
 layered Ansible stable and devel contains a layered Ansible HEAD.  Pull one of these images from the
 Docker Hub:</p>
-<div class="highlight"><pre><span></span><code>docker pull ansible/ubuntu14.04-ansible
-</code></pre></div>
+<p><code>docker pull ansible/ubuntu14.04-ansible</code></p>
 <p>This technique will allow you to rinse and repeat installs with different roles, which will help you
 figure out which ones deliver the most suitable functionality for your use cases.</p>
 <p>Launch the docker image and leave a shell process running:</p>
-<div class="highlight"><pre><span></span><code>docker run -i -t ansible/ubuntu14.04-ansible:stable /bin/bash
-</code></pre></div>
+<p><code>docker run -i -t ansible/ubuntu14.04-ansible:stable /bin/bash</code></p>
 <p>Download a role from Ansible Galaxy:</p>
-<div class="highlight"><pre><span></span><code>ansible-galaxy install geerlingguy.memcached
-</code></pre></div>
+<p><code>ansible-galaxy install geerlingguy.memcached</code></p>
 <p>Create a local site.yml playbook to run the role:</p>
-<div class="highlight"><pre><span></span><code>- hosts: localhost
+<p><code>- hosts: localhost
   roles:
-      - role: geerlingguy.memcached
-</code></pre></div>
+      - role: geerlingguy.memcached</code></p>
 <p>Execute the playbook:</p>
-<div class="highlight"><pre><span></span><code>root@ccca9e7f365f:/# ansible-playbook site.yml -c local
-
-PLAY [localhost] **************************************************************
-
-GATHERING FACTS ***************************************************************
-ok: [localhost]
-
-TASK: [geerlingguy.memcached | Install Memcached.] ****************************
-skipping: [localhost]
-
-TASK: [geerlingguy.memcached | Update apt cache.] *****************************
-ok: [localhost]
-
-TASK: [geerlingguy.memcached | Install Memcached.] ****************************
-changed: [localhost]
-
-TASK: [geerlingguy.memcached | Copy Memcached configuration.] *****************
-changed: [localhost]
-
-TASK: [geerlingguy.memcached | Ensure Memcached is started and set to run on startup.] ***
-changed: [localhost]
-
-NOTIFIED: [geerlingguy.memcached | restart memcached] *************************
-changed: [localhost]
-
-PLAY RECAP ********************************************************************
-localhost                  : ok=6    changed=4    unreachable=0    failed=0
-
-root@ccca9e7f365f:/#
-</code></pre></div>
+<p>```
+root@ccca9e7f365f:/# ansible-playbook site.yml -c local</p>
+<p>PLAY [localhost] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong>*</p>
+<p>GATHERING FACTS <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>
+ok: [localhost]</p>
+<p>TASK: [geerlingguy.memcached | Install Memcached.] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>
+skipping: [localhost]</p>
+<p>TASK: [geerlingguy.memcached | Update apt cache.] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*
+ok: [localhost]</p>
+<p>TASK: [geerlingguy.memcached | Install Memcached.] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>
+changed: [localhost]</p>
+<p>TASK: [geerlingguy.memcached | Copy Memcached configuration.] <strong><em>*</em></strong><strong><em>*</em></strong>***
+changed: [localhost]</p>
+<p>TASK: [geerlingguy.memcached | Ensure Memcached is started and set to run on startup.] ***
+changed: [localhost]</p>
+<p>NOTIFIED: [geerlingguy.memcached | restart memcached] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>****
+changed: [localhost]</p>
+<p>PLAY RECAP <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong>
+localhost                  : ok=6    changed=4    unreachable=0    failed=0</p>
+<p>root@ccca9e7f365f:/#
+```</p>
 <p><br/></p>
 
 

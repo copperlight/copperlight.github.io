@@ -1742,18 +1742,17 @@
 <p><a href="https://www.computerhope.com/unix/uat.htm">https://www.computerhope.com/unix/uat.htm</a></p>
 <p>The purpose of this technique is to allow you to disconnect from the instance, while leaving the job
 running (i.e. not dependent on a shell fork).</p>
-<div class="highlight"><pre><span></span><code>(root) # at now + 1 minute
+<p>```
+(root) # at now + 1 minute
 warning: commands will be executed using /bin/sh
 at&gt; /apps/something/bin/upload_to_s3.sh
 at&gt; ^d
-job 2 at Wed Aug  9 20:37:00 2017
-
-(root) # atq
+job 2 at Wed Aug  9 20:37:00 2017</p>
+<p>(root) # atq
 2   Wed Aug  9 20:37:00 2017 a root
-</code></pre></div>
+```</p>
 <p>If you need to remove and reschedule a job, you can do the following:</p>
-<div class="highlight"><pre><span></span><code>(root) # atrm 2
-</code></pre></div>
+<p><code>(root) # atrm 2</code></p>
 <p>The following are examples of casual times that can be used with at:</p>
 <table>
 <thead>

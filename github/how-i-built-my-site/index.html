@@ -1883,8 +1883,8 @@ this for most pages.</p>
 <a href="../../python/install-the-latest-python-versions-on-macosx/">Install the Latest Python Versions on Mac OSX</a>.</p>
 <p>Install <a href="http://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>. This package will bring along all the necessary dependencies,
 including <a href="http://www.mkdocs.org/">MkDocs</a>, for a fully functioning site.</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-material
-</code></pre></div>
+<p><code>bash
+pip install mkdocs-material</code></p>
 <h2 id="sign-up-for-google-analytics">Sign Up for Google Analytics<a class="headerlink" href="#sign-up-for-google-analytics" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1954,24 +1954,24 @@ will build the site for every PR that is submitted.</p>
 <li>
 <p>Create a GitHub Actions configuration file for deploying the site (<code>./.github/workflows/release.yml</code>),
 replacing <code>$USERNAME</code> with your username.</p>
-<div class="codehilite"><pre><span></span><code><span class="n">name</span><span class="o">:</span><span class="w"> </span><span class="n">release</span>
+<div class="codehilite"><pre><span></span><code>name:<span class="w"> </span>release
 
-<span class="n">on</span><span class="o">:</span>
-<span class="w">  </span><span class="n">push</span><span class="o">:</span>
-<span class="w">    </span><span class="n">branches</span><span class="o">:</span>
-<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">main</span>
-<span class="n">jobs</span><span class="o">:</span>
-<span class="w">  </span><span class="n">deploy</span><span class="o">:</span>
-<span class="w">    </span><span class="k">if</span><span class="o">:</span><span class="w"> </span><span class="n">$</span><span class="o">{{</span><span class="w"> </span><span class="n">github</span><span class="o">.</span><span class="na">repository</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;$USERNAME/$USERNAME.github.io&#39;</span><span class="w"> </span><span class="o">}}</span>
-<span class="w">    </span><span class="n">runs</span><span class="o">-</span><span class="n">on</span><span class="o">:</span><span class="w"> </span><span class="n">ubuntu</span><span class="o">-</span><span class="n">latest</span>
-<span class="w">    </span><span class="n">steps</span><span class="o">:</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">uses</span><span class="o">:</span><span class="w"> </span><span class="n">actions</span><span class="o">/</span><span class="n">checkout</span><span class="err">@</span><span class="n">v2</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">uses</span><span class="o">:</span><span class="w"> </span><span class="n">actions</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">python</span><span class="err">@</span><span class="n">v2</span>
-<span class="w">        </span><span class="k">with</span><span class="o">:</span>
-<span class="w">          </span><span class="n">python</span><span class="o">-</span><span class="n">version</span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="o">.</span><span class="na">x</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">run</span><span class="o">:</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">requirements</span><span class="o">.</span><span class="na">txt</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">run</span><span class="o">:</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">fetch</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">:</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">run</span><span class="o">:</span><span class="w"> </span><span class="n">mkdocs</span><span class="w"> </span><span class="n">gh</span><span class="o">-</span><span class="n">deploy</span>
+on:
+<span class="w">  </span>push:
+<span class="w">    </span>branches:
+<span class="w">    </span>-<span class="w"> </span>main
+jobs:
+<span class="w">  </span>deploy:
+<span class="w">    </span>if:<span class="w"> </span><span class="cp">${</span><span class="p">{</span> <span class="n">github</span><span class="o">.</span><span class="n">repository</span> <span class="o">==</span> <span class="s1">&#39;$USERNAME/$USERNAME.github.io&#39;</span> <span class="cp">}</span>}
+<span class="w">    </span>runs-on:<span class="w"> </span>ubuntu-latest
+<span class="w">    </span>steps:
+<span class="w">      </span>-<span class="w"> </span>uses:<span class="w"> </span>actions/checkout@v2
+<span class="w">      </span>-<span class="w"> </span>uses:<span class="w"> </span>actions/setup-python@v2
+<span class="w">        </span>with:
+<span class="w">          </span>python-version:<span class="w"> </span>3.x
+<span class="w">      </span>-<span class="w"> </span>run:<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="w">      </span>-<span class="w"> </span>run:<span class="w"> </span>git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>gh-pages:gh-pages
+<span class="w">      </span>-<span class="w"> </span>run:<span class="w"> </span>mkdocs<span class="w"> </span>gh-deploy
 </code></pre></div>
 
 </li>

@@ -1940,225 +1940,221 @@ this is not a bad way to keep up on the latest Ansible news.</p>
 <p>Windows + Cygwin + SSHd + Python</p>
 <h2 id="playbooks">Playbooks<a class="headerlink" href="#playbooks" title="Permanent link">&para;</a></h2>
 <p>Ansible inventory file <code>hosts</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[w7x64-jf]</span>
-<span class="na">w7x64-jf.pd.local</span>
-</code></pre></div>
+<p><code>ini
+[w7x64-jf]
+w7x64-jf.pd.local</code></p>
 <p>JDK7 installation playbook <code>jdk7_install.yml</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install oracle jdk7</span>
-<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">w7x64-jf</span>
-<span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">administrator</span>
-<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7u45</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">b18</span>
-<span class="w">    </span><span class="nt">version_padded</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.7.0_45</span>
-<span class="w">    </span><span class="nt">dodrootca2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">c:\\jdk\{{version_padded}}\\jre\\lib\\security\\dod.root-ca-2.pem</span>
-<span class="w">    </span><span class="nt">cacerts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">c:\\jdk{{version_padded}}\\jre\\lib\\security\\cacerts</span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wget -P /usr/local/src --no-cookies --no-check-certificate --header Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com http://download.oracle.com/otn-pub/java/jdk/{{version}}-{{build}}/jdk-{{version}}-windows-x64.exe creates=/usr/local/src/jdk-{{version}}-windows-x64.exe</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path=/usr/local/src/jdk-{{version}}-windows-x64.exe mode=0755</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/src/jdk-{{version}}-windows-x64.exe /s INSTALLDIR=c:\\jdk{{version_padded}} /INSTALLDIRPUBJRE=c:\\jre{{version_padded}} REBOOT=Suppress ADDLOCAL=ToolsFeature,SourceFeature,PublicjreFeature AUTOUPDATE=0 SYSTRAY=0 SYSTRAY=0 /L c:\\cygwin\\usr\\local\\src\\jdk-install-log.txt creates=/cygdrive/c/jdk{{version_padded}}</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">copy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=../certs/dod.root-ca-2.pem dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/dod.root-ca-2.pem</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/cygdrive/c/jdk{{version_padded}}/bin/keytool -import -trustcacerts -alias dodrootca2 -file {{dodrootca2}} -keystore $cacerts -storepass changeit -noprompt</span>
-<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">copy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=files/cygdrive_c_java_jre_lib_security_US_export_policy.jar dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/US_export_policy.jar</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">copy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=files/cygdrive_c_java_jre_lib_security_local_policy.jar dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/local_policy.jar</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/cygdrive/c/jdk{{version_padded}}/bin/java -version 2&gt;&amp;1 |head -1 |awk &#39;{print $3}&#39; |sed -e &#39;s/&quot;//g&#39;</span>
-<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java_version</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">fail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">msg=&quot;The Java version does not match the expected value {{ version_padded }}.&quot;</span>
-<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;{{</span><span class="nv"> </span><span class="s">java_version.stdout</span><span class="nv"> </span><span class="s">}}&#39;</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;{{</span><span class="nv"> </span><span class="s">version_padded</span><span class="nv"> </span><span class="s">}}&#39;&quot;</span>
-</code></pre></div>
+<p>```yaml
+- name: install oracle jdk7
+  hosts:
+  - w7x64-jf
+  user: administrator
+  gather_facts: false
+  vars:
+    version: 7u45
+    build: b18
+    version_padded: 1.7.0_45
+    dodrootca2: c:\jdk{{version_padded}}\jre\lib\security\dod.root-ca-2.pem
+    cacerts: c:\jdk{{version_padded}}\jre\lib\security\cacerts
+  tasks:
+  - command: wget -P /usr/local/src --no-cookies --no-check-certificate --header Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com http://download.oracle.com/otn-pub/java/jdk/{{version}}-{{build}}/jdk-{{version}}-windows-x64.exe creates=/usr/local/src/jdk-{{version}}-windows-x64.exe</p>
+<ul>
+<li>
+<p>file: path=/usr/local/src/jdk-{{version}}-windows-x64.exe mode=0755</p>
+</li>
+<li>
+<p>shell: /usr/local/src/jdk-{{version}}-windows-x64.exe /s INSTALLDIR=c:\jdk{{version_padded}} /INSTALLDIRPUBJRE=c:\jre{{version_padded}} REBOOT=Suppress ADDLOCAL=ToolsFeature,SourceFeature,PublicjreFeature AUTOUPDATE=0 SYSTRAY=0 SYSTRAY=0 /L c:\cygwin\usr\local\src\jdk-install-log.txt creates=/cygdrive/c/jdk{{version_padded}}</p>
+</li>
+<li>
+<p>copy: src=../certs/dod.root-ca-2.pem dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/dod.root-ca-2.pem</p>
+</li>
+<li>
+<p>command: /cygdrive/c/jdk{{version_padded}}/bin/keytool -import -trustcacerts -alias dodrootca2 -file {{dodrootca2}} -keystore $cacerts -storepass changeit -noprompt
+    ignore_errors: true</p>
+</li>
+<li>
+<p>copy: src=files/cygdrive_c_java_jre_lib_security_US_export_policy.jar dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/US_export_policy.jar</p>
+</li>
+<li>
+<p>copy: src=files/cygdrive_c_java_jre_lib_security_local_policy.jar dest=/cygdrive/c/jdk{{version_padded}}/jre/lib/security/local_policy.jar</p>
+</li>
+<li>
+<p>shell: /cygdrive/c/jdk{{version_padded}}/bin/java -version 2&gt;&amp;1 |head -1 |awk '{print $3}' |sed -e 's/"//g'
+    register: java_version</p>
+</li>
+<li>
+<p>fail: msg="The Java version does not match the expected value {{ version_padded }}."
+    when: "'{{ java_version.stdout }}' != '{{ version_padded }}'"
+```</p>
+</li>
+</ul>
 <p>JDK7 uninstallation playbook <code>jdk7_uninstall.yml</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uninstall oracle jdk7</span>
-<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">w7x64-jf</span>
-<span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">administrator</span>
-<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7u45</span>
-<span class="w">    </span><span class="nt">version_padded</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.7.0_45</span>
-<span class="w">    </span><span class="nt">version_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;7</span><span class="nv"> </span><span class="s">Update</span><span class="nv"> </span><span class="s">45&quot;</span>
-<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src=templates/usr_local_src_remove-programs.vbs dest=/usr/local/src/remove-programs.vbs</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cscript remove-programs.vbs |grep &quot;Java {{version_text}} (64-bit)&quot; chdir=/usr/local/src</span>
-<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
-<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cscript remove-programs.vbs /uninstall &quot;Java {{version_text}} (64-bit)&quot; chdir=/usr/local/src</span>
-<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result|success</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cscript remove-programs.vbs |grep &quot;Java SE Development Kit {{version_text}} (64-bit)&quot; chdir=/usr/local/src</span>
-<span class="w">    </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
-<span class="w">    </span><span class="nt">ignore_errors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cscript remove-programs.vbs /uninstall &quot;Java SE Development Kit {{version_text}} (64-bit)&quot; chdir=/usr/local/src</span>
-<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result|success</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path={{item}} state=absent</span>
-<span class="w">    </span><span class="nt">with_items</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/src/jdk-{{version}}-windows-x64.exe</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/src/jdk-install-log.txt</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/local/src/remove-programs.vbs</span>
-</code></pre></div>
+<p>```yaml
+- name: uninstall oracle jdk7
+  hosts:
+  - w7x64-jf
+  user: administrator
+  gather_facts: false
+  vars:
+    version: 7u45
+    version_padded: 1.7.0_45
+    version_text: "7 Update 45"
+  tasks:
+  - template: src=templates/usr_local_src_remove-programs.vbs dest=/usr/local/src/remove-programs.vbs</p>
+<ul>
+<li>
+<p>shell: cscript remove-programs.vbs |grep "Java {{version_text}} (64-bit)" chdir=/usr/local/src
+    register: result
+    ignore_errors: true</p>
+</li>
+<li>
+<p>command: cscript remove-programs.vbs /uninstall "Java {{version_text}} (64-bit)" chdir=/usr/local/src
+    when: result|success</p>
+</li>
+<li>
+<p>shell: cscript remove-programs.vbs |grep "Java SE Development Kit {{version_text}} (64-bit)" chdir=/usr/local/src
+    register: result
+    ignore_errors: true</p>
+</li>
+<li>
+<p>command: cscript remove-programs.vbs /uninstall "Java SE Development Kit {{version_text}} (64-bit)" chdir=/usr/local/src
+    when: result|success</p>
+</li>
+<li>
+<p>file: path={{item}} state=absent
+    with_items:</p>
+<ul>
+<li>/usr/local/src/jdk-{{version}}-windows-x64.exe</li>
+<li>/usr/local/src/jdk-install-log.txt</li>
+<li>/usr/local/src/remove-programs.vbs
+```</li>
+</ul>
+</li>
+</ul>
 <p>The <code>remove-programs.vbs</code> helper script:</p>
-<div class="highlight"><pre><span></span><code><span class="k">If</span><span class="w"> </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Arguments</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">Then</span>
-<span class="w">  </span><span class="n">inventory_software</span><span class="p">()</span>
-<span class="k">ElseIf</span><span class="w"> </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Arguments</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">Then</span>
-<span class="w">  </span><span class="k">If</span><span class="w"> </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Arguments</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/uninstall&quot;</span><span class="w"> </span><span class="k">Then</span>
-<span class="w">    </span><span class="c1">&#39;Expecting: cscript remove-programs.vbs /uninstall &quot;Java(TM) 6 Update 26&quot;</span>
-<span class="w">    </span><span class="c1">&#39;Expecting: cscript remove-programs.vbs /uninstall &quot;Java(TM) SE Development Kit 6 Update 26&quot;</span>
-<span class="w">    </span><span class="n">uninstall_software</span><span class="p">(</span><span class="n">Wscript</span><span class="p">.</span><span class="n">Arguments</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="w">  </span><span class="k">Else</span>
-<span class="w">    </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span><span class="w"> </span><span class="s2">&quot;Usage: remove-programs.vbs [/uninstall &quot;&quot;software&quot;&quot;]&quot;</span>
-<span class="w">  </span><span class="k">End</span><span class="w"> </span><span class="k">If</span>
-<span class="k">Else</span>
-<span class="w">  </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span><span class="w"> </span><span class="s2">&quot;Usage: remove-programs.vbs [/uninstall &quot;&quot;software&quot;&quot;]&quot;</span>
-<span class="k">End</span><span class="w"> </span><span class="k">If</span>
-
-<span class="kd">Sub</span><span class="w"> </span><span class="nf">inventory_software</span><span class="p">()</span>
-<span class="w">  </span><span class="n">strComputer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
-
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">objWMIService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">GetObject</span><span class="p">(</span><span class="s2">&quot;winmgmts:&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;{impersonationLevel=impersonate}!\\&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="n">strComputer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;\root\cimv2&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">colSoftware</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objWMIService</span><span class="p">.</span><span class="n">ExecQuery</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="p">(</span><span class="s2">&quot;Select * from Win32_Product&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="k">For</span><span class="w"> </span><span class="k">Each</span><span class="w"> </span><span class="n">objSoftware</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">colSoftware</span>
-<span class="w">    </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span><span class="w"> </span><span class="s2">&quot;Name: &quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">objSoftware</span><span class="p">.</span><span class="n">Name</span>
-<span class="w">    </span><span class="c1">&#39;Wscript.Echo &quot;Version: &quot; &amp; objSoftware.Version</span>
-<span class="w">  </span><span class="k">Next</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Sub</span>
-
-<span class="kd">Sub</span><span class="w"> </span><span class="nf">inventory_java_software</span><span class="p">()</span>
-<span class="w">  </span><span class="n">strComputer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
-
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">objWMIService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">GetObject</span><span class="p">(</span><span class="s2">&quot;winmgmts:&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;{impersonationLevel=impersonate}!\\&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="n">strComputer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;\root\cimv2&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">colSoftware</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objWMIService</span><span class="p">.</span><span class="n">ExecQuery</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="p">(</span><span class="s2">&quot;Select * from Win32_Product &quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">        </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;Where Name Like &#39;Java%&#39;&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="k">For</span><span class="w"> </span><span class="k">Each</span><span class="w"> </span><span class="n">objSoftware</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">colSoftware</span>
-<span class="w">    </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span><span class="w"> </span><span class="s2">&quot;Name: &quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">objSoftware</span><span class="p">.</span><span class="n">Name</span>
-<span class="w">    </span><span class="n">Wscript</span><span class="p">.</span><span class="n">Echo</span><span class="w"> </span><span class="s2">&quot;Version: &quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">objSoftware</span><span class="p">.</span><span class="n">Version</span>
-<span class="w">  </span><span class="k">Next</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Sub</span>
-
-<span class="kd">Sub</span><span class="w"> </span><span class="nf">uninstall_software</span><span class="p">(</span><span class="n">strApplicationName</span><span class="p">)</span>
-<span class="w">  </span><span class="c1">&#39;Make sure to run this with Administrator privileges</span>
-<span class="w">  </span><span class="n">strComputer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
-
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">objWMIService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">GetObject</span><span class="p">(</span><span class="s2">&quot;winmgmts:&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;{impersonationLevel=impersonate}!\\&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="n">strComputer</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;\root\cimv2&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="k">Set</span><span class="w"> </span><span class="n">colSoftware</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objWMIService</span><span class="p">.</span><span class="n">ExecQuery</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="p">(</span><span class="s2">&quot;Select * From Win32_Product Where Name = &#39;&quot;</span><span class="w"> </span><span class="n">_</span>
-<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="n">strApplicationName</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="k">For</span><span class="w"> </span><span class="k">Each</span><span class="w"> </span><span class="n">objSoftware</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">colSoftware</span>
-<span class="w">    </span><span class="n">objSoftware</span><span class="p">.</span><span class="n">Uninstall</span><span class="p">()</span>
-<span class="w">  </span><span class="k">Next</span>
-<span class="k">End</span><span class="w"> </span><span class="k">Sub</span>
-</code></pre></div>
+<p>```vbscript
+If Wscript.Arguments.Count = 0 Then
+  inventory_software()
+ElseIf Wscript.Arguments.Count = 2 Then
+  If Wscript.Arguments(0) = "/uninstall" Then
+    'Expecting: cscript remove-programs.vbs /uninstall "Java(TM) 6 Update 26"
+    'Expecting: cscript remove-programs.vbs /uninstall "Java(TM) SE Development Kit 6 Update 26"
+    uninstall_software(Wscript.Arguments(1))
+  Else
+    Wscript.Echo "Usage: remove-programs.vbs [/uninstall ""software""]"
+  End If
+Else
+  Wscript.Echo "Usage: remove-programs.vbs [/uninstall ""software""]"
+End If</p>
+<p>Sub inventory_software()
+  strComputer = "."</p>
+<p>Set objWMIService = GetObject("winmgmts:" _
+    &amp; "{impersonationLevel=impersonate}!\" _
+    &amp; strComputer &amp; "\root\cimv2")
+  Set colSoftware = objWMIService.ExecQuery _
+    ("Select * from Win32_Product")</p>
+<p>For Each objSoftware in colSoftware
+    Wscript.Echo "Name: " &amp; objSoftware.Name
+    'Wscript.Echo "Version: " &amp; objSoftware.Version
+  Next
+End Sub</p>
+<p>Sub inventory_java_software()
+  strComputer = "."</p>
+<p>Set objWMIService = GetObject("winmgmts:" _
+    &amp; "{impersonationLevel=impersonate}!\" _
+    &amp; strComputer &amp; "\root\cimv2")
+  Set colSoftware = objWMIService.ExecQuery _
+    ("Select * from Win32_Product " _
+        &amp; "Where Name Like 'Java%'")</p>
+<p>For Each objSoftware in colSoftware
+    Wscript.Echo "Name: " &amp; objSoftware.Name
+    Wscript.Echo "Version: " &amp; objSoftware.Version
+  Next
+End Sub</p>
+<p>Sub uninstall_software(strApplicationName)
+  'Make sure to run this with Administrator privileges
+  strComputer = "."</p>
+<p>Set objWMIService = GetObject("winmgmts:" _
+    &amp; "{impersonationLevel=impersonate}!\" _
+    &amp; strComputer &amp; "\root\cimv2")
+  Set colSoftware = objWMIService.ExecQuery _
+    ("Select * From Win32_Product Where Name = '" _
+    &amp; strApplicationName &amp; "'")</p>
+<p>For Each objSoftware in colSoftware
+    objSoftware.Uninstall()
+  Next
+End Sub
+```</p>
 <h2 id="demonstration">Demonstration<a class="headerlink" href="#demonstration" title="Permanent link">&para;</a></h2>
 <p>File system state before install:</p>
-<div class="highlight"><pre><span></span><code>administrator@W7X64-JF~
-$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/cygdrive/c<span class="w"> </span><span class="p">|</span>egrep<span class="w"> </span><span class="s2">&quot;jdk|jre&quot;</span>
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">2010</span><span class="w"> </span>jdk5
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk6
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk7
-</code></pre></div>
+<p><code>bash
+administrator@W7X64-JF~
+$ ls -l /cygdrive/c |egrep "jdk|jre"
+drwx------+ 1 SYSTEM SYSTEM 0 Jun 24 2010 jdk5
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk6
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk7</code></p>
 <p>Install JDK7 on Windows:</p>
-<div class="highlight"><pre><span></span><code>copperpro:windows-hack<span class="w"> </span>mjohnson$<span class="w"> </span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>hosts<span class="w"> </span>jdk7_install.yml
-
-PLAY<span class="w"> </span><span class="o">[</span>install<span class="w"> </span>oracle<span class="w"> </span>jdk7<span class="o">]</span><span class="w"> </span>****************************************************
-
-TASK:<span class="w"> </span><span class="o">[</span><span class="nb">command</span><span class="w"> </span>wget<span class="w"> </span>-P<span class="w"> </span>/usr/local/src<span class="w"> </span>--no-cookies<span class="w"> </span>--no-check-certificate<span class="w"> </span>--header<span class="w"> </span>Cookie:gpw_e24<span class="o">=</span>http%3A%2F%2Fwww.oracle.com<span class="w"> </span>http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-windows-x64.exe<span class="w"> </span><span class="nv">creates</span><span class="o">=</span>/usr/local/src/jdk-7u45-windows-x64.exe<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>file<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/usr/local/src/jdk-7u45-windows-x64.exe<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="m">0755</span><span class="o">]</span><span class="w"> </span>***********
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>shell<span class="w"> </span>/usr/local/src/jdk-7u45-windows-x64.exe<span class="w"> </span>/s<span class="w"> </span><span class="nv">INSTALLDIR</span><span class="o">=</span>c:<span class="se">\\</span>jdk1.7.0_45<span class="w"> </span>/INSTALLDIRPUBJRE<span class="o">=</span>c:<span class="se">\\</span>jre1.7.0_45<span class="w"> </span><span class="nv">REBOOT</span><span class="o">=</span>Suppress<span class="w"> </span><span class="nv">ADDLOCAL</span><span class="o">=</span>ToolsFeature,SourceFeature,PublicjreFeature<span class="w"> </span><span class="nv">AUTOUPDATE</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">SYSTRAY</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">SYSTRAY</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>/L<span class="w"> </span>c:<span class="se">\\</span>cygwin<span class="se">\\</span>usr<span class="se">\\</span>local<span class="se">\\</span>src<span class="se">\\</span>jdk-install-log.txt<span class="w"> </span><span class="nv">creates</span><span class="o">=</span>/cygdrive/c/jdk1.7.0_45<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>copy<span class="w"> </span><span class="nv">src</span><span class="o">=</span>../certs/dod.root-ca-2.pem<span class="w"> </span><span class="nv">dest</span><span class="o">=</span>/cygdrive/c/jdk1.7.0_45/jre/lib/security/dod.root-ca-2.pem<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span><span class="nb">command</span><span class="w"> </span>/cygdrive/c/jdk1.7.0_45/bin/keytool<span class="w"> </span>-import<span class="w"> </span>-trustcacerts<span class="w"> </span>-alias<span class="w"> </span>dodrootca2<span class="w"> </span>-file<span class="w"> </span>c:<span class="se">\\</span>jdk1.7.0_45<span class="se">\\</span>jre<span class="se">\\</span>lib<span class="se">\\</span>security<span class="se">\\</span>dod.root-ca-2.pem<span class="w"> </span>-keystore<span class="w"> </span>c:<span class="se">\\</span>jdk1.7.0_45<span class="se">\\</span>jre<span class="se">\\</span>lib<span class="se">\\</span>security<span class="se">\\</span>cacerts<span class="w"> </span>-storepass<span class="w"> </span>changeit<span class="w"> </span>-noprompt<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>copy<span class="w"> </span><span class="nv">src</span><span class="o">=</span>files/cygdrive_c_java_jre_lib_security_US_export_policy.jar<span class="w"> </span><span class="nv">dest</span><span class="o">=</span>/cygdrive/c/jdk1.7.0_45/jre/lib/security/US_export_policy.jar<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>copy<span class="w"> </span><span class="nv">src</span><span class="o">=</span>files/cygdrive_c_java_jre_lib_security_local_policy.jar<span class="w"> </span><span class="nv">dest</span><span class="o">=</span>/cygdrive/c/jdk1.7.0_45/jre/lib/security/local_policy.jar<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>shell<span class="w"> </span>/cygdrive/c/jdk1.7.0_45/bin/java<span class="w"> </span>-version<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span>head<span class="w"> </span>-1<span class="w"> </span><span class="p">|</span>awk<span class="w"> </span><span class="s1">&#39;{print $3}&#39;</span><span class="w"> </span><span class="p">|</span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/&quot;//g&#39;</span><span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>fail<span class="w"> </span><span class="nv">msg</span><span class="o">=</span><span class="s2">&quot;The Java version does not match the expected value 1.7.0_45.&quot;</span><span class="o">]</span><span class="w"> </span>***
-skipping:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-PLAY<span class="w"> </span>RECAP<span class="w"> </span>********************************************************************
-w7x64-jf.pd.local<span class="w"> </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="nv">changed</span><span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-</code></pre></div>
+<p>```bash
+copperpro:windows-hack mjohnson$ ansible-playbook -i hosts jdk7_install.yml</p>
+<p>PLAY [install oracle jdk7] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>***</p>
+<p>TASK: [command wget -P /usr/local/src --no-cookies --no-check-certificate --header Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com http://download.oracle.com/otn-pub/java/jdk/7u45-b18/jdk-7u45-windows-x64.exe creates=/usr/local/src/jdk-7u45-windows-x64.exe] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [file path=/usr/local/src/jdk-7u45-windows-x64.exe mode=0755] <strong><em>*</em></strong>****
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [shell /usr/local/src/jdk-7u45-windows-x64.exe /s INSTALLDIR=c:\jdk1.7.0_45 /INSTALLDIRPUBJRE=c:\jre1.7.0_45 REBOOT=Suppress ADDLOCAL=ToolsFeature,SourceFeature,PublicjreFeature AUTOUPDATE=0 SYSTRAY=0 SYSTRAY=0 /L c:\cygwin\usr\local\src\jdk-install-log.txt creates=/cygdrive/c/jdk1.7.0_45] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [copy src=../certs/dod.root-ca-2.pem dest=/cygdrive/c/jdk1.7.0_45/jre/lib/security/dod.root-ca-2.pem] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [command /cygdrive/c/jdk1.7.0_45/bin/keytool -import -trustcacerts -alias dodrootca2 -file c:\jdk1.7.0_45\jre\lib\security\dod.root-ca-2.pem -keystore c:\jdk1.7.0_45\jre\lib\security\cacerts -storepass changeit -noprompt] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [copy src=files/cygdrive_c_java_jre_lib_security_US_export_policy.jar dest=/cygdrive/c/jdk1.7.0_45/jre/lib/security/US_export_policy.jar] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [copy src=files/cygdrive_c_java_jre_lib_security_local_policy.jar dest=/cygdrive/c/jdk1.7.0_45/jre/lib/security/local_policy.jar] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [shell /cygdrive/c/jdk1.7.0_45/bin/java -version 2&gt;&amp;1 |head -1 |awk '{print $3}' |sed -e 's/"//g'] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [fail msg="The Java version does not match the expected value 1.7.0_45."] ***
+skipping: [w7x64-jf.pd.local]</p>
+<p>PLAY RECAP <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong>
+w7x64-jf.pd.local : ok=8 changed=8 unreachable=0 failed=0
+```</p>
 <p>File system state after install and before uninstall:</p>
-<div class="highlight"><pre><span></span><code>administrator@W7X64-JF<span class="w"> </span>~
-$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/cygdrive/c<span class="w"> </span><span class="p">|</span>egrep<span class="w"> </span><span class="s2">&quot;jdk|jre&quot;</span>
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Dec<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">23</span>:17<span class="w"> </span>jdk1.7.0_45
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">2010</span><span class="w"> </span>jdk5
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk6
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk7
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Dec<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">23</span>:17<span class="w"> </span>jre1.7.0_45
-</code></pre></div>
+<p><code>bash
+administrator@W7X64-JF ~
+$ ls -l /cygdrive/c |egrep "jdk|jre"
+drwx------+ 1 SYSTEM SYSTEM 0 Dec 12 23:17 jdk1.7.0_45
+drwx------+ 1 SYSTEM SYSTEM 0 Jun 24 2010 jdk5
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk6
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk7
+drwx------+ 1 SYSTEM SYSTEM 0 Dec 12 23:17 jre1.7.0_45</code></p>
 <p>Uninstall JDK7 on Windows:</p>
-<div class="highlight"><pre><span></span><code>copperpro:windows-hack<span class="w"> </span>mjohnson$<span class="w"> </span>ansible-playbook<span class="w"> </span>-i<span class="w"> </span>hosts<span class="w"> </span>jdk7_uninstall.yml
-
-PLAY<span class="w"> </span><span class="o">[</span>uninstall<span class="w"> </span>oracle<span class="w"> </span>jdk7<span class="o">]</span><span class="w"> </span>**************************************************
-
-TASK:<span class="w"> </span><span class="o">[</span>template<span class="w"> </span><span class="nv">src</span><span class="o">=</span>templates/usr_local_src_remove-programs.vbs<span class="w"> </span><span class="nv">dest</span><span class="o">=</span>/usr/local/src/remove-programs.vbs<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>shell<span class="w"> </span>cscript<span class="w"> </span>remove-programs.vbs<span class="w"> </span><span class="p">|</span>grep<span class="w"> </span><span class="s2">&quot;Java 7 Update 45 (64-bit)&quot;</span><span class="w"> </span><span class="nv">chdir</span><span class="o">=</span>/usr/local/src<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span><span class="nb">command</span><span class="w"> </span>cscript<span class="w"> </span>remove-programs.vbs<span class="w"> </span>/uninstall<span class="w"> </span><span class="s2">&quot;Java 7 Update 45 (64-bit)&quot;</span><span class="w"> </span><span class="nv">chdir</span><span class="o">=</span>/usr/local/src<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>shell<span class="w"> </span>cscript<span class="w"> </span>remove-programs.vbs<span class="w"> </span><span class="p">|</span>grep<span class="w"> </span><span class="s2">&quot;Java SE Development Kit 7 Update 45 (64-bit)&quot;</span><span class="w"> </span><span class="nv">chdir</span><span class="o">=</span>/usr/local/src<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span><span class="nb">command</span><span class="w"> </span>cscript<span class="w"> </span>remove-programs.vbs<span class="w"> </span>/uninstall<span class="w"> </span><span class="s2">&quot;Java SE Development Kit 7 Update 45 (64-bit)&quot;</span><span class="w"> </span><span class="nv">chdir</span><span class="o">=</span>/usr/local/src<span class="o">]</span><span class="w"> </span>***
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span>
-
-TASK:<span class="w"> </span><span class="o">[</span>file<span class="w"> </span><span class="nv">path</span><span class="o">=</span><span class="nv">$item</span><span class="w"> </span><span class="nv">state</span><span class="o">=</span>absent<span class="o">]</span><span class="w"> </span>******************************************
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">(</span><span class="nv">item</span><span class="o">=</span>/usr/local/src/jdk-7u45-windows-x64.exe<span class="o">)</span>
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">(</span><span class="nv">item</span><span class="o">=</span>/usr/local/src/jdk-install-log.txt<span class="o">)</span>
-changed:<span class="w"> </span><span class="o">[</span>w7x64-jf.pd.local<span class="o">]</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">(</span><span class="nv">item</span><span class="o">=</span>/usr/local/src/remove-programs.vbs<span class="o">)</span>
-
-PLAY<span class="w"> </span>RECAP<span class="w"> </span>********************************************************************
-w7x64-jf.pd.local<span class="w"> </span>:<span class="w"> </span><span class="nv">ok</span><span class="o">=</span><span class="m">6</span><span class="w"> </span><span class="nv">changed</span><span class="o">=</span><span class="m">6</span><span class="w"> </span><span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">failed</span><span class="o">=</span><span class="m">0</span>
-</code></pre></div>
+<p>```bash
+copperpro:windows-hack mjohnson$ ansible-playbook -i hosts jdk7_uninstall.yml</p>
+<p>PLAY [uninstall oracle jdk7] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>*</p>
+<p>TASK: [template src=templates/usr_local_src_remove-programs.vbs dest=/usr/local/src/remove-programs.vbs] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [shell cscript remove-programs.vbs |grep "Java 7 Update 45 (64-bit)" chdir=/usr/local/src] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [command cscript remove-programs.vbs /uninstall "Java 7 Update 45 (64-bit)" chdir=/usr/local/src] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [shell cscript remove-programs.vbs |grep "Java SE Development Kit 7 Update 45 (64-bit)" chdir=/usr/local/src] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [command cscript remove-programs.vbs /uninstall "Java SE Development Kit 7 Update 45 (64-bit)" chdir=/usr/local/src] ***
+changed: [w7x64-jf.pd.local]</p>
+<p>TASK: [file path=$item state=absent] <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong>
+changed: [w7x64-jf.pd.local] =&gt; (item=/usr/local/src/jdk-7u45-windows-x64.exe)
+changed: [w7x64-jf.pd.local] =&gt; (item=/usr/local/src/jdk-install-log.txt)
+changed: [w7x64-jf.pd.local] =&gt; (item=/usr/local/src/remove-programs.vbs)</p>
+<p>PLAY RECAP <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>*</strong>
+w7x64-jf.pd.local : ok=6 changed=6 unreachable=0 failed=0
+```</p>
 <p>File system state after uninstall:</p>
-<div class="highlight"><pre><span></span><code>administrator@W7X64-JF<span class="w"> </span>~
-$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/cygdrive/c<span class="w"> </span><span class="p">|</span>egrep<span class="w"> </span><span class="s2">&quot;jdk|jre&quot;</span>
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">2010</span><span class="w"> </span>jdk5
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk6
-drwx------+<span class="w"> </span><span class="m">1</span><span class="w"> </span>SYSTEM<span class="w"> </span>SYSTEM<span class="w"> </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>jdk7
-</code></pre></div>
+<p><code>bash
+administrator@W7X64-JF ~
+$ ls -l /cygdrive/c |egrep "jdk|jre"
+drwx------+ 1 SYSTEM SYSTEM 0 Jun 24 2010 jdk5
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk6
+drwx------+ 1 SYSTEM SYSTEM 0 Oct 4 2012 jdk7</code></p>
 <p><br/></p>
 
 

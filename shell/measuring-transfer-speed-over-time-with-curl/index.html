@@ -1741,11 +1741,11 @@
 </div>
 <p>Ordinarily when you run the <a href="http://curl.haxx.se/">cURL</a> command to download a file, you see a
 progress meter that updates every second.</p>
-<div class="highlight"><pre><span></span><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<p><code>text
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   346  100   346    0     0    422      0 --:--:-- --:--:-- --:--:--   422
-  4  635M    4 29.8M    0     0  1793k      0  0:06:02  0:00:17  0:05:45 2394k
-</code></pre></div>
+  4  635M    4 29.8M    0     0  1793k      0  0:06:02  0:00:17  0:05:45 2394k</code></p>
 <p>This progress meter is written to stderr and if you were to redirect both stderr and stdout to a
 file and then run <code>tail -f</code> on that file, you would see the exact same progress meter being updated
 once per second, with no running log of download speed.  The reason that this output updates in
@@ -1763,20 +1763,19 @@ in an unbuffered manner, so that data is instantly available in the output file.
 challenge proposed to <a href="http://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>, who solved it with
 ~10 pages of literate Pascal, and <a href="http://en.wikipedia.org/wiki/Douglas_McIlroy">Doug McIlroy</a> who
 critiqued the solution and provided an alternative solution in six shell commands.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso&quot;</span>
-
-curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$URL</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="p">|</span>tr<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;\r&#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>curl.out
-</code></pre></div>
+<p>```bash
+URL="https://releases.ubuntu.com/20.04/ubuntu-20.04.3-live-server-amd64.iso"</p>
+<p>curl -L -o /dev/null "$URL" 2&gt;&amp;1 \
+  |tr -u '\r' '\n' &gt; curl.out
+```</p>
 <p>This results in an output file that looks like this:</p>
-<div class="highlight"><pre><span></span><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
+<p>```text
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed</p>
+<p>0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100   346  100   346    0     0    295      0  0:00:01  0:00:01 --:--:--   295
-
-  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100   346  100   346    0     0    295      0  0:00:01  0:00:01 --:--:--   295</p>
+<p>0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
   0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0
   0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0
   0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0
@@ -1792,85 +1791,82 @@ curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>
   .
   .
   .
-</code></pre></div>
+```</p>
 <p>Write a Python script <code>plot-curl-data.py</code> to process the data to convert it into a format useful for
 <a href="http://www.gnuplot.info/">gnuplot</a> and render a plot:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<p>```python</p>
+<h1 id="usrbinenv-python3">!/usr/bin/env python3<a class="headerlink" href="#usrbinenv-python3" title="Permanent link">&para;</a></h1>
+<p>import subprocess
+import sys</p>
+<p>def transform_curl_data(curl_data_filename: str) -&gt; None:
+    raw_lines = []
+    with open(curl_data_filename) as f:
+        for line in f.readlines():
+            raw_lines.append(line.split())</p>
+<div class="codehilite"><pre><span></span><code>converted_lines = []
+for line in raw_lines[3:]:
+    if len(line) == 12 and &#39;--&#39; not in line[9]:
+        # curl reports speed in bytes per second
+        if &#39;k&#39; in line[11]:
+            line[11] = str(float(line[11].replace(&#39;k&#39;, &#39;&#39;)) <span class="gs">* 8 *</span> 1024)
+        elif &#39;M&#39; in line[11]:
+            line[11] = str(float(line[11].replace(&#39;M&#39;, &#39;&#39;)) <span class="gs">* 8 *</span> 1048576)
+        elif &#39;G&#39; in line[11]:
+            line[11] = str(float(line[11].replace(&#39;G&#39;, &#39;&#39;)) <span class="gs">* 8 *</span> 1073741824)
+        converted_lines.append([line[9], line[11]])
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">transform_curl_data</span><span class="p">(</span><span class="n">curl_data_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">raw_lines</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">curl_data_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
-            <span class="n">raw_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-
-    <span class="n">converted_lines</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">raw_lines</span><span class="p">[</span><span class="mi">3</span><span class="p">:]:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span> <span class="ow">and</span> <span class="s1">&#39;--&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span>
-            <span class="c1"># curl reports speed in bytes per second</span>
-            <span class="k">if</span> <span class="s1">&#39;k&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
-                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="s1">&#39;M&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
-                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1048576</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="s1">&#39;G&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span>
-                <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1073741824</span><span class="p">)</span>
-            <span class="n">converted_lines</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">line</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">11</span><span class="p">]])</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">curl_data_filename</span><span class="si">}</span><span class="s1">.gnuplot.data&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">converted_lines</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="n">curl_data_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-        <span class="sa">f</span><span class="s1">&#39;set output &quot;</span><span class="si">{</span><span class="n">curl_data_filename</span><span class="si">}</span><span class="s1">.png&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set datafile separator &quot;,&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set terminal png size 1400,800</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set title &quot;Download Speed&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set ylabel &quot;Speed (Mbits/s)&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set xlabel &quot;Time (seconds)&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set xdata time</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set timefmt &quot;%H:%M:%S&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set key outside</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;set grid</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;plot </span><span class="se">\\\n</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">curl_data_filename</span><span class="si">}</span><span class="s1">.gnuplot.data&quot; using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title &quot;speed&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">])</span>
-
-    <span class="n">gnuplot_command_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">curl_data_filename</span><span class="si">}</span><span class="s1">.gp&#39;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">gnuplot_command_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">,</span> <span class="s1">&#39;gnuplot&#39;</span><span class="p">],</span>
-            <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
-            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span>
-        <span class="p">)</span>
-    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;gnuplot is not available on the PATH&#39;</span><span class="p">)</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;gnuplot&#39;</span><span class="p">,</span> <span class="n">gnuplot_command_file</span><span class="p">])</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Usage: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> [curl_data_filename]&#39;</span><span class="p">)</span>
-        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">transform_curl_data</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">plot</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+with open(f&#39;{curl_data_filename}.gnuplot.data&#39;, &#39;w&#39;) as f:
+    for line in converted_lines:
+        f.write(&#39;,&#39;.join(line) + &#39;\n&#39;)
 </code></pre></div>
+
+<p>def plot(curl_data_filename: str) -&gt; None:
+    payload = ''.join([
+        f'set output "{curl_data_filename}.png"\n',
+        'set datafile separator ","\n',
+        'set terminal png size 1400,800\n',
+        'set title "Download Speed"\n',
+        'set ylabel "Speed (Mbits/s)"\n',
+        'set xlabel "Time (seconds)"\n',
+        'set xdata time\n',
+        'set timefmt "%H:%M:%S"\n',
+        'set key outside\n',
+        'set grid\n',
+        'plot \\n',
+        f'"{curl_data_filename}.gnuplot.data" using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title "speed"\n'
+    ])</p>
+<div class="codehilite"><pre><span></span><code><span class="n">gnuplot_command_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="s1">&#39;{curl_data_filename}.gp&#39;</span>
+<span class="n">with</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">gnuplot_command_file</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">f</span><span class="p">:</span>
+<span class="w">    </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="n">try</span><span class="p">:</span>
+<span class="w">    </span><span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="w">        </span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gnuplot&#39;</span><span class="p">],</span>
+<span class="w">        </span><span class="n">check</span><span class="o">=</span><span class="n">True</span><span class="p">,</span>
+<span class="w">        </span><span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="n">except</span><span class="w"> </span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;gnuplot is not available on the PATH&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;gnuplot&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">gnuplot_command_file</span><span class="p">])</span>
+</code></pre></div>
+
+<p>if <strong>name</strong> == '<strong>main</strong>':
+    if len(sys.argv) &lt; 2:
+        print(f'Usage: {sys.argv[0]} [curl_data_filename]')
+        exit(1)
+    else:
+        transform_curl_data(sys.argv[1])
+        plot(sys.argv[1])
+```</p>
 <p>Run this script like so:</p>
-<div class="highlight"><pre><span></span><code>./plot-curl-data.py<span class="w"> </span>curl.out
-</code></pre></div>
+<p><code>bash
+./plot-curl-data.py curl.out</code></p>
 <p>You will end up with data (<code>curl.out.gp.data</code>) and configuration files (<code>curl.out.gp</code>) like so:</p>
-<div class="highlight"><pre><span></span><code>0:00:01,295
+<p><code>text
+0:00:01,295
 0:00:01,0
 0:00:02,0
 0:00:03,0
@@ -1887,21 +1883,20 @@ curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>
 0:00:14,12173312
 .
 .
-.
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>set output &quot;curl.out.png&quot;
-set datafile separator &quot;,&quot;
+.</code></p>
+<p><code>text
+set output "curl.out.png"
+set datafile separator ","
 set terminal png size 1400,800
-set title &quot;Download Speed&quot;
-set ylabel &quot;Speed (Mbits/s)&quot;
-set xlabel &quot;Time (seconds)&quot;
+set title "Download Speed"
+set ylabel "Speed (Mbits/s)"
+set xlabel "Time (seconds)"
 set xdata time
-set timefmt &quot;%H:%M:%S&quot;
+set timefmt "%H:%M:%S"
 set key outside
 set grid
 plot \
-&quot;curl.out.gp.data&quot; using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title &quot;speed&quot;
-</code></pre></div>
+"curl.out.gp.data" using 1:($2/1e6) with lines lw 1 lt 1 lc 1 title "speed"</code></p>
 <p>The graph will be rendered in PNG format:</p>
 <p><img alt="Curl Transfer Speed" src="../../images/curl-out.png" title="Curl Transfer Speed" /></p>
 <p><br/></p>

@@ -1741,15 +1741,14 @@
 </div>
 <p><a href="http://stackoverflow.com/questions/20901791/how-to-reset-build-number-in-jenkins">http://stackoverflow.com/questions/20901791/how-to-reset-build-number-in-jenkins</a></p>
 <p>Go to the Jenkins Script Console and enter:</p>
-<div class="highlight"><pre><span></span><code><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jenkins</span><span class="o">.</span><span class="na">instance</span><span class="o">.</span><span class="na">getItemByFullName</span><span class="o">(</span><span class="s2">&quot;your-job-name-here&quot;</span><span class="o">)</span>
-
-<span class="c1">// remove all build history</span>
-<span class="n">item</span><span class="o">.</span><span class="na">builds</span><span class="o">.</span><span class="na">each</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">-&gt;</span>
-<span class="w">  </span><span class="n">build</span><span class="o">.</span><span class="na">delete</span><span class="o">()</span>
-<span class="o">}</span>
-
-<span class="n">item</span><span class="o">.</span><span class="na">updateNextBuildNumber</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
-</code></pre></div>
+<p>```groovy
+item = Jenkins.instance.getItemByFullName("your-job-name-here")</p>
+<p>// remove all build history
+item.builds.each() { build -&gt;
+  build.delete()
+}</p>
+<p>item.updateNextBuildNumber(1)
+```</p>
 <p><br/></p>
 
 

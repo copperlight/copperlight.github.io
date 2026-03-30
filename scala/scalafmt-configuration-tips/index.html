@@ -1884,27 +1884,26 @@
 <p><a href="http://scalameta.org/scalafmt/">Scalafmt</a> is a code formatter for Scala.  It is available as
 an <a href="https://plugins.jetbrains.com/plugin/8236-scalafmt">IntelliJ plugin</a> and a CLI version can
 be installed using <a href="http://scalameta.org/scalafmt/#Homebrew">Homebrew</a>.</p>
-<div class="highlight"><pre><span></span><code>brew install --HEAD olafurpg/scalafmt/scalafmt
-</code></pre></div>
+<p><code>brew install --HEAD olafurpg/scalafmt/scalafmt</code></p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>The following <code>.scalafmt.conf</code> configuration is recommended for use with Scala projects. It
 should be created in the project's root directory.</p>
-<div class="highlight"><pre><span></span><code>style = defaultWithAlign
-
-align.openParenCallSite = false
+<p>```
+style = defaultWithAlign</p>
+<p>align.openParenCallSite = false
 align.openParenDefnSite = false
-align.tokens = [{code = &quot;-&gt;&quot;}, {code = &quot;&lt;-&quot;}, {code = &quot;=&gt;&quot;, owner = &quot;Case&quot;}]
+align.tokens = [{code = "-&gt;"}, {code = "&lt;-"}, {code = "=&gt;", owner = "Case"}]
 continuationIndent.callSite = 2
 continuationIndent.defnSite = 2
 danglingParentheses = true
 indentOperator = spray
 maxColumn = 100
 newlines.alwaysBeforeTopLevelStatements = true
-project.excludeFilters = [&quot;.*\\.sbt&quot;]
+project.excludeFilters = [".*\.sbt"]
 rewrite.rules = [RedundantParens, SortImports]
 spaces.inImportCurlyBraces = false
 unindentTopLevelOperators = true
-</code></pre></div>
+```</p>
 <p>The <code>maxColumn</code> value is chosen so that it is easy to do side-by-side views of code and tests,
 while also avoiding wrapping in diffs on GitHub and Stash.</p>
 <p>Alignment is allowed for case statements <code>=&gt;</code> and map assignments <code>-&gt;</code> and it is disallowed for
@@ -1927,22 +1926,21 @@ check: Format on file save.</li>
 used to enforce scalafmt conventions for your project.  It expects the configuration file to be
 located in the root of your project.</p>
 <p>Add the following to your <code>build.gradle</code> file:</p>
-<div class="highlight"><pre><span></span><code>buildscript {
+<p>```
+buildscript {
     dependencies {
-        classpath &#39;cz.alenkacz:gradle-scalafmt:1.6.0&#39;
+        classpath 'cz.alenkacz:gradle-scalafmt:1.6.0'
     }
-}
-
-apply plugin: &#39;scalafmt&#39;
-</code></pre></div>
+}</p>
+<p>apply plugin: 'scalafmt'
+```</p>
 <p>This adds a task <code>checkScalafmtAll</code> to your project, which can be used to verify that your project
 files adhere to the established configuration.</p>
 <h3 id="sbt">Sbt<a class="headerlink" href="#sbt" title="Permanent link">&para;</a></h3>
 <p>A <a href="https://github.com/lucidsoftware/neo-sbt-scalafmt">Scalafmt sbt plugin</a> is available, which can
 be used to enforce scalafmt conventions for your project.  It expects the configuration file to be
 located in the root of your project.</p>
-<div class="highlight"><pre><span></span><code>scalafmt::test test:scalafmt::test
-</code></pre></div>
+<p><code>scalafmt::test test:scalafmt::test</code></p>
 <p><br/></p>
 
 
